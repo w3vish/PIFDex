@@ -4,6 +4,7 @@ import { maxStats, genderRatios, shapeDescriptions } from "./spriteConstants";
 import { gameInfo } from "./gameInfo";
 import { placeHolders } from "./placeholders";
 import { artistPlaceholder } from "./artistsConstants";
+import { gridClass } from "./styles";
 
 export {
     imageURLs,
@@ -14,5 +15,6 @@ export {
     shapeDescriptions,
     gameInfo,
     placeHolders,
-    artistPlaceholder
+    artistPlaceholder,
+    gridClass
 }
