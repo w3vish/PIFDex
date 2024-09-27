@@ -1,0 +1,96 @@
+.pokemon-card {
+  width: 100%;
+  max-width: 24rem;
+  margin: 0 auto;
+  border: 1px solid hsl(var(--border));
+  border-radius: var(--radius);
+  background-color: hsl(var(--card));
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.pokemon-card > div:first-child:has(*) {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.25rem;
+  margin: 0.75rem;
+}
+
+.pokemon-card h2 {
+  /* font-size: 1.125rem; */
+  font-weight: 600;
+}
+
+.pokemon-card h2 a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.pokemon-card > div:first-child > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.25rem;
+}
+
+.pokemon-card > div:first-child img {
+  width: 4rem;
+  height: auto;
+  margin: auto 0;
+  border-radius: 0.25rem;
+}
+
+.pokemon-card > div:nth-child(2):has(*) {
+  position: relative;
+  padding: 0.5rem 1rem;
+  padding-top: 0.5rem;
+}
+
+.pokemon-card > div:nth-child(2) > a > img {
+  display: block;
+  max-width: 13rem;
+  min-height: 13rem;
+  margin: 0 auto 0.5rem;
+  object-fit: contain;
+}
+
+.pokemon-card > div:nth-child(2) > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  bottom: 0.5rem;
+  left: 1rem;
+  right: 1rem;
+  font-size: 0.875rem;
+}
+
+.pokemon-card > div:nth-child(2) > div:nth-child(1) {
+  text-align: left;
+}
+
+.pokemon-card > div:nth-child(2) > div:nth-child(2) > span:last-child {
+  text-align: right;
+  color: hsl(var(--muted-foreground));
+}
+
+.pokemon-card > div:nth-child(2) a {
+  text-decoration: none;
+  border-bottom: 2px solid hsl(var(--border));
+}
+
+
+
+.pokemon-card > div:last-child:has(*) {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+}
+
+.pokemon-card > div:last-child p {
+  display: flex;
+  justify-content: space-between;
+  margin: 0; 
+}
+
+
