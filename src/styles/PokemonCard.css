@@ -1,6 +1,6 @@
 .pokemon-card {
   width: 100%;
-  max-width: 24rem;
+  max-width: 22rem; /* Previous  max-width: 26rem; */
   margin: 0 auto;
   border: 1px solid hsl(var(--border));
   border-radius: var(--radius);
@@ -12,12 +12,13 @@
   display: flex;
   justify-content: space-between;
   gap: 0.25rem;
-  margin: 0.75rem;
+  margin: 0.75rem; 
 }
 
 .pokemon-card h2 {
-  /* font-size: 1.125rem; */
-  font-weight: 600;
+  /* font-size: 1.125rem; */ /* Previous font-size */
+  /* font-weight: 600; */ /* Previous font-weight */
+  /* font-weight was commented out completely in the new version */
 }
 
 .pokemon-card h2 a {
@@ -33,7 +34,8 @@
 }
 
 .pokemon-card > div:first-child img {
-  width: 4rem;
+  width: 100%; /* Previous width: 4rem */
+  max-width: 4rem;
   height: auto;
   margin: auto 0;
   border-radius: 0.25rem;
@@ -41,14 +43,15 @@
 
 .pokemon-card > div:nth-child(2):has(*) {
   position: relative;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem; /* Previous padding: 0.5rem 1rem */
   padding-top: 0.5rem;
 }
 
 .pokemon-card > div:nth-child(2) > a > img {
   display: block;
-  max-width: 13rem;
-  min-height: 13rem;
+  max-width: 18rem; /* Previous width: 13rem */
+  min-height: 18rem; /* Previous height: 13rem */
+  width: 100%; /* Resize image to the container's full width */
   margin: 0 auto 0.5rem;
   object-fit: contain;
 }
@@ -77,20 +80,16 @@
   border-bottom: 2px solid hsl(var(--border));
 }
 
-
-
 .pokemon-card > div:last-child:has(*) {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem; /* Previous padding: 0.5rem 1rem */
   font-size: 0.875rem;
 }
 
 .pokemon-card > div:last-child p {
   display: flex;
   justify-content: space-between;
-  margin: 0; 
+  margin: 0;
 }
-
-
