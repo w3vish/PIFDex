@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} max-w-screen-2xl mx-auto`}>
+      <body className={`${inter.className} max-w-screen-2xl mx-auto min-h-screen`}>
         <NextTopLoader />
         <ThemeProvider
           attribute="class"
