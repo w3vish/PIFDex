@@ -1,5 +1,6 @@
 import { loadModules } from "@/lib/utils/pages";
-import { PokemonCard } from "@/components/pages";
+import { GridContent, PokemonCard } from "@/components/pages";
+import { gridClass } from "@/lib/utils/constants";
 
 interface Pokemon {
   id: string;
@@ -21,11 +22,11 @@ const page = async () => {
   const data: any = await loadModules("home");
 
   return (
-     <article className="md:px-2 gap-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
+     <GridContent>
      {data.results.map((pokemon: Pokemon) => (
           <PokemonCard pokemon={pokemon} key={pokemon.id}/>
       ))}
-     </article>
+     </GridContent>
   
   );
 };
