@@ -29,10 +29,10 @@ const SpriteImage: React.FC<SpriteImageProps> = ({ primaryImage, pokemonName, ty
                 />
                 <Separator className="bg-gray-200 dark:bg-gray-700" />
                 <div className="flex justify-between">
-                    <span className="text-muted-foreground text-base">
+                    <span className="">
                         #{primaryImage.sprite_id.padStart(3, "0")}
                     </span>
-                    <div className="text-right ml-4 mr-1 block">
+                    <div className="text-right ml-4 text-sm mr-1 block ">
                         {primaryImage.artists?.map((artist: string, index: number) => (
                             <span key={artist} content={artist}>
                                 {artist === "Autogen" ? (
