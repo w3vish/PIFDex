@@ -3,9 +3,9 @@ import { loadArtists } from '@/lib/utils/api';
 import { notFound } from 'next/navigation';
 import React from 'react';
 import { decodeArtistSlug } from '@/lib/utils';
-import { PokemonCard } from '@/components/pages';
+import { GridContent, PokemonCard } from '@/components/pages';
 import { PaginationClient } from '@/components/pages';
-import { artistPlaceholder } from '@/lib/utils/constants';
+import { artistPlaceholder, gridClass } from '@/lib/utils/constants';
 import { SelectSpritesLimit } from '@/components/artists';
 import { Metadata, ResolvingMetadata } from 'next';
 
@@ -80,7 +80,7 @@ const ArtistsPage = async ({ params, searchParams }: ArtistsPageProps) => {
 
   return (
     <>
-      <Card className='p-2 md:p-4'>
+      <Card className=''>
         <CardHeader className='text-center'>
           <h1 className='text-2xl'>
             {artistData.total_sprites} Sprites by{' '}
@@ -88,15 +88,15 @@ const ArtistsPage = async ({ params, searchParams }: ArtistsPageProps) => {
           </h1>
         </CardHeader>
 
-        <div className='flex justify-end mb-4'>
+        <CardContent className='flex justify-end p-4'>
           <SelectSpritesLimit />
-        </div>
+        </CardContent>
 
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
+        <GridContent>
           {mappedPokemonData.map((pokemon: any) => (
             <PokemonCard pokemon={pokemon} key={pokemon.id} />
           ))}
-        </div>
+        </GridContent>
 
         <footer className='mt-4'>
           {/* Render the client-side pagination component */}
