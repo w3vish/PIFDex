@@ -2,8 +2,8 @@
 
 import React, { useCallback, useMemo, useState, useEffect, useRef } from 'react';
 import { LoadAllFusionsResponse } from "@/lib/types";
-import { Card, CardContent } from "../ui/card";
-import { PokemonCard } from "../pages";
+import { Card, CardContent, CardHeader } from "../ui/card";
+import { GridContent, PokemonCard } from "../pages";
 import {
   Select,
   SelectContent,
@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Separator } from '../ui/separator';
+import { gridClass } from '@/lib/utils/constants';
 
 const ITEMS_PER_CHUNK = 50;
 
@@ -118,7 +119,7 @@ const RelatedFusionsClient = React.memo(({
   );
 
   const memoizedFilters = useMemo(() => (
-    <div className="flex pb-4 gap-2 md:gap-4" onClick={(e) => e.stopPropagation()}>
+    <div className="flex gap-2 md:gap-4" onClick={(e) => e.stopPropagation()}>
       <Select onValueChange={handleSpriteFilterChange} value={spriteFilter}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Sprite Type" />
@@ -144,19 +145,19 @@ const RelatedFusionsClient = React.memo(({
   ), [handleSpriteFilterChange, handleFusionTypeFilterChange, spriteFilter, fusionTypeFilter]);
 
   return (
-    <Card className="p-4 pt-2">
-      <div className="md:flex md:justify-between">
+    <Card className="py-4">
+      <CardContent className="flex justify-between flex-wrap">
         <div className="my-auto">
-          <h2 className="text-xl mb-2 text-center md:mb-0">Related Fusions ({allFilteredData.length})</h2>
+          <h2 className="text-xl mb-2 text-center">Related Fusions ({allFilteredData.length})</h2>
         </div>
         {memoizedFilters}
-      </div>
+      </CardContent>
 
       <Separator className='mb-4'/>
 
-      <CardContent className="p-0 grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
+      <GridContent>
         {memoizedPokemonCards}
-      </CardContent>
+      </GridContent>
       
       {hasMore && (
         <div className="mt-4 text-center">
