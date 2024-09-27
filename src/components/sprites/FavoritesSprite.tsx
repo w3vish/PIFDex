@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-
+import Link from "next/link";
 
 interface PokemonData {
   id: string;
@@ -50,8 +50,16 @@ const FavoritesSprite = ({ pokemonData }: LikeSpriteProps) => {
       localStorage.setItem(storageKey, JSON.stringify(likedSprites));
       setIsLiked(false);
       toast({
-        title: "Removed from favorites",
-        description: `Sprite #${pokemonData.id} (${pokemonData.name}) has been removed from your favorites.`,
+        title: `Removed from favorites`, // Title must be a string
+        description: (
+          <>
+            Sprite #{pokemonData.id} ({pokemonData.name}) has been removed from
+            your favorites. Check your{" "}
+            <Link href="/favorites" className="underline">
+              favorites
+            </Link>.
+          </>
+        ),
         duration: 2000,
       });
     } else {
@@ -60,8 +68,16 @@ const FavoritesSprite = ({ pokemonData }: LikeSpriteProps) => {
       localStorage.setItem(storageKey, JSON.stringify(likedSprites));
       setIsLiked(true);
       toast({
-        title: "Added to favorites",
-        description: `Sprite #${pokemonData.id} (${pokemonData.name}) has been added to your favorites.`,
+        title: `Added to favorites`, // Title must be a string
+        description: (
+          <>
+            Sprite #{pokemonData.id} ({pokemonData.name}) has been added to
+            your favorites. Check your{" "}
+            <Link href="/favorites" className="underline">
+              favorites
+            </Link>.
+          </>
+        ),
         duration: 2000,
       });
     }
