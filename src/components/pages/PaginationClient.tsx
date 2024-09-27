@@ -22,12 +22,12 @@ export default function PaginationClient({ currentPage, totalPages, limit }: Pag
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const [maxVisiblePages, setMaxVisiblePages] = useState(5); // Default to 3
+  const [maxVisiblePages, setMaxVisiblePages] = useState(3); // Default to 3
 
   // Only run this effect on the client side
   useEffect(() => {
     const handleResize = () => {
-      setMaxVisiblePages(window.innerWidth > 768 ? 7 : 5);
+      setMaxVisiblePages(window.innerWidth > 768 ? 7 : 3);
     };
 
     handleResize(); // Set initial value
@@ -133,7 +133,7 @@ export default function PaginationClient({ currentPage, totalPages, limit }: Pag
   };
 
   return (
-    <Pagination>
+    <Pagination className='my-4'>
       <PaginationContent>
         <PaginationItem className="hidden md:inline-flex">
           <PaginationPrevious
