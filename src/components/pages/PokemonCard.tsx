@@ -9,11 +9,11 @@ import { Separator } from "../ui/separator";
 
 interface PokemonData {
   id: string;
-  name: string;
+  name?: string;
   primary_type?: string;
   secondary_type?: string;
   base_pokemons: { [key: string]: string };
-  total_sprites: number;
+  total_sprites?: number;
   head_fusions?: number;
   body_fusions?: number;
   images?: {
@@ -45,9 +45,16 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
     || autogenImage; // Fallback to autogenImage if everything else fails
 
 
-  const ids = pokemon.id.split('.');
-  const spriteType: SpriteType = !imagesArray.length ? 'autogen' : ids.length === 2 ? 'fusion' : ids.length === 3 ? 'triples' : 'base';
+  const ids: string[] = pokemon.id.split('.');
 
+  // Updated logic to prioritize 'autogen' over the ID structure
+  const spriteType: SpriteType = primaryImage.sprite_type === 'autogen'
+    ? 'autogen'
+    : ids.length === 2
+      ? 'fusion'
+      : ids.length === 3
+        ? 'triples'
+        : 'base';
   const types = pokemon.primary_type || pokemon.secondary_type
     ? Array.from(new Set([
       ...(pokemon.primary_type ? processTypes(pokemon.primary_type) : []),
@@ -141,6 +148,24 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
             )}
           </>
         )}
+        {spriteType === 'triples' && (
+
+          <p>
+            <span>{`Fusion of`}</span>
+            <span className="text-muted-foreground">
+            {
+              ids.map((id, index) => (
+                <React.Fragment key={index}>
+                <Link className="border-b" href={`/${id}`}>{pokemon.base_pokemons[id]}</Link>
+                {ids.length - 1 > index && " / "}
+                </React.Fragment>
+              ))
+            }
+            </span>
+          </p>
+
+        )}
+
         {pokemon.total_sprites !== undefined && (
           <p>
             <span>Variants:</span>
