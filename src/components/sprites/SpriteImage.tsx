@@ -1,8 +1,4 @@
 // components/SpriteImage.tsx
-import { Separator } from "@/components/ui/separator";
-import Link from "next/link";
-import { getSpriteImageURL, generateArtistSlug } from "@/lib/utils";
-import { placeHolders } from "@/lib/utils/constants";
 import Image from "next/image";
 import { PokemonCard } from "../pages";
 
