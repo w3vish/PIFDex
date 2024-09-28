@@ -4,6 +4,7 @@ import { getMainSpriteId, loadSprite } from "@/lib/utils";
 import { processTypes } from "@/lib/utils/types";
 import { SpritesGallary, StatsDisplay, FusionStats, PokemonDetails, SpriteImage, WeaknessTable, MovesTable, RelatedPokemons, RelatedFusions, FavoritesSprite } from "@/components/sprites";
 import { notFound } from 'next/navigation';
+import { PokemonCard } from '@/components/pages';
 
 export const runtime = 'edge';
 
@@ -104,6 +105,14 @@ const SpritePage = async ({ params, searchParams }: SpritePageParams) => {
     images: primaryImage
   };
 
+  const SpriteImageData = {
+    id: id,
+    base_pokemons: pokemon.base_pokemons,
+    images: [primaryImage]
+  }
+
+
+
   return (
     <>
       <Card>
@@ -113,7 +122,7 @@ const SpritePage = async ({ params, searchParams }: SpritePageParams) => {
         </h1>
         <CardContent className="p-4  flex flex-col md:flex-row gap-4">
           <div className="w-full md:max-w-xs mx-auto">
-            <SpriteImage primaryImage={primaryImage} pokemonName={pokemon.name} types={types} />
+            <SpriteImage pokemon={SpriteImageData} types={types} />
             {spriteType === 'base' && (
               <FusionStats headSpriteCount={pokemon.head_sprite} bodySpriteCount={pokemon.body_sprite} />
             )}
