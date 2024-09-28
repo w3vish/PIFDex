@@ -1,8 +1,6 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { getSpriteImageURL, generateArtistSlug } from "@/lib/utils";
-import { gridClass, placeHolders } from "@/lib/utils/constants";
+import { Card, CardHeader } from "@/components/ui/card";
+import { generateArtistSlug, getSpriteImageURL } from "@/lib/utils";
+import { placeHolders } from "@/lib/utils/constants";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -19,7 +17,6 @@ interface SpritesGallaryProps {
 }
 
 const SpritesGallary = ({ images }: SpritesGallaryProps) => {
-
   return (
     <Card className="my-4 py-4">
       <CardHeader className="text-2xl text-center p-1">Sprites Gallery ({images.length})</CardHeader>
@@ -57,7 +54,7 @@ const SpritesGallary = ({ images }: SpritesGallaryProps) => {
                         </React.Fragment>
                       ))
                     ) : (
-                      placeHolders.imageName
+                      placeHolders.artistName
                     )}
                   </span>
                 </div>
