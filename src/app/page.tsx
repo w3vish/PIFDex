@@ -1,6 +1,15 @@
-import { loadModules } from "@/lib/utils/pages";
+import HeroSection from "@/components/Home/Hero";
 import { GridContent, PokemonCard } from "@/components/pages";
-import { gridClass } from "@/lib/utils/constants";
+import { Progress } from "@/components/ui/progress";
+import { Separator } from "@/components/ui/separator";
+import { gameInfo } from "@/lib/utils/constants";
+import { loadModules } from "@/lib/utils/pages";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "InfiniteFusion.org - Pokémon Infinite Fusion Sprite Dex",
+  description: "Explore 221,390 Pokémon fusions and 170,000+ custom sprites at InfiniteFusion.org, a fan-driven Dex for the Pokémon Infinite Fusion game with contributions from over 3,400 artists.",
+}
 
 interface Pokemon {
   id: string;
@@ -22,12 +31,17 @@ const page = async () => {
   const data: any = await loadModules("home");
 
   return (
-     <GridContent>
-     {data.results.map((pokemon: Pokemon) => (
-          <PokemonCard pokemon={pokemon} key={pokemon.id}/>
-      ))}
-     </GridContent>
-  
+    <>
+      <HeroSection />
+      <Separator className="my-4" />
+      <h2 className="text-xl mx-4 my-2">Base Pokemons</h2>
+      <GridContent>
+        {data.results.map((pokemon: Pokemon) => (
+          <PokemonCard pokemon={pokemon} key={pokemon.id} />
+        ))}
+      </GridContent>
+    </>
+
   );
 };
 
