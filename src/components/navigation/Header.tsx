@@ -1,21 +1,21 @@
 "use client"
 
-import Link from 'next/link'
-import { Menu, X, User, Heart, Settings, Download, BookOpen, Calculator, Wand2, Search } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Sheet, SheetContent, SheetTrigger, SheetClose, SheetTitle } from "@/components/ui/sheet"
-import { Separator } from '../ui/separator'
-import { ThemeToggle } from '../theme'
-import { usePathname } from 'next/navigation'
+import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { cn } from '@/lib/theme/utils'
+import { BookOpen, Calculator, Download, Heart, Menu, Search, Settings, User, Wand2 } from 'lucide-react'
+import Link from 'next/link'
+import { usePathname } from 'next/navigation'
+import { useState } from 'react'
+import { ThemeToggle } from '../theme'
 import { Input } from '../ui/input'
+import { Separator } from '../ui/separator'
+import SearchBox from './SearchBox'
 
 export default function Header() {
-  const currentRoute = usePathname() // Get the current path
-
-  // Define active link styles as a constant
-  const activeLinkStyle = "border-2 rounded-lg";
+  const currentRoute = usePathname()
+  const [isSearchOpen, setSearchOpen] = useState(false) // State to toggle the search box
 
   const navLinks = [
     { name: 'Fusion Calculator', href: '/fusion', icon: Calculator },
@@ -26,13 +26,13 @@ export default function Header() {
 
   const userMenuItems = [
     { name: 'Favorites', href: '/favorites', icon: Heart },
-    { name: 'Settings', href: '/settings',  icon: Settings },
+    { name: 'Settings', href: '/settings', icon: Settings },
   ]
 
   return (
     <nav className="border border-t-0 lg:rounded-lg">
       <div className=" mx-auto px-4">
-        <div className="flex items-center justify-between h-14">
+        <div className="flex items-center justify-between h-12">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0 text-lg font-semibold">
             Infinite Fusion
@@ -40,49 +40,64 @@ export default function Header() {
 
           <div className='flex gap-16'>
             {/* Desktop Navigation Links */}
-            <div className="hidden lg:flex items-center space-x-6 lg:space-x-2">
+            {/* <div className="hidden lg:flex items-center space-x-6 lg:space-x-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
                   className={cn(
                     "text-sm px-3 py-2 hover:underline transition-all",  // General link styles
-                    currentRoute === link.href ? activeLinkStyle : ""    // Apply active link style if current route matches
+                    currentRoute === link.href ? "border-2 rounded-lg" : ""    // Apply active link style if current route matches
                   )}
                 >
                   {link.name}
                 </Link>
               ))}
-            </div>
+            </div> */}
 
             {/* User Menu and Mobile Navigation */}
             <div className="flex items-center space-x-2">
-              <Input
-                className='w-56 hidden lg:block'
-                placeholder='Search Pokemons'
-              />
-              <Button variant="outline" size="icon" className="lg:hidden">
-                    <Search className="h-5 w-5" />
-                    <span className="sr-only">User menu</span>
-                  </Button>
+             {/* Desktop Search Input */}
+             <div className="relative w-56 hidden lg:block">
+                <Input
+                  className="pr-16"
+                  placeholder="Search..."
+                  onFocus={() => setSearchOpen(true)}
+                />
+                <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                  <kbd className="hidden sm:inline-flex h-6 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground">
+                    <span className="text-xs">⌘</span>S
+                  </kbd>
+                </div>
+              </div>
 
+              {/* Mobile Search Icon */}
+              <Button
+                variant="outline"
+                size="icon"
+                className="lg:hidden"
+                onClick={() => setSearchOpen(true)} // Open search box on mobile
+              >
+                <Search className="h-5 w-5" />
+                <span className="sr-only">Open search</span>
+              </Button>
 
               {/* Dropdown Menu for User */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="icon" className="hidden lg:flex">
+                  <Button variant="outline" size="icon" className="hidden lg:flex relative">
                     <User className="h-5 w-5" />
                     <span className="sr-only">User menu</span>
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent  align="end">
+                <DropdownMenuContent align="end">
                   {userMenuItems.map((item) => (
-                  <Link href={item.href} key={item.name}>
-                    <DropdownMenuItem  className='cursor-pointer'>
-                      <item.icon className="mr-2 h-4 w-4" />
-                      <span>{item.name}</span>
-                    </DropdownMenuItem>
-                      </Link>
+                    <Link href={item.href} key={item.name}>
+                      <DropdownMenuItem className='cursor-pointer'>
+                        <item.icon className="mr-2 h-4 w-4" />
+                        <span>{item.name}</span>
+                      </DropdownMenuItem>
+                    </Link>
                   ))}
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -137,6 +152,9 @@ export default function Header() {
           </div>
         </div>
       </div>
+
+      {/* Search Box Component */}
+      <SearchBox open={isSearchOpen} setOpen={setSearchOpen} />
     </nav>
   )
 }
