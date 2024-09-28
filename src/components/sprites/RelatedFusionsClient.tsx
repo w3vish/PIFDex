@@ -2,7 +2,8 @@
 
 import React, { useCallback, useMemo, useState, useEffect, useRef } from 'react';
 import { LoadAllFusionsResponse } from "@/lib/types";
-import { Card, CardContent, CardHeader } from "../ui/card";
+import { Card, CardContent } from "../ui/card";
+import { Separator } from '../ui/separator';
 import { GridContent, PokemonCard } from "../pages";
 import {
   Select,
@@ -12,8 +13,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { Separator } from '../ui/separator';
-import { gridClass } from '@/lib/utils/constants';
 
 const ITEMS_PER_CHUNK = 50;
 
@@ -31,6 +30,30 @@ function useDebounce(func: Function, delay: number) {
     }, delay);
   }, [func, delay]);
 }
+
+// CustomSelectContent component to prevent touch and click events
+const CustomSelectContent = React.forwardRef<
+  React.ElementRef<typeof SelectContent>,
+  React.ComponentPropsWithoutRef<typeof SelectContent>
+>((props, ref) => (
+  <SelectContent
+    {...props}
+    ref={ref}
+  >
+    <div
+      ref={(divRef) => {
+        if (!divRef) return;
+        // Prevent touch and click events to stop interactions with content behind the dropdown
+        divRef.ontouchstart = (e) => e.preventDefault();
+        divRef.onclick = (e) => e.stopPropagation();
+      }}
+    >
+      {props.children}
+    </div>
+  </SelectContent>
+));
+
+CustomSelectContent.displayName = 'CustomSelectContent';
 
 const RelatedFusionsClient = React.memo(({
   pokemons,
@@ -111,46 +134,49 @@ const RelatedFusionsClient = React.memo(({
     debouncedFilter(spriteFilter, fusionTypeFilter);
   }, [debouncedFilter, spriteFilter, fusionTypeFilter]);
 
-  const memoizedPokemonCards = useMemo(() => 
+  const memoizedPokemonCards = useMemo(() =>
     visibleData.map((pokemon) => (
       <PokemonCard pokemon={pokemon} key={pokemon.id} />
     )),
     [visibleData]
   );
 
+  // Memoized filters, ensuring the selects stay in the same row on mobile devices
   const memoizedFilters = useMemo(() => (
-    <div className="flex gap-2 md:gap-4" onClick={(e) => e.stopPropagation()}>
+    <div className="flex flex-row gap-2 md:gap-4" onClick={(e) => e.stopPropagation()}>
       <Select onValueChange={handleSpriteFilterChange} value={spriteFilter}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="min-w-max w-[150px] md:w-[180px]">
           <SelectValue placeholder="Sprite Type" />
         </SelectTrigger>
-        <SelectContent>
+        <CustomSelectContent>
           <SelectItem value="all">All Sprites</SelectItem>
           <SelectItem value="fusion">Custom Sprites</SelectItem>
           <SelectItem value="autogen">Autogen Sprites</SelectItem>
-        </SelectContent>
+        </CustomSelectContent>
       </Select>
 
       <Select onValueChange={handleFusionTypeFilterChange} value={fusionTypeFilter}>
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="min-w-max w-[150px] md:w-[180px]">
           <SelectValue placeholder="Fusion Part" />
         </SelectTrigger>
-        <SelectContent>
+        <CustomSelectContent>
           <SelectItem value="all_fusions">All Fusions</SelectItem>
           <SelectItem value="head">Head Only</SelectItem>
           <SelectItem value="body">Body Only</SelectItem>
-        </SelectContent>
+        </CustomSelectContent>
       </Select>
     </div>
   ), [handleSpriteFilterChange, handleFusionTypeFilterChange, spriteFilter, fusionTypeFilter]);
 
   return (
     <Card className="py-4">
-      <CardContent className="flex justify-between flex-wrap">
-        <div className="my-auto">
-          <h2 className="text-xl mb-2 text-center">Related Fusions ({allFilteredData.length})</h2>
+      <CardContent className="flex justify-between flex-wrap gap-4">
+        <div className="my-auto mx-auto md:mx-0">
+          <h2 className="text-xl text-center">Related Fusions ({allFilteredData.length})</h2>
         </div>
-        {memoizedFilters}
+        <div className='flex justify-center w-full md:w-auto'>
+          {memoizedFilters}
+        </div>
       </CardContent>
 
       <Separator className='mb-4'/>
