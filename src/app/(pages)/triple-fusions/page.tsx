@@ -1,9 +1,7 @@
 import { GridContent, PokemonCard } from '@/components/pages';
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import React from 'react';
-import { loadModules } from '@/lib/utils';
+import { Card, CardDescription, CardHeader } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { notFound } from 'next/navigation';
+import { loadModules } from '@/lib/utils';
 
 
 interface PokemonData {
@@ -34,12 +32,9 @@ async function page() {
         <Card className='py-4'>
             {/* Header Section */}
             <CardHeader className='p-2 px-4'>
-                <h1 className='text-2xl'>Triple Fusions</h1>
+                <h1 className='text-2xl'>Triple Fusions ({TripleFusionsData.results.length})</h1>
                 <CardDescription>
                     Triple fusions combine three Pokémon, typically legendary trios or fully-evolved starters from the same region. These unique fusions blend the attributes and types of all three Pokémon.
-                </CardDescription>
-                <CardDescription>
-                    Explore the 20 available triple fusions in Pokémon Infinite Fusion below.
                 </CardDescription>
             </CardHeader>
 
