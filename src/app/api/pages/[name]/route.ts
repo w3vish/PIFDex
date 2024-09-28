@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 interface Params {
     params: {
         name: 'home' | 'types' | 'abilities' | 'moves' | 'self-fusions' | 'triple-fusions' |
-        'base-pokemons'
+        'base-pokemons' | 'info'
     }
 }
 
@@ -99,7 +99,9 @@ export async function GET(request: NextRequest, { params }: Params) {
             case 'moves':
                 query = `SELECT * FROM moves`;
                 break;
-
+            case 'info':
+              query = `SELECT * FROM game_info`;
+              break;
             default:
                 return NextResponse.json({ error: "Invalid page name" }, { status: 400 });
         }
