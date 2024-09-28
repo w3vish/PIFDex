@@ -67,7 +67,7 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
     <div className="pokemon-card">
       <div>
         {pokemon.name && (
-          <h2><Link href={`/${pokemon.id}`}>{pokemon.name}</Link></h2>
+          <h2><Link prefetch={false} href={`/${pokemon.id}`}>{pokemon.name}</Link></h2>
         )}
         {types.length > 0 && (
           <div>
@@ -84,7 +84,7 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
         )}
       </div>
       <div>
-        <Link href={`/${pokemon.id}`}>
+        <Link prefetch={false} href={`/${pokemon.id}`}>
           <Image
             src={getSpriteImageURL(primaryImage.sprite_id, spriteType)}
             alt={`${pokemon.name || 'Pokemon'} Sprite Image`}
@@ -99,7 +99,7 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
               primaryImage.artists.map((artist, index) => (
                 <React.Fragment key={artist}>
                   {
-                    artist === "Autogen" ? <span>{artist}</span> : <Link href={generateArtistSlug(artist)}>
+                    artist === "Autogen" ? <span>{artist}</span> : <Link prefetch={false} href={generateArtistSlug(artist)}>
                       {artist}
                     </Link>
                   }
@@ -137,13 +137,13 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
             {pokemon.base_pokemons[ids[0]] && (
               <p className="text-muted-foreground">
                 <span>Head</span>
-                <Link className="border-b" href={`/${ids[0]}`}>{pokemon.base_pokemons[ids[0]]}</Link>
+                <Link prefetch={false} className="border-b" href={`/${ids[0]}`}>{pokemon.base_pokemons[ids[0]]}</Link>
               </p>
             )}
             {pokemon.base_pokemons[ids[1]] && (
               <p className="text-muted-foreground">
                 <span>Body</span>
-                <Link className="border-b" href={`/${ids[1]}`}>{pokemon.base_pokemons[ids[1]]}</Link>
+                <Link prefetch={false} className="border-b" href={`/${ids[1]}`}>{pokemon.base_pokemons[ids[1]]}</Link>
               </p>
             )}
           </>
@@ -156,7 +156,7 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
             {
               ids.map((id, index) => (
                 <React.Fragment key={index}>
-                <Link className="border-b" href={`/${id}`}>{pokemon.base_pokemons[id]}</Link>
+                <Link prefetch={false} className="border-b" href={`/${id}`}>{pokemon.base_pokemons[id]}</Link>
                 {ids.length - 1 > index && " / "}
                 </React.Fragment>
               ))
