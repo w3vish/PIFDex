@@ -84,8 +84,8 @@ const TYPE_DATA: { [key: string]: { weaknesses?: string[], resistances?: string[
  * @throws Error if the input is not a valid array of types.
  */
 function calculateTypeEffectiveness(types: string[]): { [key: string]: string[] } {
-    if (!Array.isArray(types) || types.length === 0 || types.length > 3) {
-        throw new Error("Input must be an array of 1 to 3 types.");
+    if (!Array.isArray(types) || types.length === 0 || types.length > 4) {
+        throw new Error("Input must be an array of 1 to 4 types.");
     }
 
     const effectiveness: { [key: string]: string[] } = {
