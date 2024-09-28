@@ -1,10 +1,9 @@
-import { Metadata, ResolvingMetadata } from 'next';
+import { FavoritesSprite, FusionStats, MovesTable, PokemonDetails, RelatedFusions, RelatedPokemons, SpriteImage, SpritesGallary, StatsDisplay, WeaknessTable } from "@/components/sprites";
 import { Card, CardContent } from "@/components/ui/card";
 import { getMainSpriteId, loadSprite } from "@/lib/utils";
 import { processTypes } from "@/lib/utils/types";
-import { SpritesGallary, StatsDisplay, FusionStats, PokemonDetails, SpriteImage, WeaknessTable, MovesTable, RelatedPokemons, RelatedFusions, FavoritesSprite } from "@/components/sprites";
+import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
-import { PokemonCard } from '@/components/pages';
 
 export const runtime = 'edge';
 
@@ -117,7 +116,7 @@ const SpritePage = async ({ params, searchParams }: SpritePageParams) => {
     <>
       <Card>
         <h1 className="text-2xl text-center font-semibold p-2">
-          {pokemon.name} <span className="text-muted-foreground">#{params.spriteId.padStart(3, '0')} {searchParams.sprite === 'autogen' ? "(Autogen)" : null}</span>
+          {pokemon.name} <span className="text-muted-foreground">#{decodeURIComponent(params.spriteId.padStart(3, '0'))} {searchParams.sprite === 'autogen' ? "(Autogen)" : null}</span>
           <FavoritesSprite pokemonData={pokemonData} />
         </h1>
         <CardContent className="p-4  flex flex-col md:flex-row gap-4">
