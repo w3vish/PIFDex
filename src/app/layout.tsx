@@ -30,7 +30,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header/>
-          <main className="max-w-screen-2xl p-2">
+          <main className="max-w-screen-2xl">
             {children}
           </main>
           <Toaster />
