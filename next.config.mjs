@@ -12,7 +12,29 @@ const nextConfig = {
   images: {
     domains: ['cdn.jsdelivr.net'],  // Add your external image domain here
     unoptimized: true,
-  }
+  },
+  async headers() {
+    return [
+      {
+        // Apply these headers to all API routes
+        source: '/api/:path*',
+        headers: [
+          {
+            key: 'Access-Control-Allow-Origin',
+            value: '*', // Allow all origins, adjust as needed for security
+          },
+          {
+            key: 'Access-Control-Allow-Methods',
+            value: 'GET, POST, OPTIONS', // Methods allowed
+          },
+          {
+            key: 'Access-Control-Allow-Headers',
+            value: 'Content-Type', // Allow necessary headers
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
