@@ -8,15 +8,17 @@ export default function HeroSection() {
 
     return (
         <Card className="space-y-6 m-2 py-8 px-4">
-            <h1 className="text-3xl font-bold tracking-tight">Welcome to InfiniteFusion.org</h1>
-            <p className="text-lg text-muted-foreground">
+           <div>
+           <h1 className="text-3xl font-bold tracking-tight">Welcome to InfiniteFusion.org</h1>
+            <p className="text-base md:text-lg text-muted-foreground">
                 A Dex for the Pokémon Infinite Fusion game. Explore our vast collection of Pokémon fusions and custom sprites.
             </p>
+           </div>
 
             <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                    <span>Total Fusions: <span className="font-semibold">{gameInfo.totalSprites.toLocaleString()}</span></span>
-                    <span>Custom Sprites: <span className="font-semibold">{gameInfo.spritesWithCustomSprites.toLocaleString()}</span></span>
+                    <span>Total Pokemons: <span className="font-semibold">{gameInfo.totalSprites.toLocaleString()}</span></span>
+                    <span className="text-end">Custom Sprites: <span className="font-semibold">{gameInfo.spritesWithCustomSprites.toLocaleString()}</span></span>
                 </div>
                 <Progress
                     value={progressPercentage}
@@ -30,7 +32,7 @@ export default function HeroSection() {
 
             <div className="flex items-center justify-between text-sm">
                 <span>Contributing Artists: <span className="font-semibold">3,400+</span></span>
-                <span>Total Custom Sprites: <span className="font-semibold">170,000+</span></span>
+                <span className="text-end">Total Custom Sprites: <span className="font-semibold">170,000+</span></span>
             </div>
 
             <Separator className="bg-gray-700" />
