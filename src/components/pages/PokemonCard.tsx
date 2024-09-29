@@ -25,7 +25,7 @@ interface PokemonData {
 
 type SpriteType = 'base' | 'fusion' | 'triples' | 'autogen'
 
-export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
+function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
   const imagesArray = Array.isArray(pokemon.images)
     ? pokemon.images
     : pokemon.images
@@ -134,7 +134,8 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
         )}
         {(spriteType === 'fusion' || spriteType === 'autogen') && (
           <>
-            {pokemon.base_pokemons[ids[0]] && (
+          {/* Original Fusion Pokemons Section */}
+            {/* {pokemon.base_pokemons[ids[0]] && (
               <p className="text-muted-foreground">
                 <span>Head</span>
                 <Link prefetch={false} className="border-b" href={`/${ids[0]}`}>{pokemon.base_pokemons[ids[0]]}</Link>
@@ -145,7 +146,22 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
                 <span>Body</span>
                 <Link prefetch={false} className="border-b" href={`/${ids[1]}`}>{pokemon.base_pokemons[ids[1]]}</Link>
               </p>
-            )}
+            )} */}
+
+            {/* New Fusion Pokemons Section For Test Structure  */}
+
+            
+            
+               
+                  <p>
+                    <span>Fusion of</span>
+                    <span className="text-muted-foreground">
+                      <Link href={ids[0]}>{pokemon.base_pokemons[ids[0]]}</Link>/<Link href={ids[1]}>{pokemon.base_pokemons[ids[1]]}</Link>
+                    </span>
+                  </p>
+               
+              
+            
           </>
         )}
         {spriteType === 'triples' && (
@@ -176,3 +192,5 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
     </div>
   );
 }
+
+export default PokemonCard;
