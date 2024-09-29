@@ -27,7 +27,7 @@ export async function GET(request: NextRequest, { params }: { params: { id: stri
         }
 
         // Return the found data
-        return new Response(JSON.stringify(data), { status: 200 });
+        return new Response(data, { status: 200 });
     } catch (error: any) {
         // Catching and handling any database query errors
         return Response.json({ error: 'Database query failed', details: error.message }, { status: 500 });
