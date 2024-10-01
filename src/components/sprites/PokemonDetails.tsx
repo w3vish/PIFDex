@@ -102,7 +102,7 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({
                     </dd>
                 </div>
             )}
-            <div className="col-span-full grid grid-cols-2 lg:flex justify-start gap-14">
+            <div className="col-span-full grid grid-cols-2 lg:flex justify-start md:gap-14">
 
                 <div className="lg:max-w-fit">
                     <dt className="font-semibold text-muted-foreground">Abilities:</dt>
