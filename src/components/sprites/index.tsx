@@ -1,4 +1,4 @@
-import { FusionStats } from "./FusionStats";
+import { TotalFusionStats } from "./TotalFusionStats";
 import { InfoToolTip } from "./InfoToolTip";
 import { NameToolTip } from "./NameToolTip";
 import { PokemonDetails } from "./PokemonDetails";
@@ -13,7 +13,7 @@ import { RelatedFusionsClient } from "./RelatedFusionsClient";
 import { FavoritesSprite } from "./FavoritesSprite";
 
 export {
-    FusionStats,
+    TotalFusionStats,
     InfoToolTip,
     NameToolTip,
     PokemonDetails,

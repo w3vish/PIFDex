@@ -2,7 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { generateArtistSlug } from "@/lib/utils/artists";
-import { processTypes } from "@/lib/utils/types";
+import { getMainSpriteId, processTypes } from "@/lib/utils";
 import { getSpriteImageURL } from "@/lib/utils";
 import { placeHolders } from "@/lib/utils/constants";
 import { Separator } from "../ui/separator";
@@ -45,7 +45,8 @@ function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
     || autogenImage; // Fallback to autogenImage if everything else fails
 
 
-  const ids: string[] = pokemon.id.split('.');
+    const ids: string[] = pokemon.id.split('.').map((id) => getMainSpriteId(id));
+
 
   // Updated logic to prioritize 'autogen' over the ID structure
   const spriteType: SpriteType = primaryImage.sprite_type === 'autogen'
@@ -156,7 +157,7 @@ function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
                   <p>
                     <span>Fusion of</span>
                     <span className="text-muted-foreground">
-                      <Link href={ids[0]}>{pokemon.base_pokemons[ids[0]]}</Link>/<Link href={ids[1]}>{pokemon.base_pokemons[ids[1]]}</Link>
+                      <Link href={`/${ids[0]}`}>{pokemon.base_pokemons[ids[0]]}</Link>/<Link href={`/${ids[1]}`}>{pokemon.base_pokemons[ids[1]]}</Link>
                     </span>
                   </p>
                

@@ -3,7 +3,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { Separator } from "@/components/ui/separator";
 import Link from "next/link";
 import { generateArtistSlug } from "@/lib/utils/artists";
-import { processTypes } from "@/lib/utils/types";
+import { processTypes } from "@/lib/utils";
 import Image from "next/image";
 import { getSpriteImageURL } from "@/lib/utils";
 import { placeHolders } from "@/lib/utils/constants";

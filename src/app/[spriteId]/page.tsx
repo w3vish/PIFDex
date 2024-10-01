@@ -1,7 +1,7 @@
-import { FavoritesSprite, FusionStats, MovesTable, PokemonDetails, RelatedFusions, RelatedPokemons, SpriteImage, SpritesGallary, StatsDisplay, WeaknessTable } from "@/components/sprites";
+import { FavoritesSprite, TotalFusionStats, MovesTable, PokemonDetails, RelatedFusions, RelatedPokemons, SpriteImage, SpritesGallary, StatsDisplay, WeaknessTable } from "@/components/sprites";
 import { Card, CardContent } from "@/components/ui/card";
 import { getMainSpriteId, loadSprite } from "@/lib/utils";
-import { processTypes } from "@/lib/utils/types";
+import { processTypes } from "@/lib/utils";
 import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
 
@@ -123,7 +123,7 @@ const SpritePage = async ({ params, searchParams }: SpritePageParams) => {
           <div className="w-full md:max-w-xs mx-auto">
             <SpriteImage pokemon={SpriteImageData} types={types} />
             {spriteType === 'base' && (
-              <FusionStats headSpriteCount={pokemon.head_sprite} bodySpriteCount={pokemon.body_sprite} />
+              <TotalFusionStats headSpriteCount={pokemon.head_sprite} bodySpriteCount={pokemon.body_sprite} />
             )}
           </div>
           <div className="w-full md:mt-0">

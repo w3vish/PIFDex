@@ -44,8 +44,9 @@
 .pokemon-card > div:nth-child(2) > a > img {
   display: block;
   max-width: 18rem;
-  height: auto; /* Maintain aspect ratio */
+  max-height: 18rem; /* Maintain aspect ratio */
   width: 100%; /* Ensure it fills the container */
+  height: 100%; /* Ensure it fills the container */
   margin: 0 auto 0.5rem;
   object-fit: contain; /* Contain image within bounds */
 }

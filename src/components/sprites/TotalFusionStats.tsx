@@ -7,7 +7,7 @@ interface FusionStatsProps {
     bodySpriteCount: number;
 }
 
-const FusionStats: React.FC<FusionStatsProps> = ({ headSpriteCount, bodySpriteCount }) => {
+const TotalFusionStats: React.FC<FusionStatsProps> = ({ headSpriteCount, bodySpriteCount }) => {
     return (
         <div className="mt-2 md:pr-4">
             <div className="mt-2">
@@ -34,4 +34,4 @@ const FusionStats: React.FC<FusionStatsProps> = ({ headSpriteCount, bodySpriteCo
     );
 };
 
-export { FusionStats };
+export { TotalFusionStats };

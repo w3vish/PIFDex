@@ -83,7 +83,7 @@ const TYPE_DATA: { [key: string]: { weaknesses?: string[], resistances?: string[
  * @returns An object mapping effectiveness multipliers to lists of attacking types.
  * @throws Error if the input is not a valid array of types.
  */
-function calculateTypeEffectiveness(types: string[]): { [key: string]: string[] } {
+function calculateTypeEffectiveness(types: string[], remove_empty_arrays = true): { [key: string]: string[] } {
     if (!Array.isArray(types) || types.length === 0 || types.length > 4) {
         throw new Error("Input must be an array of 1 to 4 types.");
     }
@@ -135,11 +135,13 @@ function calculateTypeEffectiveness(types: string[]): { [key: string]: string[] 
     });
 
     // Remove empty arrays from the effectiveness result
-    Object.keys(effectiveness).forEach(key => {
-        if (effectiveness[key].length === 0) {
-            delete effectiveness[key];
-        }
-    });
+    if (remove_empty_arrays) {
+        Object.keys(effectiveness).forEach(key => {
+            if (effectiveness[key].length === 0) {
+                delete effectiveness[key];
+            }
+        });
+    }
 
     return effectiveness;
 }

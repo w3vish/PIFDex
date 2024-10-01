@@ -40,7 +40,7 @@ async function page() {
             <CardHeader className='p-2 px-4'>
                 <h1 className='text-2xl'>Self Fusions ({SelfFusionsData.results.length})</h1>
                 <CardDescription>
-                Self Fusions are a unique type of Pokémon fusion where a single Pokémon fuses with itself, acting as both the head and the body. These fusions highlight the Pokémon&apos;s ability to merge its own attributes.
+                Self Fusions are a unique type of Pokémon fusion where a single Pokémon fuses with itself, acting as both the head and the body.
                 </CardDescription>
             </CardHeader>
 

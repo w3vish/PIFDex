@@ -1,20 +1,24 @@
-import { imageURLs, apiURL } from "./urls";
-import { typeColors } from "./typeColors";
-import { maxStats, genderRatios, shapeDescriptions } from "./spriteConstants";
+import { artistPlaceholder } from "./artistsConstants";
+import { basePokemons } from "./basePokemons";
 import { gameInfo } from "./gameInfo";
 import { placeHolders } from "./placeholders";
-import { artistPlaceholder } from "./artistsConstants";
+import { genderRatios, maxStats, shapeDescriptions } from "./spriteConstants";
 import { gridClass } from "./styles";
+import { typeColors } from "./typeColors";
+import { apiURL, imageURLs } from "./urls";
+import { abilities } from "./abilities";
 
 export {
-    imageURLs,
     apiURL,
-    typeColors,
-    maxStats,
-    genderRatios,
-    shapeDescriptions,
-    gameInfo,
-    placeHolders,
     artistPlaceholder,
-    gridClass
-}
+    basePokemons,
+    gameInfo,
+    genderRatios,
+    gridClass,
+    imageURLs,
+    maxStats,
+    placeHolders,
+    shapeDescriptions,
+    typeColors,
+    abilities
+};

@@ -39,7 +39,7 @@ const FavoritesClient = () => {
   
 
   return (
-    <div className="container my-4">
+    <div className="my-4">
       <h1 className="text-2xl font-bold m-4">Favorite Sprites ({favoritePokemons && favoritePokemons.length})</h1>
       
       <Separator className="mb-4" />

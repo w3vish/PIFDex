@@ -12,7 +12,10 @@ import {
     SpriteResult,
 } from "./SpriteResponse";
 import { LoadAllFusionsResponse } from "./loadAllFusionsResponse";
-
+interface SelectedPokemon {
+    id: string
+    name: string
+  }
 
 export type {
     SpriteResponse,
@@ -27,4 +30,5 @@ export type {
     Shape,
     SpriteResult,
     LoadAllFusionsResponse,
+    SelectedPokemon,
 }

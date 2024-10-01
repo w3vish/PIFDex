@@ -129,12 +129,18 @@ export default function Header() {
                         </SheetClose>
                       ))}
                       <Separator />
-                      {userMenuItems.map((item) => (
-                        <SheetClose asChild key={item.name}>
-                          <Button variant="ghost" className="w-full justify-start px-4 py-3 text-sm">
-                            <item.icon className="mr-3 h-5 w-5" />
-                            {item.name}
-                          </Button>
+                       {userMenuItems.map((link) => (
+                        <SheetClose asChild key={link.name}>
+                          <Link
+                            href={link.href}
+                            className={cn(
+                              "flex items-center px-4 py-3 text-sm hover:bg-accent transition-all",
+                              currentRoute === link.href ? "bg-accent" : ""
+                            )}
+                          >
+                            <link.icon className="mr-3 h-5 w-5" />
+                            {link.name}
+                          </Link>
                         </SheetClose>
                       ))}
                     </div>
