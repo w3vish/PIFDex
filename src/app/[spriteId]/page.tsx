@@ -21,6 +21,9 @@ export async function generateMetadata(
     return {
       title: 'Error: Invalid Sprite ID',
       description: 'The provided Sprite ID is invalid.',
+      robots: {
+        index: false, // Ensure the page is not indexed
+      },
     };
   }
 
@@ -29,27 +32,35 @@ export async function generateMetadata(
     return {
       title: 'Error: Sprite Not Found',
       description: 'The requested Pokemon sprite could not be loaded.',
+      robots: {
+        index: false, // Ensure the page is not indexed
+      },
     };
   }
 
   const pokemon = data.results[0];
-  const title = searchParams.sprite === 'autogen' ? `${pokemon.name} #${params.spriteId} (Autogen)` : `${pokemon.name} #${params.spriteId}`
+  const title = searchParams.sprite === 'autogen' ? `${pokemon.name} #${params.spriteId} (Autogen)` : `${pokemon.name} #${params.spriteId}`;
+  
   return {
     title: title,
     description: `
-    ${pokemon.name} #${params.spriteId} : ${pokemon.pokedex_entry}
-    Types: ${pokemon.primary_type && pokemon.secondary_type
+      ${pokemon.name} #${params.spriteId} : ${pokemon.pokedex_entry}
+      Types: ${pokemon.primary_type && pokemon.secondary_type
         ? `${pokemon.primary_type}/${pokemon.secondary_type}`
         : pokemon.primary_type || pokemon.secondary_type}
-    HP: ${pokemon.base_hp},
-    Attack: ${pokemon.base_atk},
-    Defense: ${pokemon.base_def},
-    Sp. Atk: ${pokemon.base_sp_atk},
-    Sp. Def: ${pokemon.base_sp_def},
-    Speed: ${pokemon.base_spd}
+      HP: ${pokemon.base_hp},
+      Attack: ${pokemon.base_atk},
+      Defense: ${pokemon.base_def},
+      Sp. Atk: ${pokemon.base_sp_atk},
+      Sp. Def: ${pokemon.base_sp_def},
+      Speed: ${pokemon.base_spd}
     `,
+    robots: {
+      index: false, // Ensure the page is not indexed
+    },
   };
 }
+
 
 const SpritePage = async ({ params, searchParams }: SpritePageParams) => {
   const id = getMainSpriteId(params.spriteId);
