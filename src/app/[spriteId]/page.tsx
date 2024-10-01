@@ -126,7 +126,7 @@ const SpritePage = async ({ params, searchParams }: SpritePageParams) => {
   return (
     <>
       <Card>
-        <h1 className="text-2xl text-center font-semibold p-2">
+        <h1 className="text-2xl text-center font-semibold p-2 mt-4">
           {pokemon.name} <span className="text-muted-foreground">#{decodeURIComponent(params.spriteId.padStart(3, '0'))} {searchParams.sprite === 'autogen' ? "(Autogen)" : null}</span>
           <FavoritesSprite pokemonData={pokemonData} />
         </h1>
