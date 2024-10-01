@@ -45,7 +45,7 @@ function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
     || autogenImage; // Fallback to autogenImage if everything else fails
 
 
-    const ids: string[] = pokemon.id.split('.').map((id) => getMainSpriteId(id));
+  const ids: string[] = pokemon.id.split('.').map((id) => getMainSpriteId(id));
 
 
   // Updated logic to prioritize 'autogen' over the ID structure
@@ -135,7 +135,7 @@ function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
         )}
         {(spriteType === 'fusion' || spriteType === 'autogen') && (
           <>
-          {/* Original Fusion Pokemons Section */}
+            {/* Original Fusion Pokemons Section */}
             {/* {pokemon.base_pokemons[ids[0]] && (
               <p className="text-muted-foreground">
                 <span>Head</span>
@@ -150,19 +150,12 @@ function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
             )} */}
 
             {/* New Fusion Pokemons Section For Test Structure  */}
-
-            
-            
-               
-                  <p>
-                    <span>Fusion of</span>
-                    <span className="text-muted-foreground">
-                      <Link href={`/${ids[0]}`}>{pokemon.base_pokemons[ids[0]]}</Link>/<Link href={`/${ids[1]}`}>{pokemon.base_pokemons[ids[1]]}</Link>
-                    </span>
-                  </p>
-               
-              
-            
+            <p>
+              <span>Fusion of</span>
+              <span className="text-muted-foreground">
+                <Link prefetch={false} href={`/${ids[0]}`}>{pokemon.base_pokemons[ids[0]]}</Link>/<Link prefetch={false} href={`/${ids[1]}`}>{pokemon.base_pokemons[ids[1]]}</Link>
+              </span>
+            </p>
           </>
         )}
         {spriteType === 'triples' && (
@@ -170,14 +163,14 @@ function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
           <p>
             <span>{`Fusion of`}</span>
             <span className="text-muted-foreground">
-            {
-              ids.map((id, index) => (
-                <React.Fragment key={index}>
-                <Link prefetch={false} className="border-b" href={`/${id}`}>{pokemon.base_pokemons[id]}</Link>
-                {ids.length - 1 > index && " / "}
-                </React.Fragment>
-              ))
-            }
+              {
+                ids.map((id, index) => (
+                  <React.Fragment key={index}>
+                    <Link prefetch={false} className="border-b" href={`/${id}`}>{pokemon.base_pokemons[id]}</Link>
+                    {ids.length - 1 > index && " / "}
+                  </React.Fragment>
+                ))
+              }
             </span>
           </p>
 
