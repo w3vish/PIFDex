@@ -36,6 +36,9 @@ export async function generateMetadata(
   return {
     title: title,
     description: `Browse all sprites created by ${params.name} and explore their artistic style.`,
+    robots: {
+      index: false, // Ensure the page is not indexed
+    },
   };
 }
 
