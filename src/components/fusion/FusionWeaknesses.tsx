@@ -19,32 +19,28 @@ function FusionWeaknesses({ types }: { types: Types }) {
       <Table className="w-full table-fixed">
         <TableHeader>
           <TableRow >
-            {/* Head and Body columns share remaining width equally */}
-            <TableHead colSpan={3} className="text-center w-[45%]">Weaknesses</TableHead>
-           
+            <TableHead colSpan={7} className="text-center">Weaknesses</TableHead>
           </TableRow>
           <TableRow>
-            {/* Head and Body columns share remaining width equally */}
-            <TableHead className="text-center w-[45%]">Head</TableHead>
-            {/* Multiplier column takes the minimum width */}
+            <TableHead colSpan={3} className="text-center w-[45%]">Head</TableHead>
             <TableHead className="text-center w-[10%] whitespace-nowrap">
               <span className="hidden sm:inline">Multiplier</span>
               <span className="inline sm:hidden">x</span>
             </TableHead>
-            <TableHead className="text-center w-[45%]">Body</TableHead>
+            <TableHead colSpan={3} className="text-center w-[45%]">Body</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {Object.keys(HeadWeaknesses).map((multiplier) => (
             <TableRow key={multiplier}>
               {/* Head Weaknesses */}
-              <TableCell className="p-0 px-2 py-4">
-                <div className="flex justify-center items-center flex-wrap gap-1 min-w-max">
+              <TableCell colSpan={3} className="p-1 py-2 md:p-4 md:py-2">
+                <div className="flex justify-center items-center flex-wrap gap-1">
                   {HeadWeaknesses[multiplier].map((type: string) => (
                     <Image
                       key={type}
                       src={`/images/type/${type.toLowerCase()}.png`}
-                      className="w-14 lg:w-16 rounded-sm"
+                      className="w-14 sm:w-16 h-auto rounded-sm" // Adjusted widths for mobile and larger screens
                       alt={type}
                       width={96}
                       height={32}
@@ -54,7 +50,7 @@ function FusionWeaknesses({ types }: { types: Types }) {
               </TableCell>
 
               {/* Multiplier */}
-              <TableCell className="p-0 px-2 py-4 text-center max-w-min">
+              <TableCell className="p-1 py-2 md:p-4 md:py-2 text-center">
                 {multiplier === '2' ? 'x2' :
                  multiplier === '1' ? 'x1' :
                  multiplier === '0.5' ? 'x0.5' :
@@ -62,13 +58,13 @@ function FusionWeaknesses({ types }: { types: Types }) {
               </TableCell>
 
               {/* Body Weaknesses */}
-              <TableCell className="p-0 px-2 py-4">
-                <div className="flex justify-center items-center flex-wrap gap-1 min-w-max">
+              <TableCell colSpan={3} className="p-1 py-2 md:p-4 md:py-2">
+                <div className="flex justify-center items-center flex-wrap gap-1">
                   {BodyWeaknesses[multiplier]?.map((type: string) => (
                     <Image
                       key={type}
                       src={`/images/type/${type.toLowerCase()}.png`}
-                      className="w-14 lg:w-16 rounded-sm"
+                      className="w-14 sm:w-16 h-auto rounded-sm" // Adjusted widths for mobile and larger screens
                       alt={type}
                       width={96}
                       height={32}
