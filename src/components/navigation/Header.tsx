@@ -26,7 +26,7 @@ export default function Header() {
 
   const userMenuItems = [
     { name: 'Favorites', href: '/favorites', icon: Heart },
-    { name: 'Settings', href: '/settings', icon: Settings },
+    // { name: 'Settings', href: '/settings', icon: Settings },
   ]
 
   return (
