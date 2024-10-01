@@ -62,7 +62,7 @@ export default function BasePokemonCard({ pokemon }: { pokemon: PokemonData }) {
         <div className="pokemon-card">
             <div>
                 {pokemon.name && (
-                    <h2><Link href={`/${pokemon.id}`}>{pokemon.name}</Link></h2>
+                    <h2><Link rel="nofollow" href={`/${pokemon.id}`}>{pokemon.name}</Link></h2>
                 )}
                 {types.length > 0 && (
                     <div>
@@ -79,7 +79,7 @@ export default function BasePokemonCard({ pokemon }: { pokemon: PokemonData }) {
                 )}
             </div>
             <div>
-                <Link href={`/${pokemon.id}`}>
+                <Link rel="nofollow" href={`/${pokemon.id}`}>
                     <Image
                         src={getSpriteImageURL(primaryImage.sprite_id, spriteType)}
                         alt={`${pokemon.name || 'Pokemon'} Sprite Image`}
@@ -93,7 +93,7 @@ export default function BasePokemonCard({ pokemon }: { pokemon: PokemonData }) {
                         {primaryImage.artists && primaryImage.artists.length > 0 ? (
                             primaryImage.artists.map((artist, index) => (
                                 <React.Fragment key={artist}>
-                                    <Link href={generateArtistSlug(artist)} prefetch={false}>
+                                    <Link rel="nofollow" href={generateArtistSlug(artist)} prefetch={false}>
                                         {artist}
                                     </Link>
                                     {primaryImage.artists && primaryImage.artists.length - 1 > index && " & "}

@@ -48,7 +48,7 @@ const FavoritesClient = () => {
       {favoritePokemons.length === 0 ? (
         <div className="text-muted-foreground text-lg">
           <p>You don&lsquo;t have any favorite Pokémon sprites yet.</p>
-          <Link href="/" className="underline">
+          <Link rel="nofollow" href="/" className="underline">
             Explore Pokémon sprites to add some favorites!
           </Link>
         </div>

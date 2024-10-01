@@ -78,7 +78,7 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({
                         {evolvesFrom.map((evo) => (
                             <p key={evo.id}>
                                 <span className="text-muted-foreground">#{evo.id} </span>
-                                <Link href={`/${evo.id}`} className="border-b-2 border-muted-foreground">
+                                <Link rel="nofollow" prefetch={false} href={`/${evo.id}`} className="border-b-2 border-muted-foreground">
                                     {evo.name}
                                 </Link>
                             </p>
@@ -94,7 +94,7 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({
                         {evolvesTo.map((evo) => (
                             <p key={evo.id}>
                                 <span className="text-muted-foreground">#{evo.id} </span>
-                                <Link href={`/${evo.id}`} className="border-b-2 border-muted-foreground">
+                                <Link rel="nofollow" prefetch={false} href={`/${evo.id}`} className="border-b-2 border-muted-foreground">
                                     {evo.name}
                                 </Link>
                             </p>

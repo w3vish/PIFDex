@@ -68,7 +68,7 @@ function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
     <div className="pokemon-card">
       <div>
         {pokemon.name && (
-          <h2><Link prefetch={false} href={`/${pokemon.id}`}>{pokemon.name}</Link></h2>
+          <h2><Link rel="nofollow" prefetch={false} href={`/${pokemon.id}`}>{pokemon.name}</Link></h2>
         )}
         {types.length > 0 && (
           <div>
@@ -85,7 +85,7 @@ function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
         )}
       </div>
       <div>
-        <Link prefetch={false} href={`/${pokemon.id}`}>
+        <Link rel="nofollow" prefetch={false} href={`/${pokemon.id}`}>
           <Image
             src={getSpriteImageURL(primaryImage.sprite_id, spriteType)}
             alt={`${pokemon.name || 'Pokemon'} Sprite Image`}
@@ -100,7 +100,7 @@ function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
               primaryImage.artists.map((artist, index) => (
                 <React.Fragment key={artist}>
                   {
-                    artist === "Autogen" ? <span>{artist}</span> : <Link prefetch={false} href={generateArtistSlug(artist)}>
+                    artist === "Autogen" ? <span>{artist}</span> : <Link rel="nofollow" prefetch={false} href={generateArtistSlug(artist)}>
                       {artist}
                     </Link>
                   }
@@ -139,13 +139,13 @@ function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
             {/* {pokemon.base_pokemons[ids[0]] && (
               <p className="text-muted-foreground">
                 <span>Head</span>
-                <Link prefetch={false} className="border-b" href={`/${ids[0]}`}>{pokemon.base_pokemons[ids[0]]}</Link>
+                <Link rel="nofollow" prefetch={false} className="border-b" href={`/${ids[0]}`}>{pokemon.base_pokemons[ids[0]]}</Link>
               </p>
             )}
             {pokemon.base_pokemons[ids[1]] && (
               <p className="text-muted-foreground">
                 <span>Body</span>
-                <Link prefetch={false} className="border-b" href={`/${ids[1]}`}>{pokemon.base_pokemons[ids[1]]}</Link>
+                <Link rel="nofollow" prefetch={false} className="border-b" href={`/${ids[1]}`}>{pokemon.base_pokemons[ids[1]]}</Link>
               </p>
             )} */}
 
@@ -153,7 +153,7 @@ function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
             <p>
               <span>Fusion of</span>
               <span className="text-muted-foreground">
-                <Link prefetch={false} href={`/${ids[0]}`}>{pokemon.base_pokemons[ids[0]]}</Link>/<Link prefetch={false} href={`/${ids[1]}`}>{pokemon.base_pokemons[ids[1]]}</Link>
+                <Link rel="nofollow" prefetch={false} href={`/${ids[0]}`}>{pokemon.base_pokemons[ids[0]]}</Link>/<Link rel="nofollow" prefetch={false} href={`/${ids[1]}`}>{pokemon.base_pokemons[ids[1]]}</Link>
               </span>
             </p>
           </>
@@ -166,7 +166,7 @@ function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
               {
                 ids.map((id, index) => (
                   <React.Fragment key={index}>
-                    <Link prefetch={false} className="border-b" href={`/${id}`}>{pokemon.base_pokemons[id]}</Link>
+                    <Link rel="nofollow" prefetch={false} className="border-b" href={`/${id}`}>{pokemon.base_pokemons[id]}</Link>
                     {ids.length - 1 > index && " / "}
                   </React.Fragment>
                 ))

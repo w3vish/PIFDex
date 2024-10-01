@@ -68,7 +68,7 @@ function FusionImage({ pokemon }: { pokemon: PokemonData }) {
             <div className="pokemon-card max-w-xs">
                 <div>
                     {/* {pokemon.name && (
-                        <h2><Link prefetch={false} href={`/${pokemon.id}`}>{pokemon.name}</Link></h2>
+                        <h2><Link rel="nofollow" prefetch={false} href={`/${pokemon.id}`}>{pokemon.name}</Link></h2>
                     )} */}
                     {/* {types.length > 0 && (
                     <div>
@@ -86,7 +86,7 @@ function FusionImage({ pokemon }: { pokemon: PokemonData }) {
                 </div>
                 <div>
 
-                    <Link className="size-72" prefetch={false} href={`/${pokemon.id}`}>
+                    <Link rel="nofollow" className="size-72" prefetch={false} href={`/${pokemon.id}`}>
                         <Image
                             src={getSpriteImageURL(primaryImage.sprite_id, spriteType)}
                             alt={`${pokemon.name || 'Pokemon'} Sprite Image`}
@@ -103,7 +103,7 @@ function FusionImage({ pokemon }: { pokemon: PokemonData }) {
                                 primaryImage.artists.map((artist, index) => (
                                     <React.Fragment key={artist}>
                                         {
-                                            artist === "Autogen" ? <span>{artist}</span> : <Link prefetch={false} href={generateArtistSlug(artist)}>
+                                            artist === "Autogen" ? <span>{artist}</span> : <Link rel="nofollow" prefetch={false} href={generateArtistSlug(artist)}>
                                                 {artist}
                                             </Link>
                                         }

@@ -9,7 +9,7 @@ interface Ability {
 
 function FusionAbilities({ ability }: { ability: Ability }) {
   return (
-    <div className="grid md:grid-cols-2 gap-4 text-base">
+    <div className="grid md:grid-cols-2 gap-4 text-base px-2">
       {/* Render normal abilities */}
       <div className="">
         <h3 className="font-semibold text-muted-foreground">Normal Abilities</h3>

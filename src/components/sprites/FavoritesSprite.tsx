@@ -55,7 +55,7 @@ const FavoritesSprite = ({ pokemonData }: LikeSpriteProps) => {
           <>
             Sprite #{pokemonData.id} ({pokemonData.name}) has been removed from
             your favorites. Check your{" "}
-            <Link href="/favorites" className="underline">
+            <Link rel="nofollow" href="/favorites" className="underline">
               favorites
             </Link>.
           </>
@@ -73,7 +73,7 @@ const FavoritesSprite = ({ pokemonData }: LikeSpriteProps) => {
           <>
             Sprite #{pokemonData.id} ({pokemonData.name}) has been added to
             your favorites. Check your{" "}
-            <Link href="/favorites" className="underline">
+            <Link rel="nofollow" href="/favorites" className="underline">
               favorites
             </Link>.
           </>

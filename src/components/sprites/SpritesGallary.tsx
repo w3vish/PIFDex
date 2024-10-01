@@ -31,7 +31,7 @@ const SpritesGallary = ({ images }: SpritesGallaryProps) => {
               <div>
               </div>
               <div>
-                <Link href={spriteURL}>
+                <Link rel="nofollow" href={spriteURL} prefetch={false}>
                   <Image
                     src={getSpriteImageURL(image.sprite_id, image.sprite_type)}
                     alt={`${image.sprite_id || 'Pokemon'} Sprite Image`}
@@ -46,7 +46,7 @@ const SpritesGallary = ({ images }: SpritesGallaryProps) => {
                       image.artists.map((artist, index) => (
                         <React.Fragment key={artist}>
                           {
-                            artist === "Autogen" ? <span>{artist}</span> : <Link href={generateArtistSlug(artist)}>
+                            artist === "Autogen" ? <span>{artist}</span> : <Link rel="nofollow" href={generateArtistSlug(artist)}>
                               {artist}
                             </Link>
                           }

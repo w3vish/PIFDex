@@ -55,7 +55,7 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
     <Card className="w-full max-w-sm mx-auto">
         <div className="flex gap-1 justify-between m-3">
             <h2 className="text-lg lg:text-base text-muted-foreground font-semibold justify-start">
-              <Link href={`/${pokemon.id}`}>
+              <Link rel="nofollow" href={`/${pokemon.id}`}>
                {pokemon.name}
               </Link>
             </h2>
@@ -73,7 +73,7 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
           </div>
         </div>
       <div className="p-4 pt-2 relative">
-        <Link prefetch={false} href={`/${pokemon.id}`}>
+        <Link rel="nofollow" prefetch={false} href={`/${pokemon.id}`}>
           <Image
             src={getSpriteImageURL(pokemon.id, spriteType)}
             alt={`${pokemon.name} Sprite Image`}
@@ -88,7 +88,7 @@ export default function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
             <span className="text-right">
               {primaryImage.artists.map((artist, index) => (
                 <React.Fragment key={artist}>
-                  <Link
+                  <Link rel="nofollow"
                     href={generateArtistSlug(artist)}
                     className="border-b-2 border-b-gray-300"
                   >

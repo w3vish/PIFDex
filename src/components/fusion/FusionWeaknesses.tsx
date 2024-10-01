@@ -38,8 +38,8 @@ function FusionWeaknesses({ types }: { types: Types }) {
           {Object.keys(HeadWeaknesses).map((multiplier) => (
             <TableRow key={multiplier}>
               {/* Head Weaknesses */}
-              <TableCell className="p-1 py-2 md:p-4 md:py-2">
-                <div className="flex justify-center items-center flex-wrap gap-1">
+              <TableCell className="p-0 px-2 py-4">
+                <div className="flex justify-center items-center flex-wrap gap-1 min-w-max">
                   {HeadWeaknesses[multiplier].map((type: string) => (
                     <Image
                       key={type}
@@ -54,7 +54,7 @@ function FusionWeaknesses({ types }: { types: Types }) {
               </TableCell>
 
               {/* Multiplier */}
-              <TableCell className="p-1 py-2 md:p-4 md:py-2 text-center">
+              <TableCell className="p-0 px-2 py-4 text-center max-w-min">
                 {multiplier === '2' ? 'x2' :
                  multiplier === '1' ? 'x1' :
                  multiplier === '0.5' ? 'x0.5' :
@@ -62,8 +62,8 @@ function FusionWeaknesses({ types }: { types: Types }) {
               </TableCell>
 
               {/* Body Weaknesses */}
-              <TableCell className="p-1 py-2 md:p-4 md:py-2">
-                <div className="flex justify-center items-center flex-wrap gap-1">
+              <TableCell className="p-0 px-2 py-4">
+                <div className="flex justify-center items-center flex-wrap gap-1 min-w-max">
                   {BodyWeaknesses[multiplier]?.map((type: string) => (
                     <Image
                       key={type}

@@ -48,7 +48,7 @@ export default function BasePokemonCard({ pokemon }: { pokemon: PokemonData }) {
                 <div className="flex gap-1 justify-between items-center">
                     <div>
                         <h2 className="text-lg font-semibold">
-                            <Link href={`/${pokemon.id}`}>
+                            <Link rel="nofollow" href={`/${pokemon.id}`}>
                                 {pokemon.name}
                             </Link>
                         </h2>
@@ -72,7 +72,7 @@ export default function BasePokemonCard({ pokemon }: { pokemon: PokemonData }) {
                 </div>
             </CardHeader>
             <CardContent className="p-4 pt-2 relative">
-                <Link prefetch={false} href={`/${pokemon.id}`}>
+                <Link rel="nofollow" prefetch={false} href={`/${pokemon.id}`}>
                     <img
                         src={`https://cdn.jsdelivr.net/gh/ViSurya/PIFDexFiles/graphics/base/${pokemon.id}.png`}
                         alt={`${pokemon.name} Sprite Image`}
@@ -83,7 +83,7 @@ export default function BasePokemonCard({ pokemon }: { pokemon: PokemonData }) {
                     <span className="text-muted-foreground text-sm">#{pokemon.id.padStart(3, "0")}</span>
                     {pokemon.images?.[0]?.artists && (
                         <span className="text-sm text-right">
-                            <Link
+                            <Link rel="nofollow"
                                 prefetch={false}
                                 className="border-b-2 border-b-gray-300"
                                 href={`/artists/${generateArtistSlug(pokemon.images[0].artists[pokemon.images[0].artists.length - 1])}`}

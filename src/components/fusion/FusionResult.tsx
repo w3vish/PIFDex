@@ -55,7 +55,7 @@ export function FusionResult({ fusionStatus, headData, bodyData }: FusionResultP
             <FusionStats stats={generateStats(headData)} comparisonStats={generateStats(bodyData)} />
             <FusionStats stats={generateStats(bodyData)} comparisonStats={generateStats(headData)} />
           </div>
-          <div className="grid grid-cols-2 gap-2 md:gap-8 px-4">
+          <div className="grid grid-cols-2 gap-2 md:gap-8 md:px-4">
             <FusionAbilities ability={{ normal: headData.abilities, hidden: headData.hidden_abilities }} />
             <FusionAbilities ability={{ normal: bodyData.abilities, hidden: bodyData.hidden_abilities }} />
           </div>
