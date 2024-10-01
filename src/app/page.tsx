@@ -7,7 +7,7 @@ import { loadModules } from "@/lib/utils/pages";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "InfiniteFusion.org - Pokémon Infinite Fusion Sprite Dex",
+  title: "InfiniteFusion.org - Pokémon Infinite Fusion Dex",
   description: "Explore 221,390 Pokémon fusions and 170,000+ custom sprites at InfiniteFusion.org, a fan-driven Dex for the Pokémon Infinite Fusion game with contributions from over 3,400 artists.",
 }
 
