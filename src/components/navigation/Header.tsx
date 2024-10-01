@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { cn } from '@/lib/theme/utils'
-import { BookOpen, Calculator, Download, Heart, Menu, Search, Settings, User, Wand2 } from 'lucide-react'
+import { BookOpen, Calculator, Download, Heart, Layers, Menu, Search, Settings, User, Wand2, Zap } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -19,9 +19,11 @@ export default function Header() {
 
   const navLinks = [
     { name: 'Fusion Calculator', href: '/fusion', icon: Calculator },
-    { name: 'Fusion Finder', href: '/find', icon: Wand2 },
-    { name: 'Download', href: '/download', icon: Download },
-    { name: 'Game Wiki', href: '/wiki', icon: BookOpen },
+    { name: "Triple Fusions", href: "/triple-fusions", icon: Layers, },
+    { name: "Self Fusions", href: "/self-fusions", icon: Zap, },
+    // { name: 'Fusion Finder', href: '/find', icon: Wand2 },
+    // { name: 'Download', href: '/download', icon: Download },
+    // { name: 'Game Wiki', href: '/wiki', icon: BookOpen },
   ]
 
   const userMenuItems = [
@@ -40,7 +42,7 @@ export default function Header() {
 
           <div className='flex gap-16'>
             {/* Desktop Navigation Links */}
-            {/* <div className="hidden lg:flex items-center space-x-6 lg:space-x-2">
+            <div className="hidden lg:flex items-center space-x-6 lg:space-x-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
@@ -53,12 +55,12 @@ export default function Header() {
                   {link.name}
                 </Link>
               ))}
-            </div> */}
+            </div>
 
             {/* User Menu and Mobile Navigation */}
             <div className="flex items-center space-x-2">
-             {/* Desktop Search Input */}
-             <div className="relative w-56 hidden lg:block">
+              {/* Desktop Search Input */}
+              <div className="relative w-56 hidden lg:block">
                 <Input
                   className="pr-16"
                   placeholder="Search..."
@@ -129,7 +131,7 @@ export default function Header() {
                         </SheetClose>
                       ))}
                       <Separator />
-                       {userMenuItems.map((link) => (
+                      {userMenuItems.map((link) => (
                         <SheetClose asChild key={link.name}>
                           <Link
                             href={link.href}
