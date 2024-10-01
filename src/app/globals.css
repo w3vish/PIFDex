@@ -6,6 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -13,6 +14,8 @@
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
+
+
   }
 }
 
@@ -49,7 +52,12 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --custom-card-background: 245, 247, 250;
+    /* Soft, premium bluish-gray */
+    --custom-image-background: 210, 220, 230;
+    /* A slightly darker, elegant blue-gray */
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -75,6 +83,11 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
+    /* Custom variables for dark mode */
+    --custom-card-background: 15, 23, 42;
+    /* Equivalent to bg-slate-950 */
+    --custom-image-background: 30, 41, 59;
+    /* Equivalent to bg-slate-800 */
   }
 }
 
@@ -82,6 +95,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
