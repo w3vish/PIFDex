@@ -52,10 +52,10 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --custom-card-background: 245, 247, 250;
-    /* Soft, premium bluish-gray */
-    --custom-image-background: 210, 220, 230;
-    /* A slightly darker, elegant blue-gray */
+   /* Custom variables for light mode */
+--custom-card-background: 245, 247, 250; /* Soft, premium bluish-gray */
+--custom-image-background: 200, 220, 245; /* Softer bluish background */
+
   }
 
   .dark {
