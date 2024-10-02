@@ -52,12 +52,8 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    /* Custom variables for light mode */
-    --custom-card-background: 245, 247, 250;
-    /* Soft, premium bluish-gray */
-    --custom-image-background: 200, 220, 245;
-    /* Softer bluish background */
-
+    --custom-card-background: 248, 250, 252; /* Soft, neutral light gray with a hint of blue */
+    --custom-image-background: 230, 240, 250; /* Soft, premium light blue with a slight gray touch */
   }
 
   .dark {
@@ -85,11 +81,8 @@
     --chart-3: 30 80% 55%;
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
-    /* Custom variables for dark mode */
-    --custom-card-background: 15, 23, 42;
-    /* Equivalent to bg-slate-950 */
-    --custom-image-background: 30, 41, 59;
-    /* Equivalent to bg-slate-800 */
+    --custom-card-background: 28, 36, 48; /* Dark slate with a smooth, premium look */
+    --custom-image-background: 38, 48, 61; /* Slightly lighter slate blue */
   }
 }
 
