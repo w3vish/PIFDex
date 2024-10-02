@@ -4,7 +4,8 @@ import { ThemeProvider } from "@/components/theme";
 import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from "@/components/ui/toaster";
 import { Header } from "@/components/navigation";
-import "./globals.css";
+import { GoogleAnalytics } from '@next/third-parties/google'
+import "@/styles/globals.css";
 import '@/styles/PokemonCard.css';
 
 const inter = Inter({ subsets: ["latin"] });
@@ -35,6 +36,7 @@ export default function RootLayout({
           </main>
           <Toaster />
         </ThemeProvider>
+        <GoogleAnalytics gaId="G-X91KPL7L5C" />
       </body>
     </html>
   );

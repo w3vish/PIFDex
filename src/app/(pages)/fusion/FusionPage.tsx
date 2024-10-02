@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, CardHeader, CardDescription } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { useToast } from '@/hooks/use-toast'
@@ -111,6 +111,8 @@ export default function FusionPage() {
     setFusionData(null)
     setFusionStatus('idle')
   }
+
+  useEffect(() => randomFusion(), [])
 
   return (
     <Card className="p-2 space-y-4 m-1 md:m-4">
