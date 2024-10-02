@@ -1,6 +1,7 @@
 import { Progress } from "@/components/ui/progress"
 import { Separator } from "@/components/ui/separator"
 import { gameInfo } from "@/lib/utils/constants"
+import Link from "next/link"
 import { Card } from "../ui/card"
 
 export default function HeroSection() {
@@ -8,12 +9,12 @@ export default function HeroSection() {
 
     return (
         <Card className="space-y-6 m-2 py-8 px-4">
-           <div>
-           <h1 className="text-3xl font-bold tracking-tight">Welcome to InfiniteFusion.org</h1>
-            <p className="text-base md:text-lg text-muted-foreground">
-                A Dex for the Pokémon Infinite Fusion game. Explore our vast collection of Pokémon fusions and custom sprites.
-            </p>
-           </div>
+            <div>
+                <h1 className="text-3xl font-bold tracking-tight">Welcome to InfiniteFusion.org</h1>
+                <p className="text-base md:text-lg text-muted-foreground">
+                    A Dex for the Pokémon Infinite Fusion game. Explore our vast collection of Pokémon fusions and custom sprites.
+                </p>
+            </div>
 
             <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
@@ -37,10 +38,13 @@ export default function HeroSection() {
 
             <Separator className="bg-gray-700" />
 
-            <p className="text-sm text-muted-foreground">
+            {/* <p className="text-sm text-muted-foreground">
                 New sprites are constantly being added by our vibrant community. <a href="https://discord.gg/infinitefusion" className="text-blue-500 underline">Join our Discord</a> to be part of the Infinite Fusion community!
-            </p>
+            </p> */}
 
+            <p className="text-sm text-muted-foreground">
+                To calculate fusions, try our latest <Link className="text-blue-500 underline" href="/fusion">Pokémon Infinite Fusion Calculator</Link>.
+            </p>
         </Card>
     )
 }

@@ -32,7 +32,8 @@ export default function Header() {
   ]
 
   return (
-    <nav className="border border-t-0 lg:rounded-lg">
+    <nav className="border border-t-0 lg:rounded-lg 
+    sticky top-0 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className=" mx-auto px-4">
         <div className="flex items-center justify-between h-12">
           {/* Logo */}

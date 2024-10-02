@@ -7,8 +7,30 @@ import { loadModules } from "@/lib/utils/pages";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "InfiniteFusion.org - Pokémon Infinite Fusion Dex",
-  description: "Explore 221,390 Pokémon fusions and 170,000+ custom sprites at InfiniteFusion.org, a fan-driven Dex for the Pokémon Infinite Fusion game with contributions from over 3,400 artists.",
+  title: "Pokémon Infinite Fusion Dex | InfiniteFusion.org",
+  description: "Discover 221,390 unique Pokémon fusions and explore 170,000+ custom sprites at InfiniteFusion.org. Your ultimate resource for the Pokémon Infinite Fusion game, featuring a comprehensive Dex and fusion calculator.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://infinitefusion.org",
+    siteName: "InfiniteFusion.org",
+    title: "Pokémon Infinite Fusion Dex & Tools",
+    description: "Explore 221,390 Pokémon fusions, 170,000+ custom sprites, and tools for the Pokémon Infinite Fusion fan game.",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Pokémon Infinite Fusion Dex & Tools"
+      }
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pokémon Infinite Fusion Dex & Tools",
+    description: "Explore 221,390 Pokémon fusions, 170,000+ custom sprites, and tools for the Pokémon Infinite Fusion fan game.",
+    images: ["/og-image.jpg"],
+  },
 }
 
 interface Pokemon {
