@@ -7,6 +7,7 @@ import { gridClass } from "./styles";
 import { typeColors } from "./typeColors";
 import { apiURL, imageURLs } from "./urls";
 import { abilities } from "./abilities";
+import { siteConfig } from "./siteConfig";
 
 export {
     apiURL,
@@ -20,5 +21,6 @@ export {
     placeHolders,
     shapeDescriptions,
     typeColors,
-    abilities
+    abilities,
+    siteConfig
 };

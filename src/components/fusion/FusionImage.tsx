@@ -65,6 +65,11 @@ function FusionImage({ pokemon }: { pokemon: PokemonData }) {
 
     return (
         <>
+        <p className="text-center my-2 mx-auto max-w-min text-muted-foreground border-b-2">
+            <Link href={`/${pokemon.id}`}>
+            {pokemon.name}
+            </Link>
+        </p>
             <div className="pokemon-card max-w-xs">
                 <div>
                     {/* {pokemon.name && (
