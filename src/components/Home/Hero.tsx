@@ -18,8 +18,8 @@ export default function HeroSection() {
 
             <div className="space-y-2">
                 <div className="flex items-center justify-between text-sm">
-                    <span>Total Pokemons: <span className="font-semibold">{gameInfo.totalSprites.toLocaleString()}</span></span>
-                    <span className="text-end">Custom Sprites: <span className="font-semibold">{gameInfo.spritesWithCustomSprites.toLocaleString()}</span></span>
+                    <span>Custom Sprites: <span className="font-semibold">{gameInfo.spritesWithCustomSprites.toLocaleString()}</span></span>
+                    <span className="text-end">Total Sprites: <span className="font-semibold">{gameInfo.totalSprites.toLocaleString()}</span></span>
                 </div>
                 <Progress
                     value={progressPercentage}
@@ -38,12 +38,8 @@ export default function HeroSection() {
 
             <Separator className="bg-gray-700" />
 
-            {/* <p className="text-sm text-muted-foreground">
-                New sprites are constantly being added by our vibrant community. <a href="https://discord.gg/infinitefusion" className="text-blue-500 underline">Join our Discord</a> to be part of the Infinite Fusion community!
-            </p> */}
-
             <p className="text-sm text-muted-foreground">
-                To calculate fusions, try our latest <Link className="text-blue-500 underline" href="/fusion">Pokémon Infinite Fusion Calculator</Link>.
+                Use our <Link className="text-blue-500 underline" href="/fusion">Pokémon Infinite Fusion Calculator</Link> to try out fusion combinations.
             </p>
         </Card>
     )

@@ -12,6 +12,7 @@ import {
     SpriteResult,
 } from "./SpriteResponse";
 import { LoadAllFusionsResponse } from "./loadAllFusionsResponse";
+import { PokemonCardTypes } from "./PokemonCard";
 interface SelectedPokemon {
     id: string
     name: string
@@ -31,4 +32,5 @@ export type {
     SpriteResult,
     LoadAllFusionsResponse,
     SelectedPokemon,
+    PokemonCardTypes
 }

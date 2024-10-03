@@ -1,7 +1,7 @@
 "use client"
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "@/components/ui/command"
 import { DialogDescription, DialogTitle } from "@/components/ui/dialog"
-import { File, Heart, Laptop, Layers, Moon, Sun, Zap, Calculator } from "lucide-react"
+import { File, Heart, Laptop, Layers, Moon, Sun, Zap, Calculator, BookOpen } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation"
 import * as React from "react"
@@ -14,7 +14,7 @@ interface SearchBoxProps {
 interface LinkItem {
   href: string;
   icon: React.ElementType;
-  label: string;
+  name: string;
 }
 
 const SearchBox: React.FC<SearchBoxProps> = ({ open, setOpen }) => {
@@ -22,10 +22,11 @@ const SearchBox: React.FC<SearchBoxProps> = ({ open, setOpen }) => {
   const { setTheme, theme } = useTheme()
 
   const links: LinkItem[] = [
-    { href: "/fusion", icon: Calculator, label: "Fusion Calculator" },
-    { href: "/favorites", icon: Heart, label: "Favorites" },
-    { href: "/triple-fusions", icon: Layers, label: "Triple Fusions" },
-    { href: "/self-fusions", icon: Zap, label: "Self Fusions" },
+    { name: 'Fusion Calculator', href: '/fusion', icon: Calculator },
+    { name: 'Fusion Dex', href: '/dex', icon: BookOpen },
+    { name: "Triple Fusions", href: "/triple-fusions", icon: Layers, },
+    { name: "Self Fusions", href: "/self-fusions", icon: Zap, },
+    { name: "Favorites", href: "/favorites", icon: Heart },
   ]
 
   React.useEffect(() => {
@@ -62,7 +63,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ open, setOpen }) => {
           {links.map((item) => (
             <CommandItem key={item.href} onSelect={() => handleSelect(item.href)} className="cursor-pointer">
               <IconComponent icon={item.icon || File} />
-              <span>{item.label}</span>
+              <span>{item.name}</span>
             </CommandItem>
           ))}
         </CommandGroup>

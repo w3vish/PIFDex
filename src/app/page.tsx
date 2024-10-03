@@ -6,32 +6,33 @@ import { gameInfo } from "@/lib/utils/constants";
 import { loadModules } from "@/lib/utils/pages";
 import { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Pokémon Infinite Fusion Dex | InfiniteFusion.org",
-  description: "Discover 221,390 unique Pokémon fusions and explore 170,000+ custom sprites at InfiniteFusion.org. Your ultimate resource for the Pokémon Infinite Fusion game, featuring a comprehensive Dex and fusion calculator.",
+export const metadata = {
+  title: "Pokémon Infinite Fusion Dex & Tools - InfiniteFusion.org",
+  description: `Discover and explore ${gameInfo.totalSprites.toLocaleString()} Pokémon fusions with over ${gameInfo.totalCustomSprites.toLocaleString()} custom sprites in our comprehensive Fusion Dex. Use the Fusion Calculator and other tools for the Pokémon Infinite Fusion fan game.`,
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://infinitefusion.org",
     siteName: "InfiniteFusion.org",
-    title: "Pokémon Infinite Fusion Dex & Tools",
-    description: "Explore 221,390 Pokémon fusions, 170,000+ custom sprites, and tools for the Pokémon Infinite Fusion fan game.",
+    title: "Pokémon Infinite Fusion Dex & Tools - InfiniteFusion.org",
+    description: `InfiniteFusion.org offers a detailed Fusion Dex with over ${gameInfo.totalSprites.toLocaleString()} Pokémon fusion combinations and ${gameInfo.totalCustomSprites.toLocaleString()} custom sprites. Access tools like the Pokémon Fusion Calculator and more.`,
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Pokémon Infinite Fusion Dex & Tools"
+        alt: "Pokémon Infinite Fusion Dex & Tools",
       }
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Pokémon Infinite Fusion Dex & Tools",
-    description: "Explore 221,390 Pokémon fusions, 170,000+ custom sprites, and tools for the Pokémon Infinite Fusion fan game.",
+    description: `Explore over ${gameInfo.totalSprites.toLocaleString()} Pokémon fusion possibilities and ${gameInfo.totalCustomSprites.toLocaleString()} custom sprites with tools for the Pokémon Infinite Fusion game.`,
     images: ["/og-image.jpg"],
   },
-}
+};
+
 
 interface Pokemon {
   id: string;

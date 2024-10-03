@@ -1,7 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
 import { Card, CardContent, CardFooter } from '@/components/ui/card'
-import { Facebook, Twitter, Instagram, Github } from 'lucide-react'
+import { Facebook, Twitter, Instagram, Github, Terminal } from 'lucide-react'
+import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
 
 export default function Footer() {
   return (
@@ -9,8 +10,8 @@ export default function Footer() {
       <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-8 p-6">
         <div>
           <h3 className="text-lg font-semibold mb-4">Infinite Fusion</h3>
-          <p className="text-sm text-muted-foreground">
-            Explore endless Pokémon combinations and discover new fusion possibilities.
+          <p className="text-sm text-muted-foreground space-y-2">
+
           </p>
         </div>
         <div>
@@ -30,11 +31,17 @@ export default function Footer() {
           </ul>
         </div>
       </CardContent>
-      <CardFooter className="flex flex-col md:flex-row justify-between items-center border-t p-6">
+      <CardFooter className="flex flex-col md:flex-row justify-between items-center border-t">
         <div className="text-sm text-muted-foreground mb-4 md:mb-0">
           © {new Date().getFullYear()} Infinite Fusion. All rights reserved.
           <br />
-          Pokémon and Pokémon character names are trademarks of Nintendo.
+    
+  
+  
+      <p>Pokémon Charactor and Names and Copyrighet by Nintend and THe Pokemon COmponey</p>
+      <p>This website is not affiliated with The Pokémon Company, Nintendo, Game Freak Inc., or Creatures Inc. </p>
+
+
         </div>
         <div className="flex space-x-4">
           <Link href="#" className="text-muted-foreground hover:text-primary">

@@ -20,6 +20,9 @@ export const metadata: Metadata = {
   keywords: ["Pokémon Infinite Fusion", "Fusion Dex", "Custom Sprites", "Fusion Calculator", "Fan Game"],
   authors: [{ name: "InfiniteFusion.org Community" }],
   creator: "InfiniteFusion.org",
+  verification: {
+    
+  },
   robots: {
     index: true,
     follow: true,

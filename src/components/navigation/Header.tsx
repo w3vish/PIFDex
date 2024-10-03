@@ -19,6 +19,7 @@ export default function Header() {
 
   const navLinks = [
     { name: 'Fusion Calculator', href: '/fusion', icon: Calculator },
+    { name: 'Fusion Dex', href: '/dex', icon: BookOpen },
     { name: "Triple Fusions", href: "/triple-fusions", icon: Layers, },
     { name: "Self Fusions", href: "/self-fusions", icon: Zap, },
     // { name: 'Fusion Finder', href: '/find', icon: Wand2 },
