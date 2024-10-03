@@ -1,6 +1,6 @@
 .pokemon-card {
   width: 100%;
-  max-width: 20rem; /* Adjusted max-width */
+  max-width: 19rem; /* Adjusted max-width */
   margin: 0 auto;
   border: 1px solid hsl(var(--border));
   border-radius: var(--radius);

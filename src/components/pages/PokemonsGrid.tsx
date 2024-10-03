@@ -14,9 +14,11 @@ const defaultGridClass = "p-0 px-2 gap-1 grid grid-cols-1 sm:grid-cols-2 md:grid
 
 const GridContent: React.FC<GridContentProps> = ({ children, className = "" }) => {
   return (
-    <CardContent className={cn(`${defaultGridClass} ${className}`)}>
+    <div className="flex justify-center">
+      <CardContent className={cn(`${defaultGridClass} ${className}`)}>
       {children}
     </CardContent>
+    </div>
   );
 };
 

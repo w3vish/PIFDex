@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme";
 import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from "@/components/ui/toaster";
-import { Header } from "@/components/navigation";
+import { Header, Footer } from "@/components/navigation";
 import { GoogleAnalytics } from '@next/third-parties/google'
 import "@/styles/globals.css";
 import '@/styles/PokemonCard.css';
@@ -40,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} max-w-screen-2xl mx-auto min-h-screen`}>
+      <body className={`${inter.className} max-w-screen-2xl flex flex-col mx-auto min-h-screen`}>
         <NextTopLoader />
         <ThemeProvider
           attribute="class"
@@ -52,6 +52,7 @@ export default function RootLayout({
           <main className="max-w-screen-2xl">
             {children}
           </main>
+          <Footer/>
           <Toaster />
         </ThemeProvider>
         <GoogleAnalytics gaId="G-X91KPL7L5C" />
