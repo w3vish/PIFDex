@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { cn } from '@/lib/theme/utils'
-import { BookOpen, Calculator, Download, Heart, Layers, Menu, Search, Settings, User, Wand2, Zap } from 'lucide-react'
+import { BookOpen, Calculator, Download, Heart, Layers, Menu, Palette, Search, Settings, User, Wand2, Zap } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -20,6 +20,7 @@ export default function Header() {
   const navLinks = [
     { name: 'Fusion Calculator', href: '/fusion', icon: Calculator },
     { name: 'Fusion Dex', href: '/dex', icon: BookOpen },
+    { name: 'Artists', href: '/artists', icon: Palette },
     { name: "Triple Fusions", href: "/triple-fusions", icon: Layers, },
     { name: "Self Fusions", href: "/self-fusions", icon: Zap, },
     // { name: 'Fusion Finder', href: '/find', icon: Wand2 },
@@ -51,7 +52,7 @@ export default function Header() {
                   href={link.href}
                   className={cn(
                     "text-sm px-3 py-2 hover:underline transition-all",  // General link styles
-                    currentRoute === link.href ? "border-2 rounded-lg" : ""    // Apply active link style if current route matches
+                    currentRoute === link.href ? "border-b-2 border-gray-500 font-bold" : ""    // Apply active link style if current route matches
                   )}
                 >
                   {link.name}

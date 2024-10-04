@@ -8,28 +8,6 @@ import { gameInfo } from '@/lib/utils/constants'; // Ensure you import gameInfo 
 export const metadata: Metadata = {
     title: "Self Fusions",
     description: "Self Fusions are a unique type of Pokémon fusion where a single Pokémon fuses with itself, acting as both the head and the body. These fusions highlight the Pokémon's ability to merge its own attributes.",
-    openGraph: {
-        type: "website",
-        locale: "en_US",
-        url: "https://infinitefusion.org/self-fusions",
-        siteName: "InfiniteFusion.org",
-        title: "Self Fusions in Pokémon Infinite Fusion",
-        description: "Explore a variety of Self Fusions, where Pokémon merge their own attributes to create unique forms.",
-        images: [
-            {
-                url: "/og-image.jpg",
-                width: 1200,
-                height: 630,
-                alt: "Self Fusions in Pokémon Infinite Fusion",
-            },
-        ],
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "Self Fusions in Pokémon Infinite Fusion",
-        description: "Dive into the world of Self Fusions, showcasing how Pokémon can creatively merge their own traits.",
-        images: ["/og-image.jpg"],
-    },
 };
 
 interface PokemonData {

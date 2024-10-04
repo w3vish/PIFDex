@@ -7,28 +7,6 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
     title: "Triple Fusions",
     description: "Explore the unique world of Triple Fusions, where three Pokémon combine their attributes into a single fusion. Perfect for fans of legendary trios and fully-evolved starters.",
-    openGraph: {
-        type: "website",
-        locale: "en_US",
-        url: "https://infinitefusion.org/triple-fusions",
-        siteName: "InfiniteFusion.org",
-        title: "Triple Fusions in Pokémon Infinite Fusion",
-        description: "Discover Triple Fusions, combining three Pokémon into unique forms. A must-see for fans of legendary trios!",
-        images: [
-            {
-                url: "/og-image.jpg",
-                width: 1200,
-                height: 630,
-                alt: "Triple Fusions in Pokémon Infinite Fusion",
-            },
-        ],
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "Triple Fusions in Pokémon Infinite Fusion",
-        description: "Dive into Triple Fusions, where three Pokémon merge their attributes for a unique fusion experience.",
-        images: ["/og-image.jpg"],
-    },
 };
 
 interface PokemonData {

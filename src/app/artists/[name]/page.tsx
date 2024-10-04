@@ -91,9 +91,16 @@ const ArtistsPage = async ({ params, searchParams }: ArtistsPageProps) => {
           </h1>
         </CardHeader>
 
-        <CardContent className='flex justify-end p-4'>
-          <SelectSpritesLimit />
-        </CardContent>
+        <div className='flex justify-between p-4'>
+          <p className='self-center pt-6 md:self-end md:text-lg font-semibold'>
+            <span>Page ({currentPage}/{totalPages})</span>
+          </p>
+          <div className='ml-auto'>
+            <SelectSpritesLimit />
+          </div>
+        </div>
+
+
 
         <GridContent>
           {mappedPokemonData.map((pokemon: any) => (

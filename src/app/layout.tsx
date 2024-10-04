@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://infinitefusion.org'),
   title: {
     default: "Pokémon Infinite Fusion Dex & Tools",
-    template: "%s | Pokemon Infinite Fusion"
+    template: "%s | Pokémon Infinite Fusion"
   },
   description: "Explore the Pokémon Infinite Fusion Dex featuring 221,390 unique fusions and 170,000+ custom sprites. Access fusion calculator, game info, and community resources for Pokémon Infinite Fusion.",
   keywords: ["Pokémon Infinite Fusion", "Fusion Dex", "Custom Sprites", "Fusion Calculator", "Fan Game"],

@@ -1,4 +1,5 @@
 .pokemon-card {
+  min-width: fit-content;
   width: 100%;
   max-width: 19rem; /* Adjusted max-width */
   margin: 0 auto;

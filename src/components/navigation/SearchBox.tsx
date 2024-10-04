@@ -1,7 +1,7 @@
 "use client"
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "@/components/ui/command"
 import { DialogDescription, DialogTitle } from "@/components/ui/dialog"
-import { File, Heart, Laptop, Layers, Moon, Sun, Zap, Calculator, BookOpen } from "lucide-react"
+import { File, Heart, Laptop, Layers, Moon, Sun, Zap, Calculator, BookOpen, Palette } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation"
 import * as React from "react"
@@ -24,6 +24,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ open, setOpen }) => {
   const links: LinkItem[] = [
     { name: 'Fusion Calculator', href: '/fusion', icon: Calculator },
     { name: 'Fusion Dex', href: '/dex', icon: BookOpen },
+    { name: 'Artists', href: '/artists', icon: Palette },
     { name: "Triple Fusions", href: "/triple-fusions", icon: Layers, },
     { name: "Self Fusions", href: "/self-fusions", icon: Zap, },
     { name: "Favorites", href: "/favorites", icon: Heart },
