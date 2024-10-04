@@ -24,10 +24,6 @@ const nextConfig = {
             value: '*', // Allow all origins, adjust as needed for security
           },
           {
-            key: 'Access-Control-Allow-Methods',
-            value: 'GET, POST, OPTIONS', // Methods allowed
-          },
-          {
             key: 'Access-Control-Allow-Headers',
             value: 'Content-Type', // Allow necessary headers
           },
