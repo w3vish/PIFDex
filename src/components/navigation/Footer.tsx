@@ -1,67 +1,117 @@
-import React from 'react'
-import Link from 'next/link'
-import { Card, CardContent, CardFooter } from '@/components/ui/card'
-import { Facebook, Twitter, Instagram, Github, Terminal } from 'lucide-react'
-import { Alert, AlertDescription, AlertTitle } from '../ui/alert'
+import Link from "next/link"
+import { Separator } from "@/components/ui/separator"
+import {
+  BookOpen,
+  Calculator,
+  Github,
+  Heart,
+  Layers,
+  Palette,
+  Zap,
+  Twitter,
+  Info,
+  Mail,
+  Search,
+  DownloadCloud,
+  ShieldCheck,
+  FileText,
+  Library,
+} from "lucide-react"
+
+const footerLinks = [
+  {
+    title: "Tools",
+    items: [
+      { name: 'Fusion Calculator', href: '/fusion', icon: Calculator },
+      { name: 'Fusion Dex', href: '/dex', icon: BookOpen },
+      { name: 'Artists', href: '/artists', icon: Palette },
+    ]
+  },
+  {
+    title: "Pages",
+    items: [
+      { name: "Favorites", href: "/favorites", icon: Heart },
+      { name: "Triple Fusions", href: "/triple-fusions", icon: Layers },
+      { name: "Self Fusions", href: "/self-fusions", icon: Zap },
+      { name: "About Us", href: "/about", icon: Info },
+      { name: "Contact Us", href: "/contact", icon: Mail },
+    ]
+  },
+  // {
+  //   title: "More",
+  //   items: [
+  //     { name: "Fusion Finder", href: "/find", icon: Search },
+  //     { name: "Wiki", href: "/wiki", icon: Library },
+  //     { name: "Download Game", href: "/download", icon: DownloadCloud },
+  //   ]
+  // },
+  {
+    title: "Legal",
+    items: [
+      { name: 'Privacy Policy', href: '/privacy', icon: ShieldCheck },
+      { name: 'Terms of Service', href: '/terms', icon: FileText },
+      { name: 'Cookie Policy', href: '/cookies', icon: FileText },
+      { name: 'Disclaimer', href: '/disclaimer', icon: FileText },
+    ]
+  },
+]
+
+const socialLinks = [
+  { name: 'GitHub', href: 'https://github.com/', icon: Github },
+  { name: 'Twitter', href: 'https://twitter.com/', icon: Twitter },
+]
 
 export default function Footer() {
   return (
-    <Card className="w-full mt-8">
-      <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-8 p-6">
-        <div>
-          <h3 className="text-lg font-semibold mb-4">Infinite Fusion</h3>
-          <p className="text-sm text-muted-foreground space-y-2">
+    <footer className="bg-card mt-8 py-12 px-4 md:px-6 border-t-2">
+      <div className="container mx-auto max-w-6xl">
+        {/* Footer Main Links */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+          {footerLinks.map((section) => (
+            <div key={section.title} className="max-w-fit">
+              <h3 className="font-semibold text-lg mb-4">{section.title}</h3>
+              <ul className="space-y-2">
+                {section.items.map((item) => (
+                  <li key={item.name}>
+                    <Link href={item.href} className="flex items-center text-muted-foreground hover:text-primary transition-colors">
+                      {item.icon && <item.icon className="mr-2 h-4 w-4" />}
+                      <span className="md:inline">{item.name}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
 
+        <Separator className="mb-8" />
+        
+        {/* Footer Disclaimer and Social Links */}
+        <div className="space-y-4 text-sm text-muted-foreground">
+          <p className="max-w-3xl">
+            InfiniteFusion.org is a fan-made website and is not affiliated with, endorsed, sponsored, 
+            or specifically approved by Nintendo, Game Freak, or The Pokémon Company. 
+            All Pokémon images, names, and related media are intellectual property of their respective owners.
           </p>
+          <p className="max-w-3xl">
+            Pokémon Infinite Fusion is a fan-made game. This website serves as a resource 
+            for the game's community and artists.
+          </p>
+          <div className="flex items-center justify-between flex-col sm:flex-row gap-4">
+            <p className="text-xs">
+              © {new Date().getFullYear()} InfiniteFusion.org. All rights reserved.
+            </p>
+            <div className="flex space-x-4">
+              {socialLinks.map((link) => (
+                <a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                  <link.icon className="h-5 w-5" />
+                  <span className="sr-only">{link.name}</span>
+                </a>
+              ))}
+            </div>
+          </div>
         </div>
-        <div>
-          <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-          <ul className="space-y-2">
-            <li><Link href="/fusion" className="text-sm hover:underline">Fusion Calculator</Link></li>
-            <li><Link href="/find" className="text-sm hover:underline">Fusion Finder</Link></li>
-            <li><Link href="/dex" className="text-sm hover:underline">Fusion Dex</Link></li>
-          </ul>
-        </div>
-        <div>
-          <h3 className="text-lg font-semibold mb-4">Pages</h3>
-          <ul className="space-y-2">
-            <li><Link href="/disclaimer" className="text-sm hover:underline">Disclaimer</Link></li>
-            <li><Link href="/privacy" className="text-sm hover:underline">Privacy Policy</Link></li>
-            <li><Link href="/contact" className="text-sm hover:underline">Contact Us</Link></li>
-          </ul>
-        </div>
-      </CardContent>
-      <CardFooter className="flex flex-col md:flex-row justify-between items-center border-t">
-        <div className="text-sm text-muted-foreground mb-4 md:mb-0">
-          © {new Date().getFullYear()} Infinite Fusion. All rights reserved.
-          <br />
-    
-  
-  
-      <p>Pokémon Charactor and Names and Copyrighet by Nintend and THe Pokemon COmponey</p>
-      <p>This website is not affiliated with The Pokémon Company, Nintendo, Game Freak Inc., or Creatures Inc. </p>
-
-
-        </div>
-        <div className="flex space-x-4">
-          <Link href="#" className="text-muted-foreground hover:text-primary">
-            <Facebook size={20} />
-            <span className="sr-only">Facebook</span>
-          </Link>
-          <Link href="#" className="text-muted-foreground hover:text-primary">
-            <Twitter size={20} />
-            <span className="sr-only">Twitter</span>
-          </Link>
-          <Link href="#" className="text-muted-foreground hover:text-primary">
-            <Instagram size={20} />
-            <span className="sr-only">Instagram</span>
-          </Link>
-          <Link href="#" className="text-muted-foreground hover:text-primary">
-            <Github size={20} />
-            <span className="sr-only">GitHub</span>
-          </Link>
-        </div>
-      </CardFooter>
-    </Card>
+      </div>
+    </footer>
   )
 }
