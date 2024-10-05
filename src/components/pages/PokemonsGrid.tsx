@@ -14,7 +14,7 @@ const defaultGridClass = "p-0 px-2 gap-1 grid grid-cols-1 sm:grid-cols-2 md:grid
 
 const GridContent: React.FC<GridContentProps> = ({ children, className = "" }) => {
   return (
-    <div className="mx-auto">
+    <div className="mx-auto max-w-fit">
       <CardContent className={cn(`${defaultGridClass} ${className}`)}>
       {children}
     </CardContent>

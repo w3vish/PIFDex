@@ -48,7 +48,7 @@ const page = async () => {
     <>
       <HeroSection />
       <Separator className="my-4" />
-      <h2 className="text-xl mx-4 my-2">Base Pokemons</h2>
+      <h2 className="text-xl text-center font-semibold my-2">Base Pokemons ({gameInfo.totalPokemons})</h2>
       <GridContent>
         {data.results.map((pokemon: Pokemon) => (
           <PokemonCard pokemon={pokemon} key={pokemon.id} />
