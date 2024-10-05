@@ -16,20 +16,11 @@ export const metadata = {
     siteName: "InfiniteFusion.org",
     title: "Pokémon Infinite Fusion Dex & Tools - InfiniteFusion.org",
     description: `InfiniteFusion.org offers a detailed Fusion Dex with over ${gameInfo.totalSprites.toLocaleString()} Pokémon fusion combinations and ${gameInfo.totalCustomSprites.toLocaleString()} custom sprites. Access tools like the Pokémon Fusion Calculator and more.`,
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Pokémon Infinite Fusion Dex & Tools",
-      }
-    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Pokémon Infinite Fusion Dex & Tools",
     description: `Explore over ${gameInfo.totalSprites.toLocaleString()} Pokémon fusion possibilities and ${gameInfo.totalCustomSprites.toLocaleString()} custom sprites with tools for the Pokémon Infinite Fusion game.`,
-    images: ["/og-image.jpg"],
   },
 };
 
