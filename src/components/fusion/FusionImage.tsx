@@ -65,11 +65,6 @@ function FusionImage({ pokemon }: { pokemon: PokemonData }) {
 
     return (
         <>
-        <p className="text-center my-2 mx-auto max-w-min text-muted-foreground border-b-2">
-            <Link href={`/${pokemon.id}`}>
-            {pokemon.name}
-            </Link>
-        </p>
             <div className="pokemon-card max-w-xs">
                 <div>
                     {/* {pokemon.name && (
@@ -102,7 +97,7 @@ function FusionImage({ pokemon }: { pokemon: PokemonData }) {
                     </Link>
 
                     <div>
-                        <span>#{primaryImage.sprite_id.padStart(3, "0")}</span>
+                        <span><Link prefetch={false} href={primaryImage.sprite_id.padStart(3, "0")}>#{primaryImage.sprite_id.padStart(3, "0")}</Link></span>
                         <span className="text-ellipsis overflow-hidden">
                             {primaryImage.artists && primaryImage.artists.length > 0 ? (
                                 primaryImage.artists.map((artist, index) => (

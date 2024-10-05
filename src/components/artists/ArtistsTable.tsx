@@ -83,7 +83,7 @@ const columns: ColumnDef<Artist>[] = [
       )
     },
     cell: ({ row }) => (
-      <Link href={generateArtistSlug(row.original.name)} className="border-b-2 font-semibold text-blue-500">
+      <Link href={generateArtistSlug(row.original.name)} className="border-b-2 hover:font-semibold">
         {row.original.name}
       </Link>
     ),
