@@ -1,46 +1,86 @@
 import { Progress } from "@/components/ui/progress"
-import { Separator } from "@/components/ui/separator"
-import { gameInfo } from "@/lib/utils/constants"
 import Link from "next/link"
 import { Card } from "../ui/card"
+import { Calculator, Database, Users } from "lucide-react"
 
 export default function HeroSection() {
-    const progressPercentage = (gameInfo.spritesWithCustomSprites / gameInfo.totalSprites) * 100
-
     return (
-        <Card className="space-y-6 m-2 py-8 px-4">
-            <div>
-                <h1 className="text-3xl font-bold tracking-tight">Welcome to InfiniteFusion.org</h1>
-                <p className="text-base md:text-lg text-muted-foreground">
-                    A Dex for the Pokémon Infinite Fusion game. Explore our vast collection of Pokémon fusions and custom sprites.
-                </p>
-            </div>
-
-            <div className="space-y-2">
-                <div className="flex items-center justify-between text-sm">
-                    <span>Custom Sprites: <span className="font-semibold">{gameInfo.spritesWithCustomSprites.toLocaleString()}</span></span>
-                    <span className="text-end">Total Sprites: <span className="font-semibold">{gameInfo.totalSprites.toLocaleString()}</span></span>
+        <div className="m-2">
+            <Card className="p-4 md:p-6 space-y-8">
+                {/* Header */}
+                <div className="space-y-2">
+                    <h1 className="text-2xl md:text-3xl font-bold">Welcome to InfiniteFusion.org</h1>
+                    <p className="text-muted-foreground">
+                        Your ultimate resource for Pokémon Infinite Fusion. Create unique combinations, 
+                        explore our vast sprite collection, and discover the artists behind the designs.
+                    </p>
                 </div>
-                <Progress
-                    value={progressPercentage}
-                    className="w-full h-2"
-                />
-                <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>{progressPercentage.toFixed(1)}% with custom sprites</span>
-                    <span>{gameInfo.totalSprites.toLocaleString()} total sprites</span>
+
+                {/* Feature Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
+                    <Card className="p-4 border">
+                        <Link href="/fusion" className="space-y-2">
+                            <div className="flex items-center gap-2">
+                                <Calculator className="h-5 w-5 shrink-0" />
+                                <h2 className="font-semibold">Fusion Calculator</h2>
+                            </div>
+                            <p className="text-sm text-muted-foreground">
+                                Mix and match over 470 Pokémon to create more than 220,000 unique fusions
+                            </p>
+                        </Link>
+                    </Card>
+
+                    <Card className="p-4 border">
+                        <Link href="/dex" className="space-y-2">
+                            <div className="flex items-center gap-2">
+                                <Database className="h-5 w-5 shrink-0" />
+                                <h2 className="font-semibold">Fusion Pokédex</h2>
+                            </div>
+                            <p className="text-sm text-muted-foreground">
+                                Browse through 2,21,390 sprite combinations, including 1,18,834 custom designs
+                            </p>
+                        </Link>
+                    </Card>
+
+                    <Card className="p-4 border">
+                        <Link href="/artists" className="space-y-2">
+                            <div className="flex items-center gap-2">
+                                <Users className="h-5 w-5 shrink-0" />
+                                <h2 className="font-semibold">Artist Gallery</h2>
+                            </div>
+                            <p className="text-sm text-muted-foreground">
+                                Discover works from our community of 3,400+ contributing artists
+                            </p>
+                        </Link>
+                    </Card>
                 </div>
-            </div>
 
-            <div className="flex items-center justify-between text-sm">
-                <span>Contributing Artists: <span className="font-semibold">3,400+</span></span>
-                <span className="text-end">Total Custom Sprites: <span className="font-semibold">170,000+</span></span>
-            </div>
+                {/* Progress Section */}
+                <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                        <div>Custom Sprites: <span className="font-semibold">1,18,834</span></div>
+                        <div className="text-end justify-end items-end">Total Sprites: <span className="font-semibold ">2,21,390</span></div>
+                    </div>
+                    <Progress value={53.7} className="w-full h-2" />
+                    <div className="flex justify-between text-xs text-muted-foreground">
+                        <div>53.7% with custom sprites</div>
+                        <div>2,21,390 total sprites</div>
+                    </div>
+                </div>
 
-            <Separator className="bg-gray-700" />
-
-            <p className="text-sm text-muted-foreground">
-                Use our <Link className="text-blue-500 underline" href="/fusion">Pokémon Infinite Fusion Calculator</Link> to try out fusion combinations.
-            </p>
-        </Card>
+                {/* Footer */}
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-2 border-t">
+                    <p className="text-sm text-muted-foreground">
+                        Join our community and contribute to the ever-growing collection of custom sprites
+                    </p>
+                    <Link 
+                        href="/about" 
+                        className="text-sm text-primary hover:underline whitespace-nowrap flex items-center"
+                    >
+                        Learn more about the project →
+                    </Link>
+                </div>
+            </Card>
+        </div>
     )
 }
