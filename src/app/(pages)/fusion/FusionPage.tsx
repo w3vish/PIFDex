@@ -112,7 +112,7 @@ export default function FusionPage() {
     setFusionStatus('idle')
   }
 
-  useEffect(() => randomFusion(), [])
+  useEffect(() => randomFusion())
 
   return (
     <Card className="p-2 space-y-4 m-1 md:m-4">

@@ -144,18 +144,20 @@ export default function ArtistsTable() {
     },
   })
 
-  // Memoize the filtered rows count
-  const filteredRowsCount = React.useMemo(
-    () => table.getFilteredRowModel().rows.length,
-    [table.getFilteredRowModel().rows.length]
-  )
+const filteredRowsLength = table.getFilteredRowModel().rows.length;
+
+// Memoize the filtered rows count
+const filteredRowsCount = React.useMemo(
+  () => filteredRowsLength,
+  [filteredRowsLength] // Pass the extracted variable
+);
 
   return (
     <Card className="w-full">
       <CardHeader>
-        <CardTitle className="text-xl sm:text-2xl">Artists of Pokémon Infinite Fusion's Sprites</CardTitle>
+        <CardTitle className="text-xl sm:text-2xl">Artists of Pokémon Infinite Fusion&apos;s Sprites</CardTitle>
         <CardDescription className="text-sm sm:text-base">
-          Explore the list of all artists who contributed to Pokémon Infinite Fusion’s unique sprites. 
+          Explore the list of all artists who contributed to Pokémon Infinite Fusion&apos;s unique sprites. 
           You can filter the list to find your favorite artists and even explore the sprites they created.
           Total Artists: {artists.length}
         </CardDescription>
