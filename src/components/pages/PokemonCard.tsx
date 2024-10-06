@@ -4,7 +4,7 @@ import Image from "next/image";
 import { generateArtistSlug } from "@/lib/utils/artists";
 import { getMainSpriteId, processTypes } from "@/lib/utils";
 import { getSpriteImageURL } from "@/lib/utils";
-import { placeHolders } from "@/lib/utils/constants";
+import { gameInfo, placeHolders } from "@/lib/utils/constants";
 import { Separator } from "../ui/separator";
 
 interface PokemonData {
@@ -125,11 +125,11 @@ function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
             </p>
             <p className="text-muted-foreground">
               <span>As Head:</span>
-              <span>{pokemon.head_fusions} / 470</span>
+              <span>{pokemon.head_fusions} / {gameInfo.totalPokemons}</span>
             </p>
             <p className="text-muted-foreground">
               <span>As Body:</span>
-              <span>{pokemon.body_fusions} / 470</span>
+              <span>{pokemon.body_fusions} / {gameInfo.totalPokemons}</span>
             </p>
           </>
         )}

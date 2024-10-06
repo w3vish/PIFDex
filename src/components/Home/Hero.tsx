@@ -2,6 +2,7 @@ import { Progress } from "@/components/ui/progress"
 import Link from "next/link"
 import { Card } from "../ui/card"
 import { Calculator, Database, Users } from "lucide-react"
+import { gameInfo } from "@/lib/utils/constants"
 
 export default function HeroSection() {
     return (
@@ -25,7 +26,7 @@ export default function HeroSection() {
                                 <h2 className="font-semibold">Fusion Calculator</h2>
                             </div>
                             <p className="text-sm text-muted-foreground">
-                                Mix and match over 470 Pokémon to create more than 220,000 unique fusions
+                                Mix and match over {gameInfo.totalPokemons} Pokémon to create more than {gameInfo.totalSprites} unique fusions
                             </p>
                         </Link>
                     </Card>

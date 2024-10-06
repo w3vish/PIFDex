@@ -4,13 +4,13 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardHeader, CardDescription } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { useToast } from '@/hooks/use-toast'
-import { basePokemons } from '@/lib/utils/constants'
+import { basePokemons, gameInfo } from '@/lib/utils/constants'
 import { loadFusion } from '@/lib/utils'
 import { SelectedPokemon, SpriteResponse, SpriteResult } from '@/lib/types'
 import { FusionControls, FusionResult, FusionSelector } from '@/components/fusion'
 
 const generateRandomId = (): string => {
-  const maxPoke = 470
+  const maxPoke = gameInfo.totalPokemons
   return (Math.floor(Math.random() * maxPoke) + 1).toString()
 }
 
