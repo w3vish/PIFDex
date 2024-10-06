@@ -50,7 +50,7 @@ export default function HeroSection() {
                                 <h2 className="font-semibold">Artist Gallery</h2>
                             </div>
                             <p className="text-sm text-muted-foreground">
-                                Discover works from our community of 3,400+ contributing artists
+                                Discover works from our community of {gameInfo.totalArtists.toLocaleString()}+ contributing artists
                             </p>
                         </Link>
                     </Card>
