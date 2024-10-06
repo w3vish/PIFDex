@@ -34,20 +34,20 @@ const footerLinks = [
       { name: "Triple Fusions", href: "/triple-fusions", icon: Layers },
       { name: "Self Fusions", href: "/self-fusions", icon: Zap },
       { name: "About Us", href: "/about", icon: Info },
-      { name: "Contact Us", href: "/contact", icon: Mail },
     ]
   },
   // {
-  //   title: "More",
-  //   items: [
-  //     { name: "Fusion Finder", href: "/find", icon: Search },
-  //     { name: "Wiki", href: "/wiki", icon: Library },
-  //     { name: "Download Game", href: "/download", icon: DownloadCloud },
-  //   ]
-  // },
-  {
-    title: "Legal",
-    items: [
+    //   title: "More",
+    //   items: [
+      //     { name: "Fusion Finder", href: "/find", icon: Search },
+      //     { name: "Wiki", href: "/wiki", icon: Library },
+      //     { name: "Download Game", href: "/download", icon: DownloadCloud },
+      //   ]
+      // },
+      {
+        title: "Legal",
+        items: [
+      { name: "Contact Us", href: "/contact", icon: Mail },
       { name: 'Privacy Policy', href: '/privacy', icon: ShieldCheck },
       { name: 'Terms of Service', href: '/terms', icon: FileText },
       // { name: 'Cookie Policy', href: '/cookies', icon: FileText },
