@@ -34,7 +34,11 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
+
 
 export default function RootLayout({
   children,
@@ -43,6 +47,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+
       <body className={`${inter.className} max-w-screen-2xl flex flex-col mx-auto min-h-screen`}>
         <NextTopLoader />
         <ThemeProvider
