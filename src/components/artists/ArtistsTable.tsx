@@ -83,7 +83,7 @@ const columns: ColumnDef<Artist>[] = [
       )
     },
     cell: ({ row }) => (
-      <Link prefetch={false} href={generateArtistSlug(row.original.name)} className="border-b-2 hover:font-semibold">
+      <Link prefetch={false} rel="nofollow" href={generateArtistSlug(row.original.name)} className="border-b-2 hover:font-semibold">
         {row.original.name}
       </Link>
     ),
