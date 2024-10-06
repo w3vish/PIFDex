@@ -19,7 +19,7 @@ async function page() {
       <CardHeader>
       <h1 className="text-2xl font-bold">Pokémon Infinite Fusion Dex</h1>
       <p className="text-sm  lg:text-base text-muted-foreground">
-        Explore over 220,000 Pokémon fusions, with more than 120,000 fusions featuring custom sprites. The dex includes a total of 190,000+ custom-generated sprites for the Pokémon Infinite Fusion fan game.
+        Explore over {gameInfo.totalSprites.toLocaleString()} Pokémon fusions, with more than {gameInfo.spritesWithCustomSprites.toLocaleString()} fusions featuring custom sprites. The dex includes a total of {gameInfo.totalCustomSprites.toLocaleString()}+ custom-generated sprites for the Pokémon Infinite Fusion fan game.
         </p>
       </CardHeader>
       <article className='space-y-2'>
