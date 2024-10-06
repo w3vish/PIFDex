@@ -42,19 +42,7 @@ export default function FusionPage() {
     return { fusionId: `${headId}.${bodyId}`, reverseId: `${bodyId}.${headId}` }
   }
 
-  const randomFusion = React.useCallback((): void => {
-    const headId = generateRandomId()
-    let bodyId = generateRandomId()
-
-    while (headId === bodyId) {
-      bodyId = generateRandomId()
-    }
-
-    setHeadPokemon({ id: headId, name: basePokemons[headId] })
-    setBodyPokemon({ id: bodyId, name: basePokemons[bodyId] })
-    calculateFusion(headId, bodyId)
-  }, [])
-
+ 
   const calculateFusion = async (headId?: string, bodyId?: string): Promise<void> => {
     setLoading(true)
     setFusionStatus('loading')
@@ -105,6 +93,20 @@ export default function FusionPage() {
     }
   }
 
+  const randomFusion = (): void => {
+    const headId = generateRandomId()
+    let bodyId = generateRandomId()
+
+    while (headId === bodyId) {
+      bodyId = generateRandomId()
+    }
+
+    setHeadPokemon({ id: headId, name: basePokemons[headId] })
+    setBodyPokemon({ id: bodyId, name: basePokemons[bodyId] })
+    calculateFusion(headId, bodyId)
+  }
+
+
   const handleReset = (): void => {
     setHeadPokemon(null)
     setBodyPokemon(null)
@@ -114,7 +116,7 @@ export default function FusionPage() {
 
   useEffect(() => {
     randomFusion()
-  }, [randomFusion])
+  }, [])
 
   return (
     <Card className="p-2 space-y-4 m-1 md:m-4">

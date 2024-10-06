@@ -1,7 +1,30 @@
 "use client"
-import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "@/components/ui/command"
+import { 
+  CommandDialog, 
+  CommandEmpty, 
+  CommandGroup, 
+  CommandInput, 
+  CommandItem, 
+  CommandList, 
+  CommandSeparator 
+} from "@/components/ui/command"
 import { DialogDescription, DialogTitle } from "@/components/ui/dialog"
-import { File, Heart, Laptop, Layers, Moon, Sun, Zap, Calculator, BookOpen, Palette } from "lucide-react"
+import { 
+  File, 
+  Heart, 
+  Laptop, 
+  Layers, 
+  Moon, 
+  Sun, 
+  Zap, 
+  Calculator, 
+  BookOpen, 
+  Palette, 
+  Info, 
+  Mail, 
+  ShieldCheck, 
+  FileText 
+} from "lucide-react"
 import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation"
 import * as React from "react"
@@ -21,13 +44,19 @@ const SearchBox: React.FC<SearchBoxProps> = ({ open, setOpen }) => {
   const router = useRouter()
   const { setTheme, theme } = useTheme()
 
+  // Merged links from the provided arrays
   const links: LinkItem[] = [
     { name: 'Fusion Calculator', href: '/fusion', icon: Calculator },
     { name: 'Fusion Dex', href: '/dex', icon: BookOpen },
     { name: 'Artists', href: '/artists', icon: Palette },
-    { name: "Triple Fusions", href: "/triple-fusions", icon: Layers, },
-    { name: "Self Fusions", href: "/self-fusions", icon: Zap, },
+    { name: "Triple Fusions", href: "/triple-fusions", icon: Layers },
+    { name: "Self Fusions", href: "/self-fusions", icon: Zap },
     { name: "Favorites", href: "/favorites", icon: Heart },
+    { name: "About Us", href: "/about", icon: Info },
+    { name: "Contact Us", href: "/contact", icon: Mail },
+    { name: 'Privacy Policy', href: '/privacy', icon: ShieldCheck },
+    { name: 'Terms of Service', href: '/terms', icon: FileText },
+    { name: 'Disclaimer', href: '/disclaimer', icon: FileText },
   ]
 
   React.useEffect(() => {
@@ -62,7 +91,11 @@ const SearchBox: React.FC<SearchBoxProps> = ({ open, setOpen }) => {
 
         <CommandGroup heading="Links">
           {links.map((item) => (
-            <CommandItem key={item.href} onSelect={() => handleSelect(item.href)} className="cursor-pointer">
+            <CommandItem 
+              key={item.href} 
+              onSelect={() => handleSelect(item.href)} 
+              className="cursor-pointer"
+            >
               <IconComponent icon={item.icon || File} />
               <span>{item.name}</span>
             </CommandItem>
@@ -72,15 +105,24 @@ const SearchBox: React.FC<SearchBoxProps> = ({ open, setOpen }) => {
         <CommandSeparator />
 
         <CommandGroup heading="Theme">
-          <CommandItem onSelect={() => setTheme("light")} className={`cursor-pointer ${theme === "light" ? "bg-accent" : ""}`}>
+          <CommandItem 
+            onSelect={() => setTheme("light")} 
+            className={`cursor-pointer ${theme === "light" ? "bg-accent" : ""}`}
+          >
             <Sun className="mr-2 h-4 w-4" />
             <span>Light</span>
           </CommandItem>
-          <CommandItem onSelect={() => setTheme("dark")} className={`cursor-pointer ${theme === "dark" ? "bg-accent" : ""}`}>
+          <CommandItem 
+            onSelect={() => setTheme("dark")} 
+            className={`cursor-pointer ${theme === "dark" ? "bg-accent" : ""}`}
+          >
             <Moon className="mr-2 h-4 w-4" />
             <span>Dark</span>
           </CommandItem>
-          <CommandItem onSelect={() => setTheme("system")} className={`cursor-pointer ${theme === "system" ? "bg-accent" : ""}`}>
+          <CommandItem 
+            onSelect={() => setTheme("system")} 
+            className={`cursor-pointer ${theme === "system" ? "bg-accent" : ""}`}
+          >
             <Laptop className="mr-2 h-4 w-4" />
             <span>System</span>
           </CommandItem>
