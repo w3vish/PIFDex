@@ -7,7 +7,7 @@ import { loadModules } from "@/lib/utils/pages";
 import { Metadata } from "next";
 
 export const metadata = {
-  title: "Pokémon Infinite Fusion Dex & Tools - InfiniteFusion.org",
+  title: "InfiniteFusion.org - Dex & Tools",
   description: `Discover and explore ${gameInfo.totalSprites.toLocaleString()} Pokémon fusions with over ${gameInfo.totalCustomSprites.toLocaleString()} custom sprites in our comprehensive Fusion Dex. Use the Fusion Calculator and other tools for the Pokémon Infinite Fusion fan game.`,
   openGraph: {
     type: "website",
