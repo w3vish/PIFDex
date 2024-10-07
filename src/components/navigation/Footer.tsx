@@ -16,21 +16,23 @@ import {
   ShieldCheck,
   FileText,
   Library,
+  Home,
 } from "lucide-react"
 
 const footerLinks = [
   {
     title: "Quick Links",
     items: [
+      { name: 'Home', href: '/', icon: Home },
       { name: 'Fusion Calculator', href: '/fusion', icon: Calculator },
       { name: 'Fusion Dex', href: '/dex', icon: BookOpen },
       { name: 'Artists', href: '/artists', icon: Palette },
-      { name: "Favorites", href: "/favorites", icon: Heart },
     ]
   },
   {
     title: "Pages",
     items: [
+      { name: "Favorites", href: "/favorites", icon: Heart },
       { name: "Triple Fusions", href: "/triple-fusions", icon: Layers },
       { name: "Self Fusions", href: "/self-fusions", icon: Zap },
       { name: "About Us", href: "/about", icon: Info },
