@@ -80,7 +80,7 @@
 
 .pokemon-card a:hover {
  /* border-bottom: 2px solid gray; */
- color: rgb(211, 58, 58);
+  font-weight: 600;
 }
 
 
