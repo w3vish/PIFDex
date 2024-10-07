@@ -2,11 +2,7 @@ import SpritePage from "./[spriteId]/page";
 
 export const runtime = "edge";
 
-export default function NotFound(id: string) {
-  if (id === "404")  return SpritePage({
-    params: { spriteId: "404" },
-    searchParams: {} //
-  });
+export default function NotFound() {
   return (
     <>
       <title>404: This page could not be found.</title>
