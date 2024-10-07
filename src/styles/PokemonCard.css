@@ -72,10 +72,17 @@
   color: hsl(var(--muted-foreground))
 }
 
-.pokemon-card>div:nth-child(2) a {
+.pokemon-card>div:nth-child(2) a,
+.pokemon-card>div:last-child a {
   text-decoration: none;
   border-bottom: 2px solid hsl(var(--border))
 }
+
+.pokemon-card a:hover {
+ /* border-bottom: 2px solid gray; */
+ color: rgb(211, 58, 58);
+}
+
 
 .pokemon-card>div:last-child:has(*) {
   display: flex;
