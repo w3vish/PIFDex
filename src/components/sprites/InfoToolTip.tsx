@@ -50,7 +50,7 @@ const InfoToolTip = ({ name, content }: InfoTooltipProps) => {
     return (
         <Popover open={isOpen} onOpenChange={setIsOpen}>
             <PopoverTrigger
-                className="hover:border-b px-1 cursor-pointer items-center w-[120px] max-w-min lg:max-w-fit flex-shrink-0 text-ellipsis whitespace-nowrap overflow-hidden"
+                className="hover:border-b hover:font-bold cursor-pointer items-center w-[120px] max-w-min lg:max-w-fit flex-shrink-0 text-ellipsis whitespace-nowrap overflow-hidden"
                 asChild
             >
                 <span

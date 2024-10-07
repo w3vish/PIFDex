@@ -106,7 +106,7 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({
 
                 <div className="lg:max-w-fit">
                     <dt className="font-semibold text-muted-foreground">Abilities:</dt>
-                    <dd className="flex flex-wrap items-center">
+                    <dd className="flex flex-wrap flex-col md:flex-row md:gap-1">
                         {abilities.map((ability, index) => (
                             <InfoToolTip
                                 key={index}
@@ -118,7 +118,7 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({
                 </div>
                 <div>
                     <dt className="font-semibold text-muted-foreground">Hidden Abilities:</dt>
-                    <dd className="flex flex-wrap items-center">
+                    <dd className="flex flex-wrap flex-col md:flex-row md:gap-1">
                         {hiddenAbilities.map((ability, index) => (
                             <InfoToolTip
                                 key={index}
