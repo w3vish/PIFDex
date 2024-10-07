@@ -92,7 +92,7 @@ export default function Footer() {
         <div className="space-y-4 text-sm text-muted-foreground">
           <p className="">
             InfiniteFusion.org is a fan-made website and is not affiliated with, endorsed, sponsored, 
-            or specifically approved by Game Developers, Nintendo, Game Freak, or The Pokémon Company. 
+            or specifically approved by Nintendo, Game Freak, or The Pokémon Company. 
             All Pokémon images, names, and related media are intellectual property of their respective owners.
           </p>
           <p className="">
