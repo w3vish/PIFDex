@@ -5,7 +5,7 @@ export const runtime = "edge";
 export default function NotFound(id: string) {
   if (id === "404")  return SpritePage({
     params: { spriteId: "404" },
-    searchParams: {} // Provide an empty object if searchParams are not needed
+    searchParams: {} //
   });
   return (
     <>
