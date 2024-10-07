@@ -39,7 +39,9 @@ export async function generateMetadata(
   }
 
   const pokemon = data.results[0];
-  const title = searchParams.sprite === 'autogen' ? `${pokemon.name} #${params.spriteId} (Autogen)` : `${pokemon.name} #${params.spriteId}`;
+  const title = searchParams.sprite === 'autogen' ? `${pokemon.name} #${params.spriteId} (Autogen)`
+  : pokemon.id.split('.').length === 1 ? `${pokemon.name} #${params.spriteId} sprites` 
+  : `${pokemon.name} #${params.spriteId}`;
   
   return {
     title: title,
