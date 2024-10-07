@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { siteConfig } from "@/lib/utils/constants";
+import { gameInfo, siteConfig } from "@/lib/utils/constants";
 
 interface SitemapURLS {
     url: string;
@@ -31,6 +31,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.5,
         });
     });
+
+    for (let i = 1; i <= gameInfo.totalPokemons; i++) {
+        sitemapURLS.push({
+            url: `${URL}/${i}`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.5,
+        });
+    }
 
     return [...sitemapURLS];
 }

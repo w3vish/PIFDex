@@ -39,10 +39,11 @@ export async function generateMetadata(
   }
 
   const pokemon = data.results[0];
+  const spriteType = id.split('.').length === 2 ? 'fusion' : id.split('.').length === 3 ? 'triples' : 'base';
   const title = searchParams.sprite === 'autogen' ? `${pokemon.name} #${params.spriteId} (Autogen)`
-  : pokemon.id.split('.').length === 1 ? `${pokemon.name} #${params.spriteId} sprites` 
-  : `${pokemon.name} #${params.spriteId}`;
-  
+    : spriteType === "base" ? `#${params.spriteId} ${pokemon.name} sprites`
+      : `${pokemon.name} #${params.spriteId}`;
+
   return {
     title: title,
     description: `
@@ -58,7 +59,7 @@ export async function generateMetadata(
       Speed: ${pokemon.base_spd}
     `,
     robots: {
-      index: false, // Ensure the page is not indexed
+      index: spriteType === 'base' ? true : false, // Ensure only base sprites are indexed
     },
   };
 }
