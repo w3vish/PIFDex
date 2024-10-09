@@ -83,7 +83,7 @@ export function SelectPokemon({ selectedPokemon, onSelect, pokemons }: SelectPok
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-full justify-between"
+          className="w-full justify-between rounded-r-none border-r-0"
         >
           {selectedPokemon 
             ? formatPokemonDisplay(selectedPokemon.id, selectedPokemon.name) 

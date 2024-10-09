@@ -14,24 +14,24 @@ export const FusionControls: React.FC<FusionControlsProps> = ({ loading, headPok
   return (
     <div className='grid grid-cols-3 max-w-xs md:max-w-sm lg:max-w-lg gap-2 md:gap-4 mx-auto flex-wrap'>
       <Button
-        disabled={loading || !headPokemon || !bodyPokemon}
-        onClick={onFuse}
+        disabled={loading || (!headPokemon && !bodyPokemon)}
+        variant="outline"
+        onClick={onReset}
         className='w-full'>
-        {loading ? 'Loading...' : 'Fuse'}
+        {loading ? 'Loading...' : 'Reset'}
       </Button>
       <Button
-        variant={'outline'}
+        variant={'default'}
         disabled={loading}
         onClick={onRandom}
         className='w-full'>
         {loading ? 'Loading...' : 'Random'}
       </Button>
       <Button
-        disabled={loading || (!headPokemon && !bodyPokemon)}
-        variant="destructive"
-        onClick={onReset}
+        disabled={loading || !headPokemon || !bodyPokemon}
+        onClick={onFuse}
         className='w-full'>
-        {loading ? 'Loading...' : 'Reset'}
+        {loading ? 'Loading...' : 'Fuse'}
       </Button>
     </div>
   )

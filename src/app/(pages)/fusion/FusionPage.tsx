@@ -42,7 +42,7 @@ export default function FusionPage() {
     return { fusionId: `${headId}.${bodyId}`, reverseId: `${bodyId}.${headId}` }
   }
 
- 
+
   const calculateFusion = async (headId?: string, bodyId?: string): Promise<void> => {
     setLoading(true)
     setFusionStatus('loading')
@@ -106,6 +106,18 @@ export default function FusionPage() {
     calculateFusion(headId, bodyId)
   }
 
+  const randomHead = (): void => {
+    const headId = generateRandomId()
+    setHeadPokemon({ id: headId, name: basePokemons[headId] })
+    if (headPokemon && bodyPokemon) calculateFusion(headId, bodyPokemon.id)
+  }
+
+  const randomBody = (): void => {
+    const bodyId = generateRandomId()
+    setBodyPokemon({ id: bodyId, name: basePokemons[bodyId] })
+    if (headPokemon && bodyPokemon) calculateFusion(bodyId, bodyPokemon.id)
+  }
+
 
   const handleReset = (): void => {
     setHeadPokemon(null)
@@ -120,7 +132,7 @@ export default function FusionPage() {
 
   return (
     <Card className="p-2 space-y-4 m-1 md:m-4">
-           <CardHeader className='p-1 px-2 text-center'>
+      <CardHeader className='p-1 px-2 text-center'>
         <h1 className='text-2xl'>Pokémon Infinite Fusion Calculator</h1>
         <CardDescription className="text-sm md:text-base">
           Select a head and body from two different Pokémon to generate a fusion. Over 170,000 custom designs available.
@@ -128,16 +140,18 @@ export default function FusionPage() {
       </CardHeader>
 
       {/* Pokemon Selection */}
-      <FusionSelector 
+      <FusionSelector
         headPokemon={headPokemon}
         bodyPokemon={bodyPokemon}
         handleSelectPokemon={handleSelectPokemon}
+        randomHead={randomHead}
+        randomBody={randomBody}
       />
 
       {/* Controls (Fuse, Random, Reset) */}
-      <FusionControls 
-        loading={loading} 
-        headPokemon={!!headPokemon} 
+      <FusionControls
+        loading={loading}
+        headPokemon={!!headPokemon}
         bodyPokemon={!!bodyPokemon}
         onFuse={() => calculateFusion()}
         onRandom={randomFusion}
@@ -147,7 +161,7 @@ export default function FusionPage() {
       {/* <Separator /> */}
 
       {/* Fusion Result Display */}
-      <FusionResult 
+      <FusionResult
         fusionStatus={fusionStatus}
         headData={headData}
         bodyData={bodyData}

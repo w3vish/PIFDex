@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { cn } from '@/lib/theme/utils'
-import { BookOpen, Calculator, Download, Heart, Layers, Menu, Palette, Search, Settings, User, Wand2, Zap } from 'lucide-react'
+import { BookOpen, Calculator, Heart, Info, Layers, Mail, Menu, Palette, Search, ShieldCheck, FileText, User, Zap } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -13,46 +13,66 @@ import { Input } from '../ui/input'
 import { Separator } from '../ui/separator'
 import SearchBox from './SearchBox'
 
-export default function Header() {
-  const currentRoute = usePathname()
-  const [isSearchOpen, setSearchOpen] = useState(false) // State to toggle the search box
+interface LinkType {
+  name: string;
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
 
-  const navLinks = [
+export default function Header() {
+  const currentRoute = usePathname();
+  const [isSearchOpen, setSearchOpen] = useState(false);
+
+  const navLinks: LinkType[] = [
     { name: 'Fusion Calculator', href: '/fusion', icon: Calculator },
     { name: 'Fusion Dex', href: '/dex', icon: BookOpen },
     { name: 'Artists', href: '/artists', icon: Palette },
-    { name: "Triple Fusions", href: "/triple-fusions", icon: Layers, },
-    { name: "Self Fusions", href: "/self-fusions", icon: Zap, },
-    // { name: 'Fusion Finder', href: '/find', icon: Wand2 },
-    // { name: 'Download', href: '/download', icon: Download },
-    // { name: 'Game Wiki', href: '/wiki', icon: BookOpen },
-  ]
+    { name: 'Triple Fusions', href: '/triple-fusions', icon: Layers },
+    { name: 'Self Fusions', href: '/self-fusions', icon: Zap },
+  ];
 
-  const userMenuItems = [
+  const mobileLinks = {
+    mainLinks: [
+      { name: 'Fusion Calculator', href: '/fusion', icon: Calculator },
+      { name: 'Fusion Dex', href: '/dex', icon: BookOpen },
+      { name: 'Artists', href: '/artists', icon: Palette }],
+    mainPages: [
+      { name: 'Favorites', href: '/favorites', icon: Heart },
+      { name: 'Triple Fusions', href: '/triple-fusions', icon: Layers },
+      { name: 'Self Fusions', href: '/self-fusions', icon: Zap },
+    ],
+    sitePages: [
+      { name: 'About Us', href: '/about', icon: Info },
+      { name: 'Contact Us', href: '/contact', icon: Mail },
+      { name: 'Privacy Policy', href: '/privacy', icon: ShieldCheck },
+      { name: 'Terms of Service', href: '/terms', icon: FileText },
+      { name: 'Disclaimer', href: '/disclaimer', icon: FileText },
+    ]
+  };
+
+  const userMenuItems: LinkType[] = [
     { name: 'Favorites', href: '/favorites', icon: Heart },
-    // { name: 'Settings', href: '/settings', icon: Settings },
-  ]
+  ];
 
   return (
-    <nav className="border-b-2 border-gray-200 dark:border-gray-700 
-    sticky top-0 z-50 w-full border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 ">
-      <div className=" mx-auto px-4">
+    <nav className="border-b-2 border-gray-200 dark:border-gray-700 sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="mx-auto px-4">
         <div className="flex items-center justify-between h-12">
           {/* Logo */}
-          <Link href="/" className="flex-shrink-0 text-lg font-semibold">
+          <Link href="/" className="text-lg font-semibold">
             Infinite Fusion
           </Link>
 
-          <div className='flex gap-16'>
+          <div className="flex gap-16">
             {/* Desktop Navigation Links */}
-            <div className="hidden lg:flex items-center space-x-6 lg:space-x-2">
-              {navLinks.map((link) => (
+            <div className="hidden lg:flex items-center space-x-6">
+              {navLinks.map(link => (
                 <Link
                   key={link.name}
                   href={link.href}
                   className={cn(
-                    "text-sm px-3 py-2 hover:underline transition-all",  // General link styles
-                    currentRoute === link.href ? "border-b-2 border-gray-500 font-bold" : ""    // Apply active link style if current route matches
+                    "text-sm px-3 py-2 hover:underline transition-all",
+                    currentRoute === link.href ? "border-b-2 border-gray-500 font-bold" : ""
                   )}
                 >
                   {link.name}
@@ -81,26 +101,26 @@ export default function Header() {
                 variant="outline"
                 size="icon"
                 className="lg:hidden"
-                onClick={() => setSearchOpen(true)} // Open search box on mobile
+                onClick={() => setSearchOpen(true)}
               >
                 <Search className="h-5 w-5" />
                 <span className="sr-only">Open search</span>
               </Button>
 
-              {/* Dropdown Menu for User */}
+              {/* User Dropdown Menu */}
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="icon" className="hidden lg:flex relative">
+                  <Button variant="outline" size="icon" className="hidden lg:flex">
                     <User className="h-5 w-5" />
                     <span className="sr-only">User menu</span>
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  {userMenuItems.map((item) => (
+                  {userMenuItems.map(item => (
                     <Link href={item.href} key={item.name}>
-                      <DropdownMenuItem className='cursor-pointer'>
+                      <DropdownMenuItem className="cursor-pointer">
                         <item.icon className="mr-2 h-4 w-4" />
-                        <span>{item.name}</span>
+                        {item.name}
                       </DropdownMenuItem>
                     </Link>
                   ))}
@@ -119,38 +139,15 @@ export default function Header() {
 
                     {/* Mobile Navigation Links */}
                     <div className="flex-grow overflow-y-auto py-2">
-                      {navLinks.map((link) => (
-                        <SheetClose asChild key={link.name}>
-                          <Link
-                            href={link.href}
-                            className={cn(
-                              "flex items-center px-4 py-3 text-sm hover:bg-accent transition-all",
-                              currentRoute === link.href ? "bg-accent" : ""
-                            )}
-                          >
-                            <link.icon className="mr-3 h-5 w-5" />
-                            {link.name}
-                          </Link>
-                        </SheetClose>
-                      ))}
+                      {mobileLinks.mainLinks.map(link => renderLinks(link, currentRoute))}
                       <Separator />
-                      {userMenuItems.map((link) => (
-                        <SheetClose asChild key={link.name}>
-                          <Link
-                            href={link.href}
-                            className={cn(
-                              "flex items-center px-4 py-3 text-sm hover:bg-accent transition-all",
-                              currentRoute === link.href ? "bg-accent" : ""
-                            )}
-                          >
-                            <link.icon className="mr-3 h-5 w-5" />
-                            {link.name}
-                          </Link>
-                        </SheetClose>
-                      ))}
+                      {mobileLinks.mainPages.map(link => renderLinks(link, currentRoute))}
+                      <Separator />
+                      {mobileLinks.sitePages.map(link => renderLinks(link, currentRoute))}
                     </div>
                   </div>
                 </SheetContent>
+
                 <ThemeToggle />
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="icon" className="lg:hidden">
@@ -169,3 +166,18 @@ export default function Header() {
     </nav>
   )
 }
+
+const renderLinks = (link: LinkType, currentRoute: string) => (
+  <SheetClose asChild key={link.name}>
+    <Link
+      href={link.href}
+      className={cn(
+        "flex items-center px-4 py-3 text-sm hover:bg-accent transition-all",
+        currentRoute === link.href ? "bg-accent" : ""
+      )}
+    >
+      <link.icon className="mr-3 h-5 w-5" />
+      {link.name}
+    </Link>
+  </SheetClose>
+);

@@ -73,7 +73,7 @@ const SpritePage = async ({ params, searchParams }: SpritePageParams) => {
 
   const data = await loadSprite(id);
   if (!data || !data.results || !data.results.length) {
-    return <div>Error: Sprite data could not be loaded.</div>;
+    return notFound();
   }
 
   const pokemon = data.results[0];

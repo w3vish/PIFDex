@@ -1,5 +1,4 @@
 import { SelectPokemon } from "./SelectPokemon";
-import { PokemonSelector } from "./PokemonSelector";
 import { FusionSelector } from "./FusionSelector";
 import { FusionResult } from "./FusionResult";
 import { FusionControls } from "./FusionControls";
@@ -11,7 +10,6 @@ import { FusionWeaknesses } from "./FusionWeaknesses";
 
 export {
     SelectPokemon,
-    PokemonSelector,
     FusionSelector,
     FusionResult,
     FusionControls,
