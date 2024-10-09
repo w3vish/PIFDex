@@ -59,7 +59,7 @@ export default function Header() {
       <div className="mx-auto px-4">
         <div className="flex items-center justify-between h-12">
           {/* Logo */}
-          <Link href="/" className="text-lg font-semibold">
+          <Link prefetch={false} href="/" className="text-lg font-semibold">
             Infinite Fusion
           </Link>
 
@@ -68,6 +68,7 @@ export default function Header() {
             <div className="hidden lg:flex items-center space-x-6">
               {navLinks.map(link => (
                 <Link
+                  prefetch={false}
                   key={link.name}
                   href={link.href}
                   className={cn(
@@ -117,7 +118,7 @@ export default function Header() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   {userMenuItems.map(item => (
-                    <Link href={item.href} key={item.name}>
+                    <Link prefetch={false} href={item.href} key={item.name}>
                       <DropdownMenuItem className="cursor-pointer">
                         <item.icon className="mr-2 h-4 w-4" />
                         {item.name}
@@ -170,6 +171,7 @@ export default function Header() {
 const renderLinks = (link: LinkType, currentRoute: string) => (
   <SheetClose asChild key={link.name}>
     <Link
+      prefetch={false}
       href={link.href}
       className={cn(
         "flex items-center px-4 py-3 text-sm hover:bg-accent transition-all",
