@@ -6,6 +6,7 @@ import { processTypes } from "@/lib/utils";
 import { getSpriteImageURL } from "@/lib/utils";
 import { placeHolders } from "@/lib/utils/constants";
 import { Separator } from "../ui/separator";
+import '@/styles/FusionImage.css';
 
 interface PokemonData {
     id: string;
@@ -65,7 +66,7 @@ function FusionImage({ pokemon }: { pokemon: PokemonData }) {
 
     return (
         <>
-            <div className="pokemon-card max-w-xs">
+            <div className="fusion-image max-w-xs">
                 <div>
                     {/* {pokemon.name && (
                         <h2><Link rel="nofollow" prefetch={false} href={`/${pokemon.id}`}>{pokemon.name}</Link></h2>

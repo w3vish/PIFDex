@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react'
 import { Card, CardHeader, CardDescription } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
 import { useToast } from '@/hooks/use-toast'
 import { basePokemons, gameInfo } from '@/lib/utils/constants'
 import { loadFusion } from '@/lib/utils'
@@ -20,11 +19,20 @@ const fetchData = async (ids: string): Promise<SpriteResponse | null> => {
 }
 
 export default function FusionPage() {
+  // Selected Pokemon states
   const [headPokemon, setHeadPokemon] = useState<SelectedPokemon | null>(null)
   const [bodyPokemon, setBodyPokemon] = useState<SelectedPokemon | null>(null)
+  
+  // Currently fused Pokemon states
+  const [fusedHeadPokemon, setFusedHeadPokemon] = useState<SelectedPokemon | null>(null)
+  const [fusedBodyPokemon, setFusedBodyPokemon] = useState<SelectedPokemon | null>(null)
+  
+  // Fusion result states
   const [fusionData, setFusionData] = useState<SpriteResponse | null>(null)
   const [headData, setHeadData] = useState<SpriteResult | null>(null)
   const [bodyData, setBodyData] = useState<SpriteResult | null>(null)
+  
+  // UI states
   const [loading, setLoading] = useState<boolean>(false)
   const [fusionStatus, setFusionStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
@@ -38,19 +46,14 @@ export default function FusionPage() {
     }
   }
 
-  const generateFusionIds = (headId: string, bodyId: string): { fusionId: string, reverseId: string } => {
-    return { fusionId: `${headId}.${bodyId}`, reverseId: `${bodyId}.${headId}` }
-  }
-
-
   const calculateFusion = async (headId?: string, bodyId?: string): Promise<void> => {
     setLoading(true)
     setFusionStatus('loading')
 
-    headId = headId || headPokemon?.id
-    bodyId = bodyId || bodyPokemon?.id
+    const currentHeadId = headId || headPokemon?.id
+    const currentBodyId = bodyId || bodyPokemon?.id
 
-    if (!headId || !bodyId) {
+    if (!currentHeadId || !currentBodyId) {
       toast.toast({
         title: "Selection Error",
         description: "Please select both a head and body Pokémon before fusing.",
@@ -62,7 +65,7 @@ export default function FusionPage() {
     }
 
     try {
-      const data = await fetchData(`${headId}.${bodyId}`)
+      const data = await fetchData(`${currentHeadId}.${currentBodyId}`)
       if (!data?.results) {
         toast.toast({
           title: "Fusion Error",
@@ -72,13 +75,20 @@ export default function FusionPage() {
         setFusionData(null)
         setFusionStatus('error')
       } else {
+        // Update fusion data
         setFusionData(data)
-        const { fusionId, reverseId } = generateFusionIds(headId, bodyId)
+        const fusionId = `${currentHeadId}.${currentBodyId}`
+        const reverseId = `${currentBodyId}.${currentHeadId}`
         const head = data.results.find(item => item.id === fusionId)
         const body = data.results.find(item => item.id === reverseId)
 
         setHeadData(head || null)
         setBodyData(body || null)
+        
+        // Update fused Pokemon state
+        setFusedHeadPokemon({ id: currentHeadId, name: basePokemons[currentHeadId] })
+        setFusedBodyPokemon({ id: currentBodyId, name: basePokemons[currentBodyId] })
+        
         setFusionStatus('success')
       }
     } catch (error) {
@@ -106,23 +116,14 @@ export default function FusionPage() {
     calculateFusion(headId, bodyId)
   }
 
-  const randomHead = (): void => {
-    const headId = generateRandomId()
-    setHeadPokemon({ id: headId, name: basePokemons[headId] })
-    if (headPokemon && bodyPokemon) calculateFusion(headId, bodyPokemon.id)
-  }
-
-  const randomBody = (): void => {
-    const bodyId = generateRandomId()
-    setBodyPokemon({ id: bodyId, name: basePokemons[bodyId] })
-    if (headPokemon && bodyPokemon) calculateFusion(bodyId, bodyPokemon.id)
-  }
-
-
   const handleReset = (): void => {
     setHeadPokemon(null)
     setBodyPokemon(null)
+    setFusedHeadPokemon(null)
+    setFusedBodyPokemon(null)
     setFusionData(null)
+    setHeadData(null)
+    setBodyData(null)
     setFusionStatus('idle')
   }
 
@@ -139,28 +140,34 @@ export default function FusionPage() {
         </CardDescription>
       </CardHeader>
 
-      {/* Pokemon Selection */}
       <FusionSelector
         headPokemon={headPokemon}
         bodyPokemon={bodyPokemon}
         handleSelectPokemon={handleSelectPokemon}
-        randomHead={randomHead}
-        randomBody={randomBody}
+        randomHead={() => {
+          const headId = generateRandomId()
+          setHeadPokemon({ id: headId, name: basePokemons[headId] })
+          if (bodyPokemon) calculateFusion(headId, bodyPokemon.id)
+        }}
+        randomBody={() => {
+          const bodyId = generateRandomId()
+          setBodyPokemon({ id: bodyId, name: basePokemons[bodyId] })
+          if (headPokemon) calculateFusion(headPokemon.id, bodyId)
+        }}
       />
 
-      {/* Controls (Fuse, Random, Reset) */}
       <FusionControls
         loading={loading}
-        headPokemon={!!headPokemon}
-        bodyPokemon={!!bodyPokemon}
+        headPokemon={headPokemon}
+        bodyPokemon={bodyPokemon}
+        fusedHeadPokemon={fusedHeadPokemon}
+        fusedBodyPokemon={fusedBodyPokemon}
+        fusionStatus={fusionStatus}
         onFuse={() => calculateFusion()}
         onRandom={randomFusion}
         onReset={handleReset}
       />
 
-      {/* <Separator /> */}
-
-      {/* Fusion Result Display */}
       <FusionResult
         fusionStatus={fusionStatus}
         headData={headData}
