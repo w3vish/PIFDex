@@ -79,7 +79,7 @@
 }
 
 .pokemon-card a:hover {
- /* border-bottom: 2px solid gray; */
+  /* border-bottom: 2px solid gray; */
   font-weight: 600;
 }
 
@@ -94,6 +94,15 @@
 
 .pokemon-card>div:last-child p {
   display: flex;
+  gap: 1rem;
   justify-content: space-between;
   margin: 0
+}
+
+.pokemon-card>div:last-child>p span:last-child {
+  text-align: end;
+}
+
+.pokemon-card>div:last-child>p span:first-child {
+  text-wrap: nowrap;
 }

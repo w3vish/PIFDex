@@ -79,18 +79,18 @@ function FusionLoading() {
   return (
     <article className='space-y-6 sm:p-4 max-w-4xl mx-auto animate-pulse'>
       <div className="grid grid-cols-2 gap-4 sm:gap-8">
-        {[0, 1].map((index) => (
-          <div key={index} className='flex flex-col items-center max-w-xs mx-auto w-full'>
-            <div className="relative w-full aspect-square">
-              <Skeleton className="absolute inset-0 rounded-lg" />
-              <div className="absolute bottom-2 left-2 flex gap-1">
-                <Skeleton className="h-6 w-16 rounded-full" />
-                <Skeleton className="h-6 w-16 rounded-full" />
-              </div>
-            </div>
-            {/* <Skeleton className="h-6 w-3/4 mt-2" /> */}
-            <Skeleton className="h-6 w-1/2 mt-1" />
-          </div>
+      {[0, 1].map((index) => (
+          <Card key={index} className='p-1 md:p-4 max-w-xs mx-auto w-full'>
+            <CardContent className="p-0">
+              <Skeleton className="min-h-40 md:h-64  mb-3" />
+              {[0, 1].map((statIndex) => (
+                <div key={statIndex} className="flex items-center mb-2">
+                  <Skeleton className="h-4 w-20 mr-2" />
+                  <Skeleton className="h-4 flex-grow" />
+                </div>
+              ))}
+            </CardContent>
+          </Card>
         ))}
       </div>
       <div className="grid grid-cols-2 gap-4 md:gap-8">
@@ -122,9 +122,9 @@ function FusionLoading() {
       <Card>
         <CardContent className="p-4">
           <Skeleton className="h-5 w-1/4 mb-3" />
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-            {[0, 1, 2, 3].map((index) => (
-              <Skeleton key={index} className="h-16 mb-2" />
+          <div className="flex flex-col gap-2">
+            {[0, 1, 2, 3,4].map((index) => (
+              <Skeleton key={index} className="h-10 mb-2" />
              
             ))}
           </div>
