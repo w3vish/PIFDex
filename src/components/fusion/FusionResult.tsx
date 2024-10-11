@@ -124,7 +124,7 @@ function FusionLoading() {
           <Skeleton className="h-5 w-1/4 mb-3" />
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {[0, 1, 2, 3].map((index) => (
-              <Skeleton className="h-16 mb-2" />
+              <Skeleton key={index} className="h-16 mb-2" />
              
             ))}
           </div>
