@@ -1,6 +1,6 @@
 import { FavoritesSprite, TotalFusionStats, MovesTable, PokemonDetails, RelatedFusions, RelatedPokemons, SpriteImage, SpritesGallary, StatsDisplay, WeaknessTable } from "@/components/sprites";
 import { Card, CardContent } from "@/components/ui/card";
-import { getMainSpriteId, loadSprite } from "@/lib/utils";
+import { getMainSpriteId, getSpriteImageURL, loadSprite } from "@/lib/utils";
 import { processTypes } from "@/lib/utils";
 import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
@@ -21,9 +21,7 @@ export async function generateMetadata(
     return {
       title: 'Error: Invalid Sprite ID',
       description: 'The provided Sprite ID is invalid.',
-      robots: {
-        index: false, // Ensure the page is not indexed
-      },
+      robots: { index: false },
     };
   }
 
@@ -32,34 +30,66 @@ export async function generateMetadata(
     return {
       title: 'Error: Sprite Not Found',
       description: 'The requested Pokemon sprite could not be loaded.',
-      robots: {
-        index: false, // Ensure the page is not indexed
-      },
+      robots: { index: false },
     };
   }
 
   const pokemon = data.results[0];
   const spriteType = id.split('.').length === 2 ? 'fusion' : id.split('.').length === 3 ? 'triples' : 'base';
-  const title = searchParams.sprite === 'autogen' ? `${pokemon.name} #${params.spriteId} (Autogen)`
-    : spriteType === "base" ? `#${params.spriteId} ${pokemon.name} sprites`
+
+  // Determine the image URL
+  let imageUrl: string;
+  if (pokemon.images && pokemon.images.length > 0 && searchParams.sprite !== 'autogen') {
+    const specificImage = pokemon.images.find(img => img.sprite_id === params.spriteId);
+    if (specificImage) {
+      imageUrl = getSpriteImageURL(specificImage.sprite_id, spriteType);
+    } else {
+      imageUrl = getSpriteImageURL(pokemon.images[0].sprite_id, spriteType);
+    }
+  } else {
+    imageUrl = getSpriteImageURL(params.spriteId, 'autogen');
+  }
+
+  const title = searchParams.sprite === 'autogen'
+    ? `${pokemon.name} #${params.spriteId} (Autogen)`
+    : spriteType === "base"
+      ? `#${params.spriteId} ${pokemon.name} sprites`
       : `${pokemon.name} #${params.spriteId}`;
 
+  const description = `
+    ${pokemon.name} #${params.spriteId} : ${pokemon.pokedex_entry}
+    Types: ${pokemon.primary_type && pokemon.secondary_type
+      ? `${pokemon.primary_type}/${pokemon.secondary_type}`
+      : pokemon.primary_type || pokemon.secondary_type}
+    HP: ${pokemon.base_hp},
+    Attack: ${pokemon.base_atk},
+    Defense: ${pokemon.base_def},
+    Sp. Atk: ${pokemon.base_sp_atk},
+    Sp. Def: ${pokemon.base_sp_def},
+    Speed: ${pokemon.base_spd}
+  `.trim();
+
   return {
-    title: title,
-    description: `
-      ${pokemon.name} #${params.spriteId} : ${pokemon.pokedex_entry}
-      Types: ${pokemon.primary_type && pokemon.secondary_type
-        ? `${pokemon.primary_type}/${pokemon.secondary_type}`
-        : pokemon.primary_type || pokemon.secondary_type}
-      HP: ${pokemon.base_hp},
-      Attack: ${pokemon.base_atk},
-      Defense: ${pokemon.base_def},
-      Sp. Atk: ${pokemon.base_sp_atk},
-      Sp. Def: ${pokemon.base_sp_def},
-      Speed: ${pokemon.base_spd}
-    `,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [{
+        url: imageUrl,
+        width: 288,
+        height: 288,
+        alt: `${pokemon.name} sprite #${params.spriteId}`
+      }]
+    },
+    twitter: {
+      card: 'summary',
+      title,
+      description,
+      images: [imageUrl],
+    },
     robots: {
-      index: spriteType === 'base' ? true : false, // Ensure only base sprites are indexed
+      index: spriteType === 'base',
     },
   };
 }
