@@ -108,7 +108,7 @@ function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
                 </React.Fragment>
               ))
             ) : (
-              placeHolders.imageName
+              placeHolders.artistName
             )}
           </span>
         </div>
