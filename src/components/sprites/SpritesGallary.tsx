@@ -14,12 +14,13 @@ type Images = Array<{
 
 interface SpritesGallaryProps {
   images: Images;
+  label: string
 }
 
-const SpritesGallary = ({ images }: SpritesGallaryProps) => {
+const SpritesGallary = ({ images, label }: SpritesGallaryProps) => {
   return (
     <Card className="my-4 py-4">
-      <CardHeader className="text-2xl text-center p-1">Sprites Gallery ({images.length})</CardHeader>
+      <CardHeader className="text-2xl text-center p-1">{label} ({images.length})</CardHeader>
       <GridContent>
         {images.map((image, index) => {
           const spriteURL =

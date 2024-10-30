@@ -2,73 +2,67 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { generateArtistSlug } from "@/lib/utils/artists";
-import { getMainSpriteId, processTypes } from "@/lib/utils";
+import { getMainSpriteId } from "@/lib/utils";
 import { getSpriteImageURL } from "@/lib/utils";
 import { gameInfo, placeHolders } from "@/lib/utils/constants";
 import { Separator } from "../ui/separator";
+import { PokemonCardData } from "@/lib/types/SpriteResponse";
 
 interface PokemonData {
   id: string;
   name?: string;
-  primary_type?: string;
-  secondary_type?: string;
+  types?: string[];
   base_pokemons: { [key: string]: string };
   total_sprites?: number;
-  head_fusions?: number;
-  body_fusions?: number;
+  TotalFusionsAsHead?: number;
+  TotalFusionsAsBody?: number;
   images?: {
     sprite_id: string;
     sprite_type: string;
     artists: string[];
+    creation_date: string;
+    last_update_date?: string;
+    comments: string | null;
   }[];
+  spriteType: 'base' | 'fusion' | 'autogen' | 'triple';
+  hasCustomSprite: boolean;
 }
 
-type SpriteType = 'base' | 'fusion' | 'triples' | 'autogen'
-
-function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
+function PokemonCard({ pokemon }: { pokemon: PokemonCardData }) {
   const imagesArray = Array.isArray(pokemon.images)
     ? pokemon.images
     : pokemon.images
-      ? [pokemon.images]
-      : [];
-
+    ? [pokemon.images]
+    : [];
   const autogenImage = {
     sprite_id: pokemon.id,
-    sprite_type: "autogen" as 'autogen',
+    sprite_type: "autogen" as const,
     artists: ["Autogen"],
+    creation_date: new Date().toISOString(),
+    last_update_date: new Date().toISOString(),
+    comments: null
   };
 
   const primaryImage = (imagesArray.length === 0)
-    ? autogenImage // If the images array is empty, use autogenImage
-    : imagesArray.find((image) => image.sprite_id === pokemon.id) // Match sprite_id with pokemon.id
-    || imagesArray[0] // If no match, use the first image in the array
-    || autogenImage; // Fallback to autogenImage if everything else fails
-
+    ? autogenImage
+    : imagesArray.find((image) => image.sprite_id === pokemon.id)
+    || imagesArray[0]
+    || autogenImage;
 
   const ids: string[] = pokemon.id.split('.').map((id) => getMainSpriteId(id));
 
-
-  // Updated logic to prioritize 'autogen' over the ID structure
-  const spriteType: SpriteType = primaryImage.sprite_type === 'autogen'
-    ? 'autogen'
-    : ids.length === 2
-      ? 'fusion'
-      : ids.length === 3
-        ? 'triples'
-        : 'base';
-  const types = pokemon.primary_type || pokemon.secondary_type
-    ? Array.from(new Set([
-      ...(pokemon.primary_type ? processTypes(pokemon.primary_type) : []),
-      ...(pokemon.secondary_type ? processTypes(pokemon.secondary_type) : [])
-    ]))
-    : [];
-
+  const spriteType = pokemon.spriteType;
+  const types = pokemon.types || [];
 
   return (
     <div className="pokemon-card">
       <div>
         {pokemon.name && (
-          <h2><Link rel="nofollow" prefetch={false} href={`/${pokemon.id}`}>{pokemon.name}</Link></h2>
+          <h3>
+            <Link rel="nofollow" prefetch={false} href={`/${pokemon.id}`}>
+              {pokemon.name}
+            </Link>
+          </h3>
         )}
         {types.length > 0 && (
           <div>
@@ -98,13 +92,15 @@ function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
           <span>
             {primaryImage.artists && primaryImage.artists.length > 0 ? (
               primaryImage.artists.map((artist, index) => (
-                <React.Fragment key={artist}>
-                  {
-                    artist === "Autogen" ? <span>{artist}</span> : <Link rel="nofollow" prefetch={false} href={generateArtistSlug(artist)}>
+                <React.Fragment key={`${artist}-${index}`}>
+                  {artist === "Autogen" ? (
+                    <span>{artist}</span>
+                  ) : (
+                    <Link rel="nofollow" prefetch={false} href={generateArtistSlug(artist)}>
                       {artist}
                     </Link>
-                  }
-                  {primaryImage.artists && primaryImage.artists.length - 1 > index && " & "}
+                  )}
+                  {primaryImage.artists.length - 1 > index && " & "}
                 </React.Fragment>
               ))
             ) : (
@@ -113,69 +109,55 @@ function PokemonCard({ pokemon }: { pokemon: PokemonData }) {
           </span>
         </div>
       </div>
-      {(pokemon.head_fusions !== undefined
-        || pokemon.base_pokemons !== undefined
-        || pokemon.total_sprites !== undefined) && <Separator />}
+      {(pokemon.TotalFusionsAsHead
+        || pokemon.base_pokemons
+        || pokemon.total_sprites) && <Separator />}
       <div>
-        {pokemon.head_fusions !== undefined && pokemon.base_pokemons !== undefined && (
+        {pokemon.TotalFusionsAsHead && pokemon.base_pokemons && (
           <>
             <p>
               <span>Fusions:</span>
-              <span>{Number(pokemon.head_fusions) + Number(pokemon.body_fusions)}</span>
+              <span>{Number(pokemon.TotalFusionsAsHead) + Number(pokemon.TotalFusionsAsBody)}</span>
             </p>
             <p className="text-muted-foreground">
               <span>As Head:</span>
-              <span>{pokemon.head_fusions} / {gameInfo.totalPokemons}</span>
+              <span>{pokemon.TotalFusionsAsHead} / {gameInfo.totalPokemons}</span>
             </p>
             <p className="text-muted-foreground">
               <span>As Body:</span>
-              <span>{pokemon.body_fusions} / {gameInfo.totalPokemons}</span>
+              <span>{pokemon.TotalFusionsAsBody} / {gameInfo.totalPokemons}</span>
             </p>
           </>
         )}
         {(spriteType === 'fusion' || spriteType === 'autogen') && (
-          <>
-            {/* Original Fusion Pokemons Section */}
-            {/* {pokemon.base_pokemons[ids[0]] && (
-              <p className="text-muted-foreground">
-                <span>Head</span>
-                <Link rel="nofollow" prefetch={false} className="border-b" href={`/${ids[0]}`}>{pokemon.base_pokemons[ids[0]]}</Link>
-              </p>
-            )}
-            {pokemon.base_pokemons[ids[1]] && (
-              <p className="text-muted-foreground">
-                <span>Body</span>
-                <Link rel="nofollow" prefetch={false} className="border-b" href={`/${ids[1]}`}>{pokemon.base_pokemons[ids[1]]}</Link>
-              </p>
-            )} */}
-
-            {/* New Fusion Pokemons Section For Test Structure  */}
-            <p>
-              <span>Fusion of</span>
-              <span className="text-muted-foreground">
-                <Link rel="nofollow" prefetch={false} href={`/${ids[0]}`}>{pokemon.base_pokemons[ids[0]]}</Link>/<Link rel="nofollow" prefetch={false} href={`/${ids[1]}`}>{pokemon.base_pokemons[ids[1]]}</Link>
-              </span>
-            </p>
-          </>
-        )}
-        {spriteType === 'triples' && (
-
           <p>
-            <span>{`Fusion of`}</span>
+            <span>Fusion of</span>
             <span className="text-muted-foreground">
-              {
-                ids.map((id, index) => (
-                  <React.Fragment key={index}>
-                    <Link rel="nofollow" prefetch={false} className="border-b" href={`/${id}`}>{pokemon.base_pokemons[id]}</Link>
-                    {ids.length - 1 > index && " / "}
-                  </React.Fragment>
-                ))
-              }
+              <Link rel="nofollow" prefetch={false} href={`/${ids[0]}`}>
+                {pokemon.base_pokemons[ids[0]]}
+              </Link>
+              /
+              <Link rel="nofollow" prefetch={false} href={`/${ids[1]}`}>
+                {pokemon.base_pokemons[ids[1]]}
+              </Link>
             </span>
           </p>
-
         )}
-
+        {spriteType === 'triple' && (
+          <p>
+            <span>Fusion of</span>
+            <span className="text-muted-foreground">
+              {ids.map((id, index) => (
+                <React.Fragment key={id}>
+                  <Link rel="nofollow" prefetch={false} className="border-b" href={`/${id}`}>
+                    {pokemon.base_pokemons[id]}
+                  </Link>
+                  {ids.length - 1 > index && " / "}
+                </React.Fragment>
+              ))}
+            </span>
+          </p>
+        )}
         {pokemon.total_sprites !== undefined && (
           <p>
             <span>Variants:</span>

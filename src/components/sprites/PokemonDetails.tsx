@@ -1,16 +1,15 @@
 import Link from "next/link";
 import { InfoToolTip } from "@/components/sprites";
 import { genderRatios } from "@/lib/utils/constants";
+import { PokemonEvolution } from "@/lib/types/SpriteResponse";
+import React from "react";
 
 interface Ability {
     real_name: string;
     real_description: string;
 }
 
-interface Evolution {
-    id: string;
-    name: string;
-}
+
 
 interface PokemonDetailsProps {
     category: string;
@@ -21,8 +20,8 @@ interface PokemonDetailsProps {
     genderRatio: string;
     abilities: Ability[];
     hiddenAbilities: Ability[];
-    evolvesFrom: Evolution[];
-    evolvesTo: Evolution[];
+    evolvesFrom: PokemonEvolution[];
+    evolvesTo: PokemonEvolution[];
 }
 
 const PokemonDetails: React.FC<PokemonDetailsProps> = ({
@@ -76,9 +75,9 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({
                     <dt className="font-semibold text-muted-foreground">Evolves From</dt>
                     <dd>
                         {evolvesFrom.map((evo) => (
-                            <p key={evo.id}>
-                                <span className="text-muted-foreground">#{evo.id} </span>
-                                <Link rel="nofollow" prefetch={false} href={`/${evo.id}`} className="border-b-2 border-muted-foreground">
+                            <p key={evo.from}>
+                                <span className="text-muted-foreground">#{evo.from} </span>
+                                <Link rel="nofollow" prefetch={false} href={`/${evo.from}`} className="border-b-2 border-muted-foreground">
                                     {evo.name}
                                 </Link>
                             </p>
@@ -92,9 +91,9 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({
                     <dt className="font-semibold text-muted-foreground">Evolves To</dt>
                     <dd>
                         {evolvesTo.map((evo) => (
-                            <p key={evo.id}>
-                                <span className="text-muted-foreground">#{evo.id} </span>
-                                <Link rel="nofollow" prefetch={false} href={`/${evo.id}`} className="border-b-2 border-muted-foreground">
+                            <p key={evo.to}>
+                                <span className="text-muted-foreground">#{evo.to} </span>
+                                <Link rel="nofollow" prefetch={false} href={`/${evo.to}`} className="border-b-2 border-muted-foreground">
                                     {evo.name}
                                 </Link>
                             </p>
@@ -102,6 +101,7 @@ const PokemonDetails: React.FC<PokemonDetailsProps> = ({
                     </dd>
                 </div>
             )}
+
             <div className="col-span-full grid grid-cols-2 lg:flex justify-start md:gap-14">
 
                 <div className="lg:max-w-fit">

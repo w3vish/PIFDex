@@ -5,7 +5,7 @@ import { Card, CardHeader, CardDescription } from '@/components/ui/card'
 import { useToast } from '@/hooks/use-toast'
 import { basePokemons, gameInfo } from '@/lib/utils/constants'
 import { loadFusion } from '@/lib/utils'
-import { SelectedPokemon, SpriteResponse, SpriteResult } from '@/lib/types'
+import { APIResponse, SelectedPokemon, SpriteResponse } from '@/lib/types'
 import { FusionControls, FusionResult, FusionSelector } from '@/components/fusion'
 
 const generateRandomId = (): string => {
@@ -13,7 +13,7 @@ const generateRandomId = (): string => {
   return (Math.floor(Math.random() * maxPoke) + 1).toString()
 }
 
-const fetchData = async (ids: string): Promise<SpriteResponse | null> => {
+const fetchData = async (ids: string): Promise<APIResponse | null> => {
   const res = await loadFusion(ids)
   return res
 }
@@ -28,9 +28,9 @@ export default function FusionPage() {
   const [fusedBodyPokemon, setFusedBodyPokemon] = useState<SelectedPokemon | null>(null)
   
   // Fusion result states
-  const [fusionData, setFusionData] = useState<SpriteResponse | null>(null)
-  const [headData, setHeadData] = useState<SpriteResult | null>(null)
-  const [bodyData, setBodyData] = useState<SpriteResult | null>(null)
+  const [fusionData, setFusionData] = useState<SpriteResponse[] | null>(null)
+  const [headData, setHeadData] = useState<SpriteResponse | null>(null)
+  const [bodyData, setBodyData] = useState<SpriteResponse | null>(null)
   
   // UI states
   const [loading, setLoading] = useState<boolean>(false)
@@ -65,8 +65,8 @@ export default function FusionPage() {
     }
 
     try {
-      const data = await fetchData(`${currentHeadId}.${currentBodyId}`)
-      if (!data?.results) {
+      const data = await fetchData(`${currentHeadId}.${currentBodyId},${currentBodyId}.${currentHeadId}`)
+      if (!data) {
         toast.toast({
           title: "Fusion Error",
           description: "Failed to load fusion data. Please try again later.",
@@ -76,7 +76,7 @@ export default function FusionPage() {
         setFusionStatus('error')
       } else {
         // Update fusion data
-        setFusionData(data)
+        setFusionData(data.results)
         const fusionId = `${currentHeadId}.${currentBodyId}`
         const reverseId = `${currentBodyId}.${currentHeadId}`
         const head = data.results.find(item => item.id === fusionId)
@@ -132,7 +132,7 @@ export default function FusionPage() {
   }, [])
 
   return (
-    <Card className="p-2 space-y-4 m-1 md:m-4">
+    <Card className="p-1 pb-4 space-y-4 md:m-4">
       <CardHeader className='p-1 px-2 text-center'>
         <h1 className='text-2xl'>Pokémon Infinite Fusion Calculator</h1>
         <CardDescription className="text-sm md:text-base">

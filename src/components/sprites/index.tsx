@@ -8,7 +8,6 @@ import { StatsDisplay } from "./StatsDisplay";
 import { WeaknessTable } from "./WeaknessTable";
 import { MovesTable } from "./MovesTable";
 import { RelatedPokemons } from "./RelatedPokemons";
-import { RelatedFusions } from "./RelatedFusions";
 import { RelatedFusionsClient } from "./RelatedFusionsClient";
 import { FavoritesSprite } from "./FavoritesSprite";
 
@@ -23,7 +22,6 @@ export {
     WeaknessTable,
     MovesTable,
     RelatedPokemons,
-    RelatedFusions,
     RelatedFusionsClient,
     FavoritesSprite,
 }

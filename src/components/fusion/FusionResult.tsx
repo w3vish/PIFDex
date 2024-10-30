@@ -2,7 +2,6 @@ import React from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { SpriteResult } from '@/lib/types';
 import { PokemonCard } from '../pages';
 import { FusionImage } from './FusionImage';
 import { FusionStats } from './FusionStats';
@@ -10,11 +9,12 @@ import { FusionAbilities } from './FusionAbilities';
 import { generateStats } from '@/lib/utils/fusion';
 import { FusionWeaknesses } from './FusionWeaknesses';
 import { Skeleton } from '../ui/skeleton';
+import { SpriteResponse } from '@/lib/types';
 
 interface FusionResultProps {
   fusionStatus: 'idle' | 'loading' | 'success' | 'error';
-  headData: SpriteResult | null;
-  bodyData: SpriteResult | null;
+  headData: SpriteResponse | null;
+  bodyData: SpriteResponse | null;
 }
 
 export function FusionResult({ fusionStatus, headData, bodyData }: FusionResultProps) {
@@ -52,21 +52,21 @@ export function FusionResult({ fusionStatus, headData, bodyData }: FusionResultP
             <FusionImage pokemon={bodyData} />
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-2 md:gap-8 md:px-4">
+        <div className="grid grid-cols-2 justify-between gap-2 md:gap-8 md:px-4">
           <FusionStats stats={generateStats(headData)} comparisonStats={generateStats(bodyData)} />
           <FusionStats stats={generateStats(bodyData)} comparisonStats={generateStats(headData)} />
         </div>
         <div className="grid grid-cols-2 gap-2 md:gap-8 md:px-4">
-          <FusionAbilities ability={{ normal: headData.abilities, hidden: headData.hidden_abilities }} />
-          <FusionAbilities ability={{ normal: bodyData.abilities, hidden: bodyData.hidden_abilities }} />
+          <FusionAbilities ability={headData.abilities} />
+          <FusionAbilities ability={bodyData.abilities} />
+         
         </div>
 
         <div>
           <FusionWeaknesses types={{
-            headTypes: [headData.primary_type, headData.secondary_type],
-            bodyTypes: [bodyData.primary_type, bodyData.secondary_type]
+            headTypes: headData.types,
+            bodyTypes: bodyData.types
           }} />
-
         </div>
       </article>
     );

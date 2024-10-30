@@ -1,7 +1,6 @@
-import { FavoritesSprite, TotalFusionStats, MovesTable, PokemonDetails, RelatedFusions, RelatedPokemons, SpriteImage, SpritesGallary, StatsDisplay, WeaknessTable } from "@/components/sprites";
+import { TotalFusionStats, MovesTable, PokemonDetails, RelatedPokemons, SpriteImage, SpritesGallary, StatsDisplay, WeaknessTable, RelatedFusionsClient, FavoritesSprite } from "@/components/sprites";
 import { Card, CardContent } from "@/components/ui/card";
 import { getMainSpriteId, getSpriteImageURL, loadSprite } from "@/lib/utils";
-import { processTypes } from "@/lib/utils";
 import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
 
@@ -26,7 +25,7 @@ export async function generateMetadata(
   }
 
   const data = await loadSprite(id);
-  if (!data || !data.results || !data.results.length) {
+  if (!data) {
     return {
       title: 'Error: Sprite Not Found',
       description: 'The requested Pokemon sprite could not be loaded.',
@@ -34,18 +33,15 @@ export async function generateMetadata(
     };
   }
 
-  const pokemon = data.results[0];
-  const spriteType = id.split('.').length === 2 ? 'fusion' : id.split('.').length === 3 ? 'triples' : 'base';
-
-  // Determine the image URL
+  const pokemon = data;
+  const spriteType = pokemon.spriteType;
   let imageUrl: string;
+
   if (pokemon.images && pokemon.images.length > 0 && searchParams.sprite !== 'autogen') {
     const specificImage = pokemon.images.find(img => img.sprite_id === params.spriteId);
-    if (specificImage) {
-      imageUrl = getSpriteImageURL(specificImage.sprite_id, spriteType);
-    } else {
-      imageUrl = getSpriteImageURL(pokemon.images[0].sprite_id, spriteType);
-    }
+    imageUrl = specificImage
+      ? getSpriteImageURL(specificImage.sprite_id, spriteType)
+      : getSpriteImageURL(pokemon.images[0].sprite_id, spriteType);
   } else {
     imageUrl = getSpriteImageURL(params.spriteId, 'autogen');
   }
@@ -58,15 +54,13 @@ export async function generateMetadata(
 
   const description = `
     ${pokemon.name} #${params.spriteId} : ${pokemon.pokedex_entry}
-    Types: ${pokemon.primary_type && pokemon.secondary_type
-      ? `${pokemon.primary_type}/${pokemon.secondary_type}`
-      : pokemon.primary_type || pokemon.secondary_type}
-    HP: ${pokemon.base_hp},
-    Attack: ${pokemon.base_atk},
-    Defense: ${pokemon.base_def},
-    Sp. Atk: ${pokemon.base_sp_atk},
-    Sp. Def: ${pokemon.base_sp_def},
-    Speed: ${pokemon.base_spd}
+    Types: ${pokemon.types.join('/')}
+    HP: ${pokemon.stats.base_hp},
+    Attack: ${pokemon.stats.base_atk},
+    Defense: ${pokemon.stats.base_def},
+    Sp. Atk: ${pokemon.stats.base_sp_atk},
+    Sp. Def: ${pokemon.stats.base_sp_def},
+    Speed: ${pokemon.stats.base_spd}
   `.trim();
 
   return {
@@ -94,81 +88,81 @@ export async function generateMetadata(
   };
 }
 
-
 const SpritePage = async ({ params, searchParams }: SpritePageParams) => {
   const id = getMainSpriteId(params.spriteId);
-  if (!id) {
-    return notFound();
-  }
+  if (!id) return notFound();
 
   const data = await loadSprite(id);
-  if (!data || !data.results || !data.results.length) {
-    return notFound();
-  }
+  if (!data) return notFound();
 
-  const pokemon = data.results[0];
+  const pokemon = data;
   const autogenImage = {
     sprite_id: id,
-    sprite_type: "autogen" as 'autogen',
+    sprite_type: "autogen" as const,
     artists: ["Autogen"],
+    creation_date: new Date().toISOString(),
+    last_update_date: new Date().toISOString(),
+    comments: null,
   };
-  const primaryImage =
-    searchParams.sprite === 'autogen'
-      ? autogenImage
-      : pokemon.images?.find((image) => image.sprite_id === params.spriteId) || pokemon.images[0] || autogenImage;
-  const spriteType = id.split('.').length === 2 ? 'fusion' : id.split('.').length === 3 ? 'triples' : 'base';
-  const allImages = spriteType === 'fusion' ? [...pokemon.images, autogenImage] : pokemon.images;
-  const types = Array.from(
-    new Set([...processTypes(pokemon.primary_type), ...processTypes(pokemon.secondary_type)])
-  );
+
+  const primaryImage = searchParams.sprite === 'autogen'
+    ? autogenImage
+    : pokemon.images?.find(image => image.sprite_id === params.spriteId) || pokemon.images[0] || autogenImage;
+
+  const spriteType: 'base' | 'fusion' | 'autogen' | 'triple' = pokemon.spriteType
+
+  const allImages = [...pokemon.images, autogenImage];
+  const types = pokemon.types || [];
   const stats = {
-    HP: pokemon.base_hp,
-    Attack: pokemon.base_atk,
-    Defense: pokemon.base_def,
-    'Sp. Atk': pokemon.base_sp_atk,
-    'Sp. Def': pokemon.base_sp_def,
-    Speed: pokemon.base_spd,
-    Total:
-      pokemon.base_hp +
-      pokemon.base_atk +
-      pokemon.base_def +
-      pokemon.base_sp_atk +
-      pokemon.base_sp_def +
-      pokemon.base_spd,
+    HP: pokemon.stats.base_hp,
+    Attack: pokemon.stats.base_atk,
+    Defense: pokemon.stats.base_def,
+    'Sp. Atk': pokemon.stats.base_sp_atk,
+    'Sp. Def': pokemon.stats.base_sp_def,
+    Speed: pokemon.stats.base_spd,
+    Total: pokemon.stats.base_hp + pokemon.stats.base_atk + pokemon.stats.base_def +
+      pokemon.stats.base_sp_atk + pokemon.stats.base_sp_def + pokemon.stats.base_spd,
   };
 
-
-  const pokemonData = {
-    id: params.spriteId,
-    name: pokemon.name,
-    primary_type: pokemon.primary_type,
-    secondary_type: pokemon.secondary_type,
-    base_pokemons: pokemon.base_pokemons,
-    total_sprites: pokemon.total_sprites,
-    images: primaryImage
-  };
-
+  // Ensure `SpriteImageData` matches the expected type structure
   const SpriteImageData = {
     id: id,
+    // name: pokemon.name,
     base_pokemons: pokemon.base_pokemons,
-    images: [primaryImage]
-  }
-
-
+    images: [
+      {
+        sprite_id: primaryImage.sprite_id,
+        sprite_type: primaryImage.sprite_type,
+        artists: primaryImage.artists,
+        creation_date: new Date().toISOString(), // Added required field
+        last_update_date: new Date().toISOString(), // Optional field
+        comments: null // Added required field
+      },
+    ],
+    spriteType: spriteType,
+    hasCustomSprite: !!pokemon.images.length,
+    // total_sprites: pokemon.total_sprites,
+    // head_fusions: pokemon.head_fusions,
+    // body_fusions: pokemon.body_fusions,
+    // types: pokemon.types,
+  };
 
   return (
-    <>
+    <article className="p-1">
       <Card>
         <h1 className="text-2xl text-center font-semibold p-2 mt-4">
           {pokemon.name} <span className="text-muted-foreground">#{decodeURIComponent(params.spriteId.padStart(3, '0'))} {searchParams.sprite === 'autogen' ? "(Autogen)" : null}</span>
-          <FavoritesSprite pokemonData={pokemonData} />
+        <FavoritesSprite pokemonData={data}/>
         </h1>
-        <CardContent className="p-4  flex flex-col md:flex-row gap-4">
+        <CardContent className="p-4 flex flex-col md:flex-row gap-4">
           <div className="w-full md:max-w-xs mx-auto">
             <SpriteImage pokemon={SpriteImageData} types={types} />
-            {spriteType === 'base' && (
-              <TotalFusionStats headSpriteCount={pokemon.head_sprite} bodySpriteCount={pokemon.body_sprite} />
-            )}
+            {spriteType === 'base'
+              && pokemon.TotalFusionsAsHead
+              && pokemon.TotalFusionsAsBody
+              && (
+                <TotalFusionStats headSpriteCount={pokemon.TotalFusionsAsHead} bodySpriteCount={pokemon.TotalFusionsAsBody} />
+              )}
           </div>
           <div className="w-full md:mt-0">
             <p>{pokemon.pokedex_entry}</p>
@@ -180,20 +174,20 @@ const SpritePage = async ({ params, searchParams }: SpritePageParams) => {
               growthRate={pokemon.growth_rate}
               catchRate={pokemon.catch_rate}
               genderRatio={pokemon.gender_ratio}
-              abilities={pokemon.all_abilities.filter((ability) => ability.type === 'normal')}
-              hiddenAbilities={pokemon.all_abilities.filter((ability) => ability.type === 'hidden')}
-              evolvesFrom={pokemon.evolves_from}
-              evolvesTo={pokemon.evolves_to}
+              abilities={pokemon.abilities.normalAbilities}
+              hiddenAbilities={pokemon.abilities.hiddenAbilities}
+              evolvesFrom={pokemon.evolvesFrom}
+              evolvesTo={pokemon.evolvesTo}
             />
           </div>
         </CardContent>
       </Card>
-      <SpritesGallary images={allImages} />
+      <SpritesGallary images={allImages} label="Sprites Gallery" />
       {spriteType !== 'base' && <RelatedPokemons id={id} spriteType={spriteType} />}
-      {spriteType === 'base' && <RelatedFusions id={id} />}
+      {spriteType === 'base' && pokemon.allFusionImages && <RelatedFusionsClient pokemons={pokemon.allFusionImages} id={id} />}
       {types && <WeaknessTable types={types} />}
-      {pokemon.all_moves && <MovesTable all_moves={pokemon.all_moves} />}
-    </>
+      {pokemon.moves && <MovesTable all_moves={pokemon.moves} />}
+    </article>
   );
 };
 

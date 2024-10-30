@@ -1,15 +1,11 @@
 import {
     SpriteResponse,
     Ability,
-    EvolutionChain,
-    EvolutionDetail,
-    FullMove,
     GenderRatio,
-    Image,
     Meta,
     Move,
     Shape,
-    SpriteResult,
+    APIResponse
 } from "./SpriteResponse";
 import { LoadAllFusionsResponse } from "./loadAllFusionsResponse";
 import { PokemonCardTypes } from "./PokemonCard";
@@ -21,16 +17,12 @@ interface SelectedPokemon {
 export type {
     SpriteResponse,
     Ability,
-    EvolutionChain,
-    EvolutionDetail,
-    FullMove,
     GenderRatio,
-    Image,
     Meta,
     Move,
     Shape,
-    SpriteResult,
     LoadAllFusionsResponse,
     SelectedPokemon,
-    PokemonCardTypes
+    PokemonCardTypes,
+    APIResponse
 }

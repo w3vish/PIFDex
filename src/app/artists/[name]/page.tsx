@@ -25,23 +25,14 @@ export async function generateMetadata(
   { params, searchParams }: ArtistsPageProps,
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-
-  // Title: Keeping artist's name in lowercase but with proper phrasing
-  let title = `spirtes by ${decodeURIComponent(params.name)}`;
-
-  // Append page number if available
+  let title = `sprites by ${decodeURIComponent(params.name)}`;
   if (searchParams.page !== undefined) title += ` - page ${searchParams.page}`;
-
-  // Return metadata with description, keeping the artist's name as is (lowercase)
   return {
     title: title,
     description: `Browse all sprites created by ${params.name} and explore their artistic style.`,
-    robots: {
-      index: false, // Ensure the page is not indexed
-    },
+    robots: { index: false },
   };
 }
-
 
 const ArtistsPage = async ({ params, searchParams }: ArtistsPageProps) => {
   const artistName = decodeArtistSlug(params.name);
@@ -54,66 +45,43 @@ const ArtistsPage = async ({ params, searchParams }: ArtistsPageProps) => {
   };
 
   const artistData = await loadArtists(loadArtistsProps);
-
-
-  if (artistData.total_sprites === 0 || artistData.images.length === 0) {
+  if (artistData.totalImages === 0 || artistData.data.length === 0) {
     notFound();
   }
 
+  // Map the artist data to match the updated structure
 
-  const mappedPokemonData = artistData.images.map((pokemon: any) => ({
-    id: pokemon.sprite_id,
-    name: pokemon.base_pokemons[Object.keys(pokemon.base_pokemons)[0]],
-    primary_type: pokemon.primary_type,
-    secondary_type: pokemon.secondary_type,
-    base_pokemons: pokemon.base_pokemons,
-    total_sprites: pokemon.total_sprites,
-    images: [
-      {
-        sprite_id: pokemon.sprite_id,
-        sprite_type: '',
-        artists: pokemon.artists || [artistData.artist_name],
-      },
-    ],
-  }));
 
-  const totalPages = artistData.pagination.total_pages;
-  const currentPage = artistData.pagination.current_page;
-  const limit = loadArtistsProps.limit;
+  const { totalPages, currentPage, limit } = artistData.pagination;
 
   return (
-    <>
-      <Card className=''>
-        <CardHeader className='text-center'>
-          <h1 className='text-2xl'>
-            {artistData.total_sprites} Sprites by{' '}
-            <span className='text-muted-foreground hover:border-b'>{artistData.artist_name}</span>
-          </h1>
-        </CardHeader>
+    <Card className=''>
+      <CardHeader className='text-center'>
+        <h1 className='text-2xl'>
+          {artistData.totalImages} Sprites by{' '}
+          <span className='text-muted-foreground hover:border-b'>{artistData.artistName}</span>
+        </h1>
+      </CardHeader>
 
-        <div className='flex justify-between p-4'>
-          <p className='self-center pt-6 md:self-end md:text-lg font-semibold'>
-            <span>Page ({currentPage}/{totalPages})</span>
-          </p>
-          <div className='ml-auto'>
-            <SelectSpritesLimit />
-          </div>
+      <div className='flex justify-between p-4'>
+        <p className='self-center pt-6 md:self-end md:text-lg font-semibold'>
+          <span>Page ({currentPage}/{totalPages})</span>
+        </p>
+        <div className='ml-auto'>
+          <SelectSpritesLimit />
         </div>
+      </div>
 
+      <GridContent>
+        {artistData.data.map((pokemon) => (
+          <PokemonCard pokemon={pokemon} key={pokemon.id} />
+        ))}
+      </GridContent>
 
-
-        <GridContent>
-          {mappedPokemonData.map((pokemon: any) => (
-            <PokemonCard pokemon={pokemon} key={pokemon.id} />
-          ))}
-        </GridContent>
-
-        <footer className='mt-4'>
-          {/* Render the client-side pagination component */}
-          <PaginationClient currentPage={currentPage} totalPages={totalPages} limit={limit} />
-        </footer>
-      </Card>
-    </>
+      <footer className='mt-4'>
+        <PaginationClient currentPage={currentPage} totalPages={totalPages} limit={limit} />
+      </footer>
+    </Card>
   );
 };
 

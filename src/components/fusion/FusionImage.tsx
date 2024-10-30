@@ -2,31 +2,15 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { generateArtistSlug } from "@/lib/utils/artists";
-import { processTypes } from "@/lib/utils";
 import { getSpriteImageURL } from "@/lib/utils";
 import { placeHolders } from "@/lib/utils/constants";
 import { Separator } from "../ui/separator";
 import '@/styles/FusionImage.css';
+import { PokemonCardData } from "@/lib/types/SpriteResponse";
 
-interface PokemonData {
-    id: string;
-    name?: string;
-    primary_type?: string;
-    secondary_type?: string;
-    base_pokemons: { [key: string]: string };
-    total_sprites?: number;
-    head_fusions?: number;
-    body_fusions?: number;
-    images?: {
-        sprite_id: string;
-        sprite_type: string;
-        artists: string[];
-    }[];
-}
 
-type SpriteType = 'base' | 'fusion' | 'triples' | 'autogen'
 
-function FusionImage({ pokemon }: { pokemon: PokemonData }) {
+function FusionImage({ pokemon }: { pokemon: PokemonCardData }) {
     const imagesArray = Array.isArray(pokemon.images)
         ? pokemon.images
         : pokemon.images
@@ -49,19 +33,14 @@ function FusionImage({ pokemon }: { pokemon: PokemonData }) {
     const ids: string[] = pokemon.id.split('.');
 
     // Updated logic to prioritize 'autogen' over the ID structure
-    const spriteType: SpriteType = primaryImage.sprite_type === 'autogen'
+    const spriteType = primaryImage.sprite_type === 'autogen'
         ? 'autogen'
         : ids.length === 2
             ? 'fusion'
             : ids.length === 3
                 ? 'triples'
                 : 'base';
-    const types = pokemon.primary_type || pokemon.secondary_type
-        ? Array.from(new Set([
-            ...(pokemon.primary_type ? processTypes(pokemon.primary_type) : []),
-            ...(pokemon.secondary_type ? processTypes(pokemon.secondary_type) : [])
-        ]))
-        : [];
+    const types = pokemon.types || [];
 
 
     return (
@@ -117,7 +96,7 @@ function FusionImage({ pokemon }: { pokemon: PokemonData }) {
                         </span>
                     </div>
                 </div>
-                {(pokemon.head_fusions !== undefined
+                {(pokemon.TotalFusionsAsHead !== undefined
                     || pokemon.base_pokemons !== undefined
                     || pokemon.total_sprites !== undefined) && <Separator />}
                 <div>

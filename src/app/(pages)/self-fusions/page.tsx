@@ -4,6 +4,7 @@ import { loadModules } from '@/lib/utils';
 import { Separator } from '@/components/ui/separator';
 import { Metadata } from 'next';
 import { gameInfo } from '@/lib/utils/constants'; // Ensure you import gameInfo if you need it for counts
+import { PokemonCardData } from '@/lib/types/SpriteResponse';
 
 export const metadata: Metadata = {
     title: "Self Fusions",
@@ -24,18 +25,16 @@ interface PokemonData {
     }[];
 }
 
-type SelfFusionsResults = PokemonData[];
 
 async function page() {
-    const data = await loadModules("self-fusions");
-    const selfFusionsData = data as { results: SelfFusionsResults };
+    const data: PokemonCardData[] = await loadModules("self-fusions");
 
-    if (!selfFusionsData || !selfFusionsData.results.length) return <></>;
+    if (!data) return <></>;
 
     return (
         <div className='space-y-4'>
             <CardHeader>
-                <h1 className="text-2xl font-bold">Self Fusions ({selfFusionsData.results.length})</h1>
+                <h1 className="text-2xl font-bold">Self Fusions ({data.length})</h1>
                 <p className="text-sm lg:text-base text-muted-foreground">
                     Self Fusions are a unique type of Pokémon fusion where a single Pokémon fuses with itself, acting as both the head and the body.
                 </p>
@@ -44,9 +43,9 @@ async function page() {
             <Separator className='my-4' />
 
             <article className='space-y-2'>
-                <h2 className='text-xl text-center font-semibold'>Total Self Fusions ({selfFusionsData.results.length})</h2>
-                <GridContent>
-                    {selfFusionsData.results.map((pokemon: PokemonData) => (
+                <h2 className='text-xl text-center font-semibold'>Total Self Fusions ({data.length})</h2>
+                <GridContent className='overflow-hidden'>
+                    {data.map((pokemon: PokemonCardData) => (
                         <PokemonCard key={pokemon.id} pokemon={pokemon} />
                     ))}
                 </GridContent>

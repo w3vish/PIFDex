@@ -1,24 +1,21 @@
+import { PokemonCardData } from "@/lib/types/SpriteResponse";
 import { apiURL } from "../constants";
 
+
 type ArtistResponse = {
-  artist_name	: string;
-  total_sprites: number;
-  images: Array<{
-    sprite_id: string;
-    artists: string[];
-    primary_type: string;
-    secondary_type: string;
-    base_pokemons: {
-      [key: string]: string;
-    };
-  }>;
+  totalImages: number
+  artistName: string
   pagination: {
-    total: number;
-    per_page: number;
-    current_page: number;
-    total_pages: number;
-  };
-};
+    total: number
+    totalPages: number
+    currentPage: number
+    limit: number
+    offset: number
+  }
+  data: PokemonCardData[]
+}
+
+
 
 type LoadArtistParams = {
   artistName: string;
@@ -27,17 +24,17 @@ type LoadArtistParams = {
 };
 
 /**
- * This Function Fetches Artist Info From API and Returns Artist Info Object
+ * Fetches artist info from the API and returns an ArtistResponse object
  * @param params Object with artistName, limit (optional), and page (optional)
- * @returns ArtistResponse
+ * @returns Promise<ArtistResponse>
  */
 const loadArtists = async ({ artistName, limit, page }: LoadArtistParams): Promise<ArtistResponse> => {
   const url = new URL(`${apiURL}/artists/${artistName}`);
-  
+
   if (limit) {
     url.searchParams.append('limit', limit.toString());
   }
-  
+
   if (page) {
     url.searchParams.append('page', page.toString());
   }
@@ -48,4 +45,8 @@ const loadArtists = async ({ artistName, limit, page }: LoadArtistParams): Promi
   return data;
 };
 
-export { loadArtists };
+export {
+  loadArtists,
+  type ArtistResponse,
+  type LoadArtistParams,
+};

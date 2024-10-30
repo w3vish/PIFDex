@@ -10,7 +10,7 @@ interface GridContentProps {
 }
 
 // Define the grid classes once
-const defaultGridClass = "p-0 px-2 gap-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5";
+const defaultGridClass = "p-0 px-2 gap-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6";
 
 const GridContent: React.FC<GridContentProps> = ({ children, className = "" }) => {
   return (

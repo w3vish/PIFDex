@@ -34,6 +34,7 @@ const MovesTable: React.FC<MovesTableProps> = ({ all_moves }) => {
                 <TableHeader>
                     <TableRow>
                         <TableHead className="text-center">Move</TableHead>
+                        <TableHead className="text-center">Level</TableHead>
                         <TableHead className="text-center">Type</TableHead>
                         <TableHead className="text-center">Category</TableHead>
                         <TableHead className="text-center">Base Damage</TableHead>
@@ -48,6 +49,9 @@ const MovesTable: React.FC<MovesTableProps> = ({ all_moves }) => {
                             <TableRow className="hover:bg-gray-100 dark:hover:bg-gray-800">
                                 {/* Move Name */}
                                 <TableCell className="text-center p-2 lg:p-4">{move.real_name}</TableCell>
+
+                                {/* Move Level */}
+                                <TableCell className="text-center p-2 lg:p-4">{move.level}</TableCell>
 
                                 {/* Type with Badge */}
                                 <TableCell className="text-center p-0 lg:m-2">

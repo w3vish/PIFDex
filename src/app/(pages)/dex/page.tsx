@@ -2,6 +2,7 @@ import { GridContent, PokemonCard } from '@/components/pages';
 import { Card, CardHeader } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
 import { PokemonCardTypes } from '@/lib/types';
+import { PokemonCardData } from '@/lib/types/SpriteResponse';
 import { loadModules } from '@/lib/utils';
 import { gameInfo } from '@/lib/utils/constants';
 import React from 'react';
@@ -14,7 +15,7 @@ export const metadata = {
 };
 
 async function page() {
-  const dexData: any = await loadModules("home");
+  const dexData: PokemonCardData[] = await loadModules("home");
 
   return (
     <div className='space-y-4'>
@@ -28,7 +29,7 @@ async function page() {
       <Separator />
         <h2 className='text-xl text-center font-semibold'>Base Pokemons ({gameInfo.totalPokemons})</h2>
         <GridContent>
-          {dexData.results.map((pokemon: PokemonCardTypes) => (
+          {dexData.map((pokemon) => (
             <PokemonCard pokemon={pokemon} key={pokemon.id} />
           ))}
         </GridContent>

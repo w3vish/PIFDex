@@ -2,6 +2,7 @@ import HeroSection from "@/components/Home/Hero";
 import { GridContent, PokemonCard } from "@/components/pages";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
+import { PokemonCardData } from "@/lib/types/SpriteResponse";
 import { gameInfo } from "@/lib/utils/constants";
 import { loadModules } from "@/lib/utils/pages";
 import { Metadata } from "next";
@@ -50,7 +51,7 @@ const page = async () => {
       <Separator className="my-4" />
       <h2 className="text-xl text-center font-semibold my-2">Base Pokemons ({gameInfo.totalPokemons})</h2>
       <GridContent>
-        {data.results.map((pokemon: Pokemon) => (
+        {data.map((pokemon: PokemonCardData) => (
           <PokemonCard pokemon={pokemon} key={pokemon.id} />
         ))}
       </GridContent>

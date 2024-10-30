@@ -3,27 +3,14 @@ import { useState, useEffect } from "react";
 import { GridContent, PokemonCard } from "@/components/pages";
 import { Separator } from "@/components/ui/separator"; 
 import Link from "next/link";
+import { PokemonCardData } from "@/lib/types/SpriteResponse";
 
-// Define the structure for Pokémon data based on what was stored
-interface PokemonData {
-    id: string;
-    name: string;
-    primary_type?: string;
-    secondary_type?: string;
-    base_pokemons: { [key: string]: string };
-    total_sprites: number;
-    images: {
-      sprite_id: string;
-      sprite_type: string;
-      artists: string[];
-    }[];
-  }
   
 
 const storageKey = "LikedSprites";
 
 const FavoritesClient = () => {
-  const [favoritePokemons, setFavoritePokemons] = useState<PokemonData[]>([]);
+  const [favoritePokemons, setFavoritePokemons] = useState<PokemonCardData[]>([]);
  
   useEffect(() => {
     const storedFavorites = JSON.parse(localStorage.getItem(storageKey) || "[]");
@@ -53,9 +40,9 @@ const FavoritesClient = () => {
           </Link>
         </div>
       ) : (
-        <GridContent>
+        <GridContent className='grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5'>
           {/* Render PokemonCard for each favorite Pokémon */}
-          {favoritePokemons.map((pokemon: PokemonData) => (
+          {favoritePokemons.map((pokemon: PokemonCardData) => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />
           ))}
         </GridContent>

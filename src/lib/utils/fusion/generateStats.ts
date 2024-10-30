@@ -1,19 +1,20 @@
-import { SpriteResult } from "@/lib/types";
+import { SpriteResponse } from "@/lib/types";
 
-const generateStats = (pokemon: SpriteResult) => ({
-    HP: pokemon.base_hp,
-    Attack: pokemon.base_atk,
-    Defense: pokemon.base_def,
-    "Sp. Atk": pokemon.base_sp_atk,
-    "Sp. Def": pokemon.base_sp_def,
-    Speed: pokemon.base_spd,
+
+const generateStats = (pokemon: SpriteResponse) => ({
+    HP: pokemon.stats.base_hp,
+    Attack: pokemon.stats.base_atk,
+    Defense: pokemon.stats.base_def,
+    "Sp. Atk": pokemon.stats.base_sp_atk,
+    "Sp. Def": pokemon.stats.base_sp_def,
+    Speed: pokemon.stats.base_spd,
     Total:
-        pokemon.base_hp +
-        pokemon.base_atk +
-        pokemon.base_def +
-        pokemon.base_sp_atk +
-        pokemon.base_sp_def +
-        pokemon.base_spd,
+        pokemon.stats.base_hp +
+        pokemon.stats.base_atk +
+        pokemon.stats.base_def +
+        pokemon.stats.base_sp_atk +
+        pokemon.stats.base_sp_def +
+        pokemon.stats.base_spd,
 });
 
 export { generateStats }

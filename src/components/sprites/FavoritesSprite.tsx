@@ -4,25 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Heart } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
-
-interface PokemonData {
-  id: string;
-  name: string;
-  primary_type?: string;
-  secondary_type?: string;
-  base_pokemons: { [key: string]: string };
-  total_sprites: number;
-  images: {
-    sprite_id: string;
-    sprite_type: string;
-    artists: string[];
-  };
-}
+import { PokemonCardData } from "@/lib/types/SpriteResponse";
 
 const storageKey = "LikedSprites";
 
 interface LikeSpriteProps {
-  pokemonData: PokemonData; // Pass full Pokemon data, including images
+  pokemonData: PokemonCardData; // Pass full Pokemon data, including images
 }
 
 const FavoritesSprite = ({ pokemonData }: LikeSpriteProps) => {
@@ -34,7 +21,7 @@ const FavoritesSprite = ({ pokemonData }: LikeSpriteProps) => {
 
     // Check if the current sprite is already liked
     const isSpriteLiked = likedSprites.some(
-      (sprite: PokemonData) => sprite.id === pokemonData.id
+      (sprite: PokemonCardData) => sprite.id === pokemonData.id
     );
     setIsLiked(isSpriteLiked);
   }, [pokemonData.id]);
@@ -45,7 +32,7 @@ const FavoritesSprite = ({ pokemonData }: LikeSpriteProps) => {
     if (isLiked) {
       // Remove the sprite if it's already liked
       likedSprites = likedSprites.filter(
-        (sprite: PokemonData) => sprite.id !== pokemonData.id
+        (sprite: PokemonCardData) => sprite.id !== pokemonData.id
       );
       localStorage.setItem(storageKey, JSON.stringify(likedSprites));
       setIsLiked(false);

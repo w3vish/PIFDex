@@ -1,5 +1,5 @@
 const cdnURL = "https://cdn.jsdelivr.net/gh/ViSurya/PIFDexFiles@main";
-const apiURL = "https://infinitefusion.org/api"
+const apiURL = "https://pokewiki-api.onrender.com/infinitefusion"
 const autogenImageURL = `${cdnURL}/graphics/autogen`;
 const fusionImageURL = `${cdnURL}/graphics/fusions`;
 const tripleImageURL = `${cdnURL}/graphics/triples`;

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useMemo, useState, useEffect, useRef } from 'react';
-import { LoadAllFusionsResponse } from "@/lib/types";
+import { PokemonCardData } from '@/lib/types/SpriteResponse';
 import { Card, CardContent } from "../ui/card";
 import { Separator } from '../ui/separator';
 import { GridContent, PokemonCard } from "../pages";
@@ -16,38 +16,16 @@ import { Button } from "@/components/ui/button";
 
 const ITEMS_PER_CHUNK = 50;
 
-// Custom debounce hook
-function useDebounce(func: Function, delay: number) {
-  const timeoutRef = useRef<NodeJS.Timeout>();
-
-  return useCallback((...args: any[]) => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-
-    timeoutRef.current = setTimeout(() => {
-      func(...args);
-    }, delay);
-  }, [func, delay]);
-}
-
-// CustomSelectContent component to prevent touch and click events
 const CustomSelectContent = React.forwardRef<
   React.ElementRef<typeof SelectContent>,
   React.ComponentPropsWithoutRef<typeof SelectContent>
 >((props, ref) => (
-  <SelectContent
-    {...props}
-    ref={ref}
-  >
-    <div
-      ref={(divRef) => {
-        if (!divRef) return;
-        // Prevent touch and click events to stop interactions with content behind the dropdown
-        divRef.ontouchstart = (e) => e.preventDefault();
-        divRef.onclick = (e) => e.stopPropagation();
-      }}
-    >
+  <SelectContent {...props} ref={ref}>
+    <div ref={(divRef) => {
+      if (!divRef) return;
+      divRef.ontouchstart = (e) => e.preventDefault();
+      divRef.onclick = (e) => e.stopPropagation();
+    }}>
       {props.children}
     </div>
   </SelectContent>
@@ -55,49 +33,55 @@ const CustomSelectContent = React.forwardRef<
 
 CustomSelectContent.displayName = 'CustomSelectContent';
 
-const RelatedFusionsClient = React.memo(({
+// Debounce function
+const useDebounce = (func: Function, delay: number) => {
+  const timeoutRef = useRef<NodeJS.Timeout>();
+
+  return useCallback((...args: any[]) => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(() => func(...args), delay);
+  }, [func, delay]);
+};
+
+const RelatedFusionsClient = ({
   pokemons,
   id: baseId,
 }: {
-  pokemons: LoadAllFusionsResponse;
+  pokemons: PokemonCardData[];
   id: string;
 }) => {
   const [spriteFilter, setSpriteFilter] = useState("all");
   const [fusionTypeFilter, setFusionTypeFilter] = useState("all_fusions");
-  const [visibleData, setVisibleData] = useState<any[]>([]);
-  const [allFilteredData, setAllFilteredData] = useState<any[]>([]);
+  const [visibleData, setVisibleData] = useState<PokemonCardData[]>([]);
+  const [allFilteredData, setAllFilteredData] = useState<PokemonCardData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
 
   const filterData = useCallback((spriteFilter: string, fusionTypeFilter: string) => {
-    let filteredResult = pokemons.data;
+    let filteredResult = pokemons;
 
-    switch (spriteFilter) {
-      case "fusion":
-        filteredResult = filteredResult.filter((pokemon) => pokemon.total_sprites !== 0);
-        break;
-      case "autogen":
-        filteredResult = filteredResult.filter((pokemon) => pokemon.total_sprites === 0);
-        break;
+    // Apply sprite type filter with default value for total_sprites
+    if (spriteFilter === "fusion") {
+        filteredResult = filteredResult.filter(pokemon => pokemon.spriteType === "fusion" && (pokemon.total_sprites ?? 0) > 0);
+    } else if (spriteFilter === "autogen") {
+        filteredResult = filteredResult.filter(pokemon => pokemon.spriteType === "autogen" && (pokemon.total_sprites ?? 0) === 0);
     }
 
-    switch (fusionTypeFilter) {
-      case "head":
-        filteredResult = filteredResult.filter((pokemon) =>
-          pokemon.id.startsWith(`${baseId}.`)
-        );
-        break;
-      case "body":
-        filteredResult = filteredResult.filter((pokemon) =>
-          pokemon.id.endsWith(`.${baseId}`)
-        );
-        break;
+    // Apply fusion type filter based on head or body patterns
+    if (fusionTypeFilter === "head") {
+        filteredResult = filteredResult.filter(pokemon => pokemon.id.startsWith(`${baseId}.`));
+    } else if (fusionTypeFilter === "body") {
+        filteredResult = filteredResult.filter(pokemon => pokemon.id.endsWith(`.${baseId}`));
     }
 
+    // Update data state
     setAllFilteredData(filteredResult);
     setVisibleData(filteredResult.slice(0, ITEMS_PER_CHUNK));
     setHasMore(filteredResult.length > ITEMS_PER_CHUNK);
-  }, [pokemons.data, baseId]);
+}, [pokemons, baseId]);
+
 
   const debouncedFilter = useDebounce(filterData, 300);
 
@@ -114,36 +98,26 @@ const RelatedFusionsClient = React.memo(({
     });
   }, [isLoading, hasMore, allFilteredData]);
 
-  const handleSpriteFilterChange = useCallback(
-    (value: string) => {
-      setSpriteFilter(value);
-      debouncedFilter(value, fusionTypeFilter);
-    },
-    [debouncedFilter, fusionTypeFilter]
-  );
+  const handleSpriteFilterChange = useCallback((value: string) => {
+    setSpriteFilter(value);
+    debouncedFilter(value, fusionTypeFilter);
+  }, [debouncedFilter, fusionTypeFilter]);
 
-  const handleFusionTypeFilterChange = useCallback(
-    (value: string) => {
-      setFusionTypeFilter(value);
-      debouncedFilter(spriteFilter, value);
-    },
-    [debouncedFilter, spriteFilter]
-  );
+  const handleFusionTypeFilterChange = useCallback((value: string) => {
+    setFusionTypeFilter(value);
+    debouncedFilter(spriteFilter, value);
+  }, [debouncedFilter, spriteFilter]);
 
   useEffect(() => {
     debouncedFilter(spriteFilter, fusionTypeFilter);
   }, [debouncedFilter, spriteFilter, fusionTypeFilter]);
 
-  const memoizedPokemonCards = useMemo(() =>
-    visibleData.map((pokemon) => (
-      <PokemonCard pokemon={pokemon} key={pokemon.id} />
-    )),
-    [visibleData]
-  );
+  const memoizedPokemonCards = useMemo(() => visibleData.map(pokemon => (
+    <PokemonCard pokemon={pokemon} key={pokemon.id} />
+  )), [visibleData]);
 
-  // Memoized filters, ensuring the selects stay in the same row on mobile devices
   const memoizedFilters = useMemo(() => (
-    <div className="flex flex-row gap-2 md:gap-4" onClick={(e) => e.stopPropagation()}>
+    <div className="flex flex-row gap-2 md:gap-4">
       <Select onValueChange={handleSpriteFilterChange} value={spriteFilter}>
         <SelectTrigger className="min-w-max w-[150px] md:w-[180px]">
           <SelectValue placeholder="Sprite Type" />
@@ -174,17 +148,17 @@ const RelatedFusionsClient = React.memo(({
         <div className="my-auto mx-auto md:mx-0">
           <h2 className="text-xl text-center">Related Fusions ({allFilteredData.length})</h2>
         </div>
-        <div className='flex justify-center w-full md:w-auto'>
+        <div className="flex justify-center w-full md:w-auto">
           {memoizedFilters}
         </div>
       </CardContent>
 
-      <Separator className='mb-4'/>
+      <Separator className="mb-4" />
 
       <GridContent>
         {memoizedPokemonCards}
       </GridContent>
-      
+
       {hasMore && (
         <div className="mt-4 text-center">
           <Button onClick={loadMore} disabled={isLoading}>
@@ -194,8 +168,7 @@ const RelatedFusionsClient = React.memo(({
       )}
     </Card>
   );
-});
+};
 
 RelatedFusionsClient.displayName = 'RelatedFusionsClient';
-
 export { RelatedFusionsClient };
