@@ -4,9 +4,10 @@ import { ThemeProvider } from "@/components/theme";
 import NextTopLoader from 'nextjs-toploader';
 import { Toaster } from "@/components/ui/toaster";
 import { Header, Footer } from "@/components/navigation";
-import { GoogleAnalytics } from '@next/third-parties/google'
+import { GoogleAnalytics, } from '@next/third-parties/google'
 import "@/styles/globals.css";
 import '@/styles/PokemonCard.css';
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   authors: [{ name: "InfiniteFusion.org Community" }],
   creator: "InfiniteFusion.org",
   verification: {
-    
+
   },
   robots: {
     index: true,
@@ -47,7 +48,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-
       <body className={`${inter.className} max-w-screen-2xl flex flex-col mx-auto min-h-screen`}>
         <NextTopLoader />
         <ThemeProvider
@@ -56,14 +56,16 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header/>
+          <Header />
           <main className="max-w-screen-2xl">
             {children}
           </main>
-          <Footer/>
+          <Footer />
           <Toaster />
         </ThemeProvider>
         <GoogleAnalytics gaId="G-X91KPL7L5C" />
+        <script defer={true} src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5359451330187418"
+          crossOrigin="anonymous"></script>
       </body>
     </html>
   );
