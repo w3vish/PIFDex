@@ -10,8 +10,8 @@ interface SitemapURLS {
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const URL = siteConfig.siteURL;
-    const mainPath = ['', 'fusion', 'dex', 'artists'];
-    const pages = ['self-fusions', 'triple-fusions'];
+    const mainPath = ['', 'fusion', 'dex', 'artists', 'download'];
+    const pages = ['self-fusions', 'triple-fusions',];
     const sitemapURLS: SitemapURLS[] = [];
 
     mainPath.forEach(path => {

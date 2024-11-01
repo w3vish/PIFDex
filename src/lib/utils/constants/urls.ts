@@ -1,9 +1,10 @@
-const cdnURL = "https://cdn.jsdelivr.net/gh/ViSurya/PIFDexFiles@main";
+const cdnURL = "https://cdn.jsdelivr.net/gh/w3vish/infinitefusion-graphics@master";
 const apiURL = "https://pokewiki-api.onrender.com/infinitefusion"
-const autogenImageURL = `${cdnURL}/graphics/autogen`;
-const fusionImageURL = `${cdnURL}/graphics/fusions`;
+const siteURL = "https://infinitefusion.org"
+const autogenImageURL = `${cdnURL}/Battlers`;
+const fusionImageURL = `${cdnURL}/CustomBattlers/indexed`;
 const tripleImageURL = `${cdnURL}/graphics/triples`;
-const baseImageURL = `${cdnURL}/graphics/base`
+const baseImageURL = `${cdnURL}/CustomBattlers/customBaseSprites`
 const notFoundImageURL = `${cdnURL}/graphics/extra/404.png`
 
 const imageURLs = {
@@ -12,9 +13,9 @@ const imageURLs = {
     triple: tripleImageURL,
     base: baseImageURL,
     notFound: notFoundImageURL,
-    cdnURL: cdnURL
+    cdnURL: cdnURL,
 }
 
-export { imageURLs, apiURL };
+export { imageURLs, apiURL, siteURL };
 
 

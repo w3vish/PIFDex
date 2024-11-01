@@ -23,7 +23,8 @@ import {
   Info, 
   Mail, 
   ShieldCheck, 
-  FileText 
+  FileText, 
+  Download
 } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useRouter } from "next/navigation"
@@ -48,6 +49,7 @@ const SearchBox: React.FC<SearchBoxProps> = ({ open, setOpen }) => {
   const links: LinkItem[] = [
     { name: 'Fusion Calculator', href: '/fusion', icon: Calculator },
     { name: 'Fusion Dex', href: '/dex', icon: BookOpen },
+    { name: 'Download Game', href: '/download', icon: Download },
     { name: 'Artists', href: '/artists', icon: Palette },
     { name: "Triple Fusions", href: "/triple-fusions", icon: Layers },
     { name: "Self Fusions", href: "/self-fusions", icon: Zap },

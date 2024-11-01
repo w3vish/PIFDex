@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { cn } from '@/lib/theme/utils'
-import { BookOpen, Calculator, Heart, Info, Layers, Mail, Menu, Palette, Search, ShieldCheck, FileText, User, Zap } from 'lucide-react'
+import { BookOpen, Calculator, Heart, Info, Layers, Mail, Menu, Palette, Search, ShieldCheck, FileText, User, Zap, Download } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
@@ -26,9 +26,10 @@ export default function Header() {
   const navLinks: LinkType[] = [
     { name: 'Fusion Calculator', href: '/fusion', icon: Calculator },
     { name: 'Fusion Dex', href: '/dex', icon: BookOpen },
+    { name: 'Download', href: '/download', icon: Download },
     { name: 'Artists', href: '/artists', icon: Palette },
-    { name: 'Triple Fusions', href: '/triple-fusions', icon: Layers },
-    { name: 'Self Fusions', href: '/self-fusions', icon: Zap },
+    // { name: 'Triple Fusions', href: '/triple-fusions', icon: Layers },
+    // { name: 'Self Fusions', href: '/self-fusions', icon: Zap },
   ];
 
   const mobileLinks = {
