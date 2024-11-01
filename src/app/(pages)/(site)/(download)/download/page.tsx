@@ -246,11 +246,11 @@ export default function DownloadPage() {
         <ol>
           <li><strong>Install Wine</strong>
             <p>Follow this <a href="https://www.youtube.com/watch?v=yCxBUy7S4Ks">Installing Wine on Linux Video</a> to set up Wine. Alternatively, use the following commands in the terminal:</p>
-            <pre>
-              sudo dpkg --add-architecture i386
-              sudo apt update
-              sudo apt install wine winbind
-            </pre>
+            <ol>
+              <li><pre>sudo dpkg --add-architecture i386</pre></li>
+              <li><pre>sudo apt update</pre></li>
+              <li><pre>sudo apt install wine winbind</pre></li>
+            </ol>
           </li>
           <li><strong>Download and Extract the Game</strong>
             <p>After downloading the game files, use your file manager or run the following command in terminal to extract:</p>
