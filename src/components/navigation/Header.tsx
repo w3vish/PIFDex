@@ -36,6 +36,7 @@ export default function Header() {
     mainLinks: [
       { name: 'Fusion Calculator', href: '/fusion', icon: Calculator },
       { name: 'Fusion Dex', href: '/dex', icon: BookOpen },
+      { name: 'Download Game', href: '/download', icon: Download },
       { name: 'Artists', href: '/artists', icon: Palette }],
     mainPages: [
       { name: 'Favorites', href: '/favorites', icon: Heart },

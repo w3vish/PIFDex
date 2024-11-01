@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 
 export default function DownloadPage() {
   return (
-    <>
+    <article className="overflow-hidden">
       <h1>Download Pokémon Infinite Fusion 6.2.4</h1>
       <Alert variant="default" className="mb-8">
         <AlertTitle className="text-lg font-bold">Important Notice</AlertTitle>
@@ -302,6 +302,6 @@ export default function DownloadPage() {
         <p>Note: I am not affiliated with the developers of Pokemon Infinite Fusion. I’m simply sharing the official download links and guides to help the community. If you encounter any issues with installation or gameplay, please reach out to the official channels above or contact me directly for assistance.</p>
       </section>
 
-    </>
+    </article>
   )
 }
