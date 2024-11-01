@@ -4,7 +4,9 @@ import { siteURL } from "@/lib/utils/constants/urls";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Download Pokémon Infinite Fusion v6.2.4 | Official Links and Guides',
+  title: {
+    absolute: 'Download Pokémon Infinite Fusion v6.2.4 | InfiniteFusion.org'
+  },
   description: 'Get the official download links for Pokémon Infinite Fusion v6.2.4. Learn how to install on Windows, Mac, Linux, and Steam Deck. Follow our guides for a smooth gaming experience.',
   keywords: 'Pokémon Infinite Fusion, download, installation guide, Windows, Mac, Linux, Steam Deck, official download, video game, sprites, gaming community',
   openGraph: {
