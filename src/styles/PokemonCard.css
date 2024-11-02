@@ -79,6 +79,16 @@
   border-bottom: 2px solid hsl(var(--border))
 }
 
+.pokemon-card>div:nth-child(2)>div>span:last-child {
+  text-align: right;
+  color: hsl(var(--muted-foreground));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: max-content;
+}
+
+
 .pokemon-card a:hover {
   /* border-bottom: 2px solid gray; */
   font-weight: 600;
