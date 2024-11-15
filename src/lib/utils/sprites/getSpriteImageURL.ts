@@ -14,7 +14,7 @@ function getSpriteImageURL(id: string, spriteType?: any) {
     let imagePath: string;
 
     // Conditional logic to select image path based on sprite type or id length
-    if(spriteType === 'autogen') return `${imageURLs['autogen']}/${id}.png` 
+    if(spriteType === 'autogen') return `${imageURLs['autogen']}/${id.split('.')[0]}/${id}.png` 
      
         const idLength = id.split('.').length || '';
         imagePath = idLength === 1 ? imageURLs['base']
