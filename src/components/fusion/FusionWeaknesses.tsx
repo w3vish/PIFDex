@@ -21,14 +21,14 @@ function FusionWeaknesses({ types }: { types: Types }) {
           <TableRow >
             <TableHead colSpan={7} className="text-center">Weaknesses</TableHead>
           </TableRow>
-          <TableRow>
+          {/* <TableRow>
             <TableHead colSpan={3} className="text-center w-[45%]">Head</TableHead>
             <TableHead className="text-center w-[10%] whitespace-nowrap">
               <span className="hidden sm:inline">Multiplier</span>
               <span className="inline sm:hidden">x</span>
             </TableHead>
             <TableHead colSpan={3} className="text-center w-[45%]">Body</TableHead>
-          </TableRow>
+          </TableRow> */}
         </TableHeader>
         <TableBody>
           {Object.keys(HeadWeaknesses).map((multiplier) => (

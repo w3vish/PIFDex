@@ -46,9 +46,11 @@ export function FusionResult({ fusionStatus, headData, bodyData }: FusionResultP
 
         <div className="grid grid-cols-2 gap-1 sm:gap-4">
           <div>
+            <p className='text-center mb-1 text-sm'>{headData.name}</p>
             <FusionImage pokemon={headData} />
           </div>
           <div>
+            <p className='text-center mb-1 text-sm'>{bodyData.name}</p>
             <FusionImage pokemon={bodyData} />
           </div>
         </div>
@@ -59,7 +61,7 @@ export function FusionResult({ fusionStatus, headData, bodyData }: FusionResultP
         <div className="grid grid-cols-2 gap-2 md:gap-8 md:px-4">
           <FusionAbilities ability={headData.abilities} />
           <FusionAbilities ability={bodyData.abilities} />
-         
+
         </div>
 
         <div>
@@ -79,7 +81,7 @@ function FusionLoading() {
   return (
     <article className='space-y-6 sm:p-4 max-w-4xl mx-auto animate-pulse'>
       <div className="grid grid-cols-2 gap-4 sm:gap-8">
-      {[0, 1].map((index) => (
+        {[0, 1].map((index) => (
           <Card key={index} className='p-1 md:p-4 max-w-xs mx-auto w-full'>
             <CardContent className="p-0">
               <Skeleton className="min-h-40 md:h-64  mb-3" />
@@ -123,9 +125,9 @@ function FusionLoading() {
         <CardContent className="p-4">
           <Skeleton className="h-5 w-1/4 mb-3" />
           <div className="flex flex-col gap-2">
-            {[0, 1, 2, 3,4].map((index) => (
+            {[0, 1, 2, 3, 4].map((index) => (
               <Skeleton key={index} className="h-10 mb-2" />
-             
+
             ))}
           </div>
         </CardContent>
