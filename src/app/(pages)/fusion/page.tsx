@@ -2,6 +2,8 @@ import React from 'react'
 import FusionPage from './FusionPage'
 import { Metadata } from 'next'
 import { gameInfo } from '@/lib/utils/constants'
+import { Card } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
 
 export const metadata: Metadata = {
   title: {
@@ -12,9 +14,10 @@ export const metadata: Metadata = {
 
 function page() {
   return (
-    <>
+    <Card className="p-1 pb-4 space-y-4 md:m-4">
       <FusionPage />
-    </>
+      <Separator className='my-2'/>
+    </Card>
   )
 }
 
