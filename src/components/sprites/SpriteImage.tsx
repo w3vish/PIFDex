@@ -33,7 +33,7 @@ interface SpriteImageProps {
 const SpriteImage: React.FC<SpriteImageProps> = ({ pokemon, types }) => {
   return (
     <div>
-      <PokemonCard pokemon={pokemon} />
+      <PokemonCard pokemon={pokemon} isMainImage={true} />
       <div className="text-muted-foreground text-base gap-1 flex justify-center mx-4 my-2">
         {types.map((type) => (
           <Image

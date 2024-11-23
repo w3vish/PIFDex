@@ -32,7 +32,7 @@ export interface PokemonCardData {
 }
 
 
-function PokemonCard({ pokemon }: PokemonCardData) {
+function PokemonCard({ pokemon, isMainImage = false }: PokemonCardData) {
   const imagesArray = Array.isArray(pokemon.images)
     ? pokemon.images
     : pokemon.images
@@ -93,7 +93,7 @@ function PokemonCard({ pokemon }: PokemonCardData) {
         </Link>
         <div>
           <span>#{primaryImage.sprite_id.padStart(3, "0")}</span>
-          <span>
+          <span className={`${isMainImage ? 'show_all_artists' : ''}`}>
             {primaryImage.artists && primaryImage.artists.length > 0 ? (
               primaryImage.artists.map((artist, index) => (
                 <React.Fragment key={`${artist}-${index}`}>

@@ -79,13 +79,23 @@
   border-bottom: 2px solid hsl(var(--border))
 }
 
-.pokemon-card>div:nth-child(2)>div>span:last-child {
+.pokemon-card > div:nth-child(2) > div > span:last-child {
   text-align: right;
   color: hsl(var(--muted-foreground));
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: max-content;
+}
+
+.show_all_artists {
+  text-align: right !important;
+  color: hsl(var(--muted-foreground)) !important;
+  white-space: normal !important; /* Allow text to wrap to multiple lines */
+  overflow: visible !important; /* Ensure overflow is visible */
+  text-overflow: clip !important; /* Disable ellipsis for text overflow */
+  max-width: 100% !important; /* Allow text to use the full width of the container */
+  line-height: 1.5; /* Optional: Improve readability by increasing line spacing */
 }
 
 
