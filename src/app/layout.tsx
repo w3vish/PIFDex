@@ -64,8 +64,6 @@ export default function RootLayout({
           <Toaster />
         </ThemeProvider>
         <GoogleAnalytics gaId="G-X91KPL7L5C" />
-        <script defer={true} src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6617838414961747"
-          crossOrigin="anonymous"></script>
       </body>
     </html>
   );
