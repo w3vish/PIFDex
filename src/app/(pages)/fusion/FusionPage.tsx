@@ -130,17 +130,7 @@ export default function FusionPage() {
   }
 
 
-  useEffect(() => {
-    const headId = generateRandomId()
-    let bodyId = generateRandomId()
-
-    while (headId === bodyId) {
-      bodyId = generateRandomId()
-    }
-
-    setHeadPokemon({ id: headId, name: basePokemons[headId] })
-    setBodyPokemon({ id: bodyId, name: basePokemons[bodyId] })
-  }, [])
+  
 
   return (
     <>
@@ -187,12 +177,13 @@ export default function FusionPage() {
 
       <Separator />
       <article className='prose dark:prose-invert px-2 md:px-6 min-w-full pt-8'>
-        <p>The Pokemon Infinite Fusion Calculator lets you combine two Pokemon to create unique fusions. You can choose one Pokemon as the “Head” and another as the “Body,” and the calculator will show you the fusion result along with a reverse fusion (swapping the head and body).</p>
-        <p>The fusion result includes a sprite, calculated stats, abilities, and type effectiveness. If a custom sprite exists for the fusion, the artist&#39;s name is shown at the bottom right of the image. If no custom sprite is available, the calculator uses an auto-generated (Autogen) sprite, which is also labeled.</p>
-        <p>On the right side of the fusion result, you'll see the Fusion Dex ID. Clicking on the sprite will take you to a detailed page with more information about that specific fusion.</p>
-        <p>Below the image, you'll find the fusion's stats, such as HP, Attack, Defense, Sp. Atk, Sp. Def, and Speed. You'll also see the Normal and Hidden Abilities for the fusion. Hover over or click the “i” icon next to an ability to read its description.</p>
-        <p>At the bottom, the tool displays the fusion's strengths and weaknesses against different types. This is shown as multipliers like x2, x1, x0.5, or x0, helping you understand how the fusion will perform in battle.</p>
+        <p>The Pokémon Infinite Fusion Calculator is a tool that lets you mix two Pokémon to create a new fusion. You can pick one Pokémon as the "Head" and another as the "Body," and the tool will show you the fusion result. It also shows what happens if you swap the Head and Body.</p>
+        <p>The fusion result includes a picture (called a sprite), stats, abilities, and how strong or weak it is against different types. If an artist has made a special sprite for the fusion, their name will appear on the image. If there isn't a special sprite, the tool uses an auto-made one labeled "Autogen."</p>
+        <p>On the right side of the fusion result, you'll see the Fusion Dex ID. You can click the sprite to see more details about that fusion.</p>
+        <p>Below the picture, you'll find stats like HP, Attack, Defense, Sp. Atk, Sp. Def, and Speed. It also shows Normal and Hidden Abilities. If you hover over or click the little “i” icon next to an ability, you can read what it does.</p>
+        <p>At the bottom, the tool shows how strong or weak the fusion is against different types. This is shown as numbers like x2 (strong), x1 (normal), x0.5 (weak), or x0 (no effect). This helps you see how it will do in battles.</p>
       </article>
+
     </>
   )
 }

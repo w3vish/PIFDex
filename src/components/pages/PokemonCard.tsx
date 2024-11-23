@@ -6,29 +6,33 @@ import { getMainSpriteId } from "@/lib/utils";
 import { getSpriteImageURL } from "@/lib/utils";
 import { gameInfo, placeHolders } from "@/lib/utils/constants";
 import { Separator } from "../ui/separator";
-import { PokemonCardData } from "@/lib/types/SpriteResponse";
+// import { PokemonCardData } from "@/lib/types/SpriteResponse";
 
-interface PokemonData {
-  id: string;
-  name?: string;
-  types?: string[];
-  base_pokemons: { [key: string]: string };
-  total_sprites?: number;
-  TotalFusionsAsHead?: number;
-  TotalFusionsAsBody?: number;
-  images?: {
-    sprite_id: string;
-    sprite_type: string;
-    artists: string[];
-    creation_date: string;
-    last_update_date?: string;
-    comments: string | null;
-  }[];
-  spriteType: 'base' | 'fusion' | 'autogen' | 'triple';
-  hasCustomSprite: boolean;
+export interface PokemonCardData {
+  pokemon: {
+    id: string;
+    name?: string;
+    types?: string[];
+    base_pokemons: { [key: string]: string };
+    total_sprites?: number;
+    TotalFusionsAsHead?: number;
+    TotalFusionsAsBody?: number;
+    images?: {
+      sprite_id: string;
+      sprite_type: string;
+      artists: string[];
+      creation_date: string;
+      last_update_date?: string;
+      comments: string | null;
+    }[];
+    spriteType: 'base' | 'fusion' | 'autogen' | 'triple';
+    hasCustomSprite: boolean;
+  };
+  isMainImage?: boolean;  
 }
 
-function PokemonCard({ pokemon }: { pokemon: PokemonCardData }) {
+
+function PokemonCard({ pokemon }: PokemonCardData) {
   const imagesArray = Array.isArray(pokemon.images)
     ? pokemon.images
     : pokemon.images
