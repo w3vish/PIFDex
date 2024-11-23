@@ -9,7 +9,29 @@ export const metadata: Metadata = {
   title: {
     absolute: 'Pokémon Infinite Fusion Calculator - InfiniteFusion.org'
   },
-  description: `Create Pokémon fusions by combining two Pokémon. Browse over 221,000 fusion combinations and 118,000+ custom pokemon fusions with 180,000+ sprites contributed by ${gameInfo.totalArtists.toLocaleString()}+ artists.`
+  description: `Create Pokémon fusions by combining two Pokémon. Browse over 221,000 fusion combinations and 118,000+ custom pokemon fusions with 180,000+ sprites contributed by ${gameInfo.totalArtists.toLocaleString()}+ artists.`,
+  openGraph: {
+    title: 'Pokémon Infinite Fusion Calculator',
+    description: `Create Pokémon fusions by combining two Pokémon. Browse over 221,000 fusion combinations and 118,000+ custom pokemon fusions with 180,000+ sprites contributed by ${gameInfo.totalArtists.toLocaleString()}+ artists.`,
+    url: 'https://infinitefusion.org/fusion',
+    siteName: 'InfiniteFusion.org',
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: '/images/og/infinite-fusion-calculator.png',
+        width: 1263,
+        height: 871,
+        alt: 'Pokémon Infinite Fusion Calculator Interface'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Pokémon Infinite Fusion Calculator',
+    description: `Create Pokémon fusions by combining two Pokémon. Browse over 221,000 fusion combinations and custom sprites.`,
+    images: ['/images/og/infinite-fusion-calculator.png'],
+  }
 }
 
 function page() {

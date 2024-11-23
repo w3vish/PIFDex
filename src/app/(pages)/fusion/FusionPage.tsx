@@ -129,7 +129,17 @@ export default function FusionPage() {
     setFusionStatus('idle')
   }
 
+  useEffect(() => {
+    const headId = generateRandomId()
+    let bodyId = generateRandomId()
 
+    while (headId === bodyId) {
+      bodyId = generateRandomId()
+    }
+
+    setHeadPokemon({ id: headId, name: basePokemons[headId] })
+    setBodyPokemon({ id: bodyId, name: basePokemons[bodyId] })
+  }, [])
   
 
   return (
