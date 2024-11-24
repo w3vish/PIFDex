@@ -41,7 +41,7 @@ function FusionImage({ pokemon }: { pokemon: PokemonCardData }) {
                 ? 'triples'
                 : 'base';
     const types = pokemon.types || [];
-
+    const spriteTypeClass = spriteType !== "autogen" ? "sprite-highlight" : "";
 
     return (
         <>
@@ -72,7 +72,7 @@ function FusionImage({ pokemon }: { pokemon: PokemonCardData }) {
                             alt={`${pokemon.name || 'Pokemon'} Sprite Image`}
                             width={288}
                             height={288}
-                            className="aspect-square"
+                            className={`aspect-square ${spriteTypeClass}`}
                         />
                     </Link>
 
