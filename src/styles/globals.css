@@ -22,7 +22,7 @@
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
-     --card: 178 39% 96%;
+     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
@@ -45,7 +45,7 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --custom-card-background: 135 63% 97%;
+    --custom-card-background: 131 63% 98%;
     --custom-image-background: 212 42% 94%;
     --custom-image-sprite-background: 145 47% 76%;
     --custom-image-sprite-border: 160 10% 80%; 
