@@ -47,7 +47,7 @@
     --radius: 0.5rem;
     --custom-card-background: 131 63% 98%;
     --custom-image-background: 212 42% 94%;
-    --custom-image-sprite-background: 145 47% 76%;
+    --custom-image-sprite-background: 117 66% 69% / 0.76;
     --custom-image-sprite-border: 160 10% 80%; 
   }
   .dark {
@@ -77,7 +77,7 @@
     --chart-5: 340 75% 55%;
     --custom-card-background: 288 0% 16%;
     --custom-image-background: 217, 19%, 27%;
-    --custom-image-sprite-background: 134 20% 43%; 
+    --custom-image-sprite-background: 117 66% 41%; 
   --custom-image-sprite-border: 160 10% 30%;
   }
 }
