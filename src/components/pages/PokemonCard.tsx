@@ -57,6 +57,8 @@ function PokemonCard({ pokemon, isMainImage = false }: PokemonCardData) {
 
   const spriteType = pokemon.spriteType;
   const types = pokemon.types || [];
+  const spriteTypeClass = spriteType !== "autogen" ? "sprite-highlight" : "";
+
 
   return (
     <div className="pokemon-card">
@@ -89,6 +91,7 @@ function PokemonCard({ pokemon, isMainImage = false }: PokemonCardData) {
             alt={`${pokemon.name || 'Pokemon'} Sprite Image`}
             width={288}
             height={288}
+            className={`${spriteTypeClass}`}
           />
         </Link>
         <div>

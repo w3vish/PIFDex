@@ -6,7 +6,6 @@
   border-radius: var(--radius);
   background-color: hsl(var(--custom-card-background));
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
-  /* flex-grow: 1; */
 }
 
 .pokemon-card>div:first-child:has(*) {
@@ -126,4 +125,11 @@
 
 .pokemon-card>div:last-child>p span:first-child {
   text-wrap: nowrap;
+}
+
+.sprite-highlight {
+  position: relative;
+  padding: 0.25rem;
+  background-color: hsl(var(--custom-image-sprite-background)) !important; /* Premium green */
+  border-radius: 0.5rem; /* Optional: Smooth corners for the image container */
 }

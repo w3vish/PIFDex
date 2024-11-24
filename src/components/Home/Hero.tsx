@@ -12,7 +12,7 @@ export default function HeroSection() {
                 <div className="space-y-2">
                     <h1 className="text-2xl md:text-3xl font-bold">Welcome to InfiniteFusion.org</h1>
                     <p className="text-muted-foreground">
-                        Your ultimate resource for Pokémon Infinite Fusion. Create unique combinations, 
+                        Your ultimate resource for Pokémon Infinite Fusion. Create unique combinations,
                         explore our vast sprite collection, and discover the artists behind the designs.
                     </p>
                 </div>
@@ -71,16 +71,17 @@ export default function HeroSection() {
 
                 {/* Footer */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pt-2 border-t">
-                    <p className="text-sm text-muted-foreground">
-                        Join our community and contribute to the ever-growing collection of custom sprites
+                    <p className="text-sm text-muted-foreground font-bold">
+                        This site is a reimagined version of the original FusionDex (<a target="_blank" rel="nofollow" className="underline" href="https://fusiondex.org">fusiondex.org</a>).
                     </p>
-                    <Link 
-                        href="/about" 
+                    <Link
+                        href="/about"
                         className="text-sm text-primary hover:underline whitespace-nowrap flex items-center"
                     >
                         Learn more about the project →
                     </Link>
                 </div>
+
             </Card>
         </div>
     )

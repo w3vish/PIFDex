@@ -57,7 +57,7 @@ export default function Header() {
   ];
 
   return (
-    <nav className="border-b-2 border-gray-200 dark:border-gray-700 sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <nav className="border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="mx-auto px-4">
         <div className="flex items-center justify-between h-12">
           {/* Logo */}

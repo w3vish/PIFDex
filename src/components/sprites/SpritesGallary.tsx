@@ -18,6 +18,7 @@ interface SpritesGallaryProps {
 }
 
 const SpritesGallary = ({ images, label }: SpritesGallaryProps) => {
+ 
   return (
     <Card className="my-4 py-4">
       <CardHeader className="text-2xl text-center p-1">{label} ({images.length})</CardHeader>
@@ -27,6 +28,7 @@ const SpritesGallary = ({ images, label }: SpritesGallaryProps) => {
             image.sprite_type === "autogen"
               ? `/${image.sprite_id}?sprite=autogen`
               : `/${image.sprite_id}`;
+              const spriteTypeClass = image.artists[0] !== "Autogen" ? "sprite-highlight" : "";
           return (
             <div key={index} className="pokemon-card">
               <div>
@@ -38,6 +40,7 @@ const SpritesGallary = ({ images, label }: SpritesGallaryProps) => {
                     alt={`${image.sprite_id || 'Pokemon'} Sprite Image`}
                     width={288}
                     height={288}
+                    className={spriteTypeClass}
                   />
                 </Link>
                 <div>
