@@ -1,4 +1,0 @@
-add diffrent background in custom sprites
-suggestion:
-Light green
-And a darker green for light mode

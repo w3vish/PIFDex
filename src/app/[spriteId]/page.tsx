@@ -3,19 +3,35 @@ import { Card, CardContent } from "@/components/ui/card";
 import { getMainSpriteId, getSpriteImageURL, loadSprite } from "@/lib/utils";
 import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
+import React from 'react';
 
 export const runtime = 'edge';
 
-interface SpritePageParams {
-  params: { spriteId: string };
-  searchParams: { sprite?: string };
-}
+// Define params as a Promise
+type SpritePageParams = Promise<{
+  spriteId: string;
+}>;
+
+// Define searchParams as a Promise
+type SpritePageSearchParams = Promise<{
+  sprite?: string;
+}>;
 
 export async function generateMetadata(
-  { params, searchParams }: SpritePageParams,
+  { 
+    params, 
+    searchParams 
+  }: { 
+    params: SpritePageParams; 
+    searchParams: SpritePageSearchParams; 
+  },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  const id = getMainSpriteId(params.spriteId);
+  // Await params and searchParams
+  const { spriteId } = await params;
+  const { sprite } = await searchParams;
+
+  const id = getMainSpriteId(spriteId);
   if (!id) {
     return {
       title: 'Error: Invalid Sprite ID',
@@ -37,23 +53,24 @@ export async function generateMetadata(
   const spriteType = pokemon.spriteType;
   let imageUrl: string;
 
-  if (pokemon.images && pokemon.images.length > 0 && searchParams.sprite !== 'autogen') {
-    const specificImage = pokemon.images.find(img => img.sprite_id === params.spriteId);
+  if (pokemon.images && pokemon.images.length > 0 && sprite !== 'autogen') {
+    const specificImage = pokemon.images.find(img => img.sprite_id === spriteId);
     imageUrl = specificImage
       ? getSpriteImageURL(specificImage.sprite_id, spriteType)
       : getSpriteImageURL(pokemon.images[0].sprite_id, spriteType);
   } else {
-    imageUrl = getSpriteImageURL(params.spriteId, 'autogen');
+    imageUrl = getSpriteImageURL(spriteId, 'autogen');
   }
 
-  const title = searchParams.sprite === 'autogen'
-    ? `${pokemon.name} #${params.spriteId} (Autogen)`
+
+  const title = sprite === 'autogen'
+    ? `${pokemon.name} #${spriteId} (Autogen)`
     : spriteType === "base"
-      ? `#${params.spriteId} ${pokemon.name} sprites`
-      : `${pokemon.name} #${params.spriteId}`;
+      ? `#${spriteId} ${pokemon.name} sprites`
+      : `${pokemon.name} #${spriteId}`;
 
   const description = `
-    ${pokemon.name} #${params.spriteId} : ${pokemon.pokedex_entry}
+    ${pokemon.name} #${spriteId} : ${pokemon.pokedex_entry}
     Types: ${pokemon.types.join('/')}
     HP: ${pokemon.stats.base_hp},
     Attack: ${pokemon.stats.base_atk},
@@ -73,7 +90,7 @@ export async function generateMetadata(
         url: imageUrl,
         width: 288,
         height: 288,
-        alt: `${pokemon.name} sprite #${params.spriteId}`
+        alt: `${pokemon.name} sprite #${spriteId}`
       }]
     },
     twitter: {
@@ -88,8 +105,19 @@ export async function generateMetadata(
   };
 }
 
-const SpritePage = async ({ params, searchParams }: SpritePageParams) => {
-  const id = getMainSpriteId(params.spriteId);
+
+export default async function SpritePage({ 
+  params, 
+  searchParams 
+}: { 
+  params: SpritePageParams; 
+  searchParams: SpritePageSearchParams; 
+}) {
+  // Await params and searchParams
+  const { spriteId } = await params;
+  const { sprite } = await searchParams;
+
+  const id = getMainSpriteId(spriteId);
   if (!id) return notFound();
 
   const data = await loadSprite(id);
@@ -105,9 +133,9 @@ const SpritePage = async ({ params, searchParams }: SpritePageParams) => {
     comments: null,
   };
 
-  const primaryImage = searchParams.sprite === 'autogen'
+  const primaryImage = sprite === 'autogen'
     ? autogenImage
-    : pokemon.images?.find(image => image.sprite_id === params.spriteId) || pokemon.images[0] || autogenImage;
+    : pokemon.images?.find(image => image.sprite_id === spriteId) || pokemon.images[0] || autogenImage;
 
   const spriteType: 'base' | 'fusion' | 'autogen' | 'triple' = pokemon.spriteType
 
@@ -127,32 +155,27 @@ const SpritePage = async ({ params, searchParams }: SpritePageParams) => {
   // Ensure `SpriteImageData` matches the expected type structure
   const SpriteImageData = {
     id: id,
-    // name: pokemon.name,
     base_pokemons: pokemon.base_pokemons,
     images: [
       {
         sprite_id: primaryImage.sprite_id,
         sprite_type: primaryImage.sprite_type,
         artists: primaryImage.artists,
-        creation_date: new Date().toISOString(), // Added required field
-        last_update_date: new Date().toISOString(), // Optional field
-        comments: null // Added required field
+        creation_date: new Date().toISOString(),
+        last_update_date: new Date().toISOString(),
+        comments: null
       },
     ],
     spriteType: spriteType,
     hasCustomSprite: !!pokemon.images.length,
-    // total_sprites: pokemon.total_sprites,
-    // head_fusions: pokemon.head_fusions,
-    // body_fusions: pokemon.body_fusions,
-    // types: pokemon.types,
   };
 
   return (
     <article className="p-1">
       <Card>
         <h1 className="text-2xl text-center font-semibold p-2 mt-4">
-          {pokemon.name} <span className="text-muted-foreground">#{decodeURIComponent(params.spriteId.padStart(3, '0'))} {searchParams.sprite === 'autogen' ? "(Autogen)" : null}</span>
-        <FavoritesSprite pokemonData={data}/>
+          {pokemon.name} <span className="text-muted-foreground">#{decodeURIComponent(spriteId.padStart(3, '0'))} {sprite === 'autogen' ? "(Autogen)" : null}</span>
+          <FavoritesSprite pokemonData={data}/>
         </h1>
         <CardContent className="p-4 flex flex-col md:flex-row gap-4">
           <div className="w-full md:max-w-xs mx-auto">
@@ -189,6 +212,4 @@ const SpritePage = async ({ params, searchParams }: SpritePageParams) => {
       {pokemon.moves && <MovesTable all_moves={pokemon.moves} />}
     </article>
   );
-};
-
-export default SpritePage;
+}
