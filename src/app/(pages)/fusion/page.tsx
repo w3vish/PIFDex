@@ -36,11 +36,12 @@ export const metadata: Metadata = {
 
 function page() {
   return (
-    <Card className="p-1 pb-4 space-y-4 md:m-4">
+    <Card className="p-1 pb-4 space-y-4 md:m-4 bg-[hsl(220,20%,98%)] dark:bg-[hsl(220,20%,12%)] text-[hsl(220,15%,10%)] dark:text-[hsl(0,0%,90%)]">
       <FusionPage />
-      <Separator className='my-2'/>
+      <Separator className="my-2" />
     </Card>
-  )
+  );
 }
 
-export default page
+export default page;
+

@@ -79,16 +79,19 @@ export function FusionResult({ fusionStatus, headData, bodyData }: FusionResultP
 
 function FusionLoading() {
   return (
-    <article className='space-y-6 sm:p-4 max-w-4xl mx-auto animate-pulse'>
+    <article className="space-y-6 sm:p-4 max-w-4xl mx-auto animate-pulse">
       <div className="grid grid-cols-2 gap-4 sm:gap-8">
         {[0, 1].map((index) => (
-          <Card key={index} className='p-1 md:p-4 max-w-xs mx-auto w-full'>
+          <Card
+            key={index}
+            className="p-1 md:p-4 max-w-xs mx-auto w-full bg-gray-100 dark:bg-gray-800"
+          >
             <CardContent className="p-0">
-              <Skeleton className="min-h-40 md:h-64  mb-3" />
+              <Skeleton className="min-h-40 md:h-64 mb-3 bg-gray-200 dark:bg-gray-700" />
               {[0, 1].map((statIndex) => (
                 <div key={statIndex} className="flex items-center mb-2">
-                  <Skeleton className="h-4 w-20 mr-2" />
-                  <Skeleton className="h-4 flex-grow" />
+                  <Skeleton className="h-4 w-20 mr-2 bg-gray-200 dark:bg-gray-700" />
+                  <Skeleton className="h-4 flex-grow bg-gray-200 dark:bg-gray-700" />
                 </div>
               ))}
             </CardContent>
@@ -97,13 +100,16 @@ function FusionLoading() {
       </div>
       <div className="grid grid-cols-2 gap-4 md:gap-8">
         {[0, 1].map((index) => (
-          <Card key={index}>
+          <Card
+            key={index}
+            className="bg-gray-100 dark:bg-gray-800"
+          >
             <CardContent className="p-4">
-              <Skeleton className="h-5 w-1/2 mb-3" />
+              <Skeleton className="h-5 w-1/2 mb-3 bg-gray-200 dark:bg-gray-700" />
               {[0, 1, 2, 3, 4, 5].map((statIndex) => (
                 <div key={statIndex} className="flex items-center mb-2">
-                  <Skeleton className="h-4 w-20 mr-2" />
-                  <Skeleton className="h-4 flex-grow" />
+                  <Skeleton className="h-4 w-20 mr-2 bg-gray-200 dark:bg-gray-700" />
+                  <Skeleton className="h-4 flex-grow bg-gray-200 dark:bg-gray-700" />
                 </div>
               ))}
             </CardContent>
@@ -112,22 +118,27 @@ function FusionLoading() {
       </div>
       <div className="grid grid-cols-2 gap-4 md:gap-8">
         {[0, 1].map((index) => (
-          <Card key={index}>
+          <Card
+            key={index}
+            className="bg-gray-100 dark:bg-gray-800"
+          >
             <CardContent className="p-4">
-              <Skeleton className="h-5 w-1/3 mb-3" />
-              <Skeleton className="h-4 w-2/3 mb-2" />
-              <Skeleton className="h-4 w-1/2" />
+              <Skeleton className="h-5 w-1/3 mb-3 bg-gray-200 dark:bg-gray-700" />
+              <Skeleton className="h-4 w-2/3 mb-2 bg-gray-200 dark:bg-gray-700" />
+              <Skeleton className="h-4 w-1/2 bg-gray-200 dark:bg-gray-700" />
             </CardContent>
           </Card>
         ))}
       </div>
-      <Card>
+      <Card className="bg-gray-100 dark:bg-gray-800">
         <CardContent className="p-4">
-          <Skeleton className="h-5 w-1/4 mb-3" />
+          <Skeleton className="h-5 w-1/4 mb-3 bg-gray-200 dark:bg-gray-700" />
           <div className="flex flex-col gap-2">
             {[0, 1, 2, 3, 4].map((index) => (
-              <Skeleton key={index} className="h-10 mb-2" />
-
+              <Skeleton
+                key={index}
+                className="h-10 mb-2 bg-gray-200 dark:bg-gray-700"
+              />
             ))}
           </div>
         </CardContent>
